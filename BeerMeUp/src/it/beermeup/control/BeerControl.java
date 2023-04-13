@@ -84,7 +84,6 @@ public class BeerControl extends HttpServlet {
 			System.out.println("Errore:" + e.getMessage());
 		}
 		
-		
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/catalogo.jsp");
 		dispatcher.forward(request, response);		
 	}

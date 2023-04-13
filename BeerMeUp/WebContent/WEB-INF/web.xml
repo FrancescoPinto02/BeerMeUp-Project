@@ -4,6 +4,9 @@
   <welcome-file-list>
     <welcome-file>home.jsp</welcome-file>
   </welcome-file-list>
+  <session-config>
+  	<session-timeout>60</session-timeout>
+  </session-config>
   <resource-ref>
     <description>JNDI reference to a data source</description>
     <res-ref-name>jdbc/beer_me_up</res-ref-name>
@@ -25,5 +28,13 @@
   <servlet-mapping>
     <servlet-name>CartControl</servlet-name>
     <url-pattern>/cart_control</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>CatalogoControl</servlet-name>
+    <servlet-class>it.beermeup.control.CatalogoControl</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CatalogoControl</servlet-name>
+    <url-pattern>/catalogo_control</url-pattern>
   </servlet-mapping>
 </web-app>

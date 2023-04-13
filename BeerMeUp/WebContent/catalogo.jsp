@@ -4,7 +4,7 @@
 <%
 	Collection<?> products = (Collection<?>) request.getAttribute("products");
 	if(products == null) {
-		response.sendRedirect("./beer_control?action=retrieveAllBeers");
+		response.sendRedirect("./catalogo_control?action=retrieveAllBeers");
 		
 		return;
 	}
@@ -41,9 +41,9 @@
 		<h2>Prodotti</h2>
 		<table border="1">
 			<tr>
-				<th>Codice <a href="beer_control?action=retrieveAllBeers&sort=id">Sort</a></th>
-				<th>Nome <a href="beer_control?action=retrieveAllBeers&sort=nome">Sort</a></th>
-				<th>Prezzo <a href="beer_control?action=retrieveAllBeers&sort=prezzo">Sort</a></th>
+				<th>Codice <a href="catalogo_control?action=retrieveAllBeers&sort=id">Sort</a></th>
+				<th>Nome <a href="catalogo_control?action=retrieveAllBeers&sort=nome">Sort</a></th>
+				<th>Prezzo <a href="catalogo_control?action=retrieveAllBeers&sort=prezzo">Sort</a></th>
 				<th>Action</th>
 			</tr>
 			<%
@@ -56,7 +56,7 @@
 				<td><%=bean.getId()%></td>
 				<td><%=bean.getNome()%></td>
 				<td><%=bean.getPrezzo()%></td>
-				<td><a href="cart_control?action=addToCart&id=<%=bean.getId()%>">Add to cart</a></td>
+				<td><a href="catalogo_control?action=addToCart&id=<%=bean.getId()%>">Add to cart</a></td>
 			</tr>
 			<%
 					}
@@ -85,7 +85,7 @@
 			<tr>
 				<td><%=beancart.getId()%></td>
 				<td><%=beancart.getNome()%></td>
-				<td><a href="cart_control?action=deleteFromCart&id=<%=beancart.getId()%>">Delete from cart</a></td>
+				<td><a href="catalogo_control?action=deleteFromCart&id=<%=beancart.getId()%>">Delete from cart</a></td>
 			</tr>
 			<%} %>
 		</table>		
