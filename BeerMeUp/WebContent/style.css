@@ -1,0 +1,89 @@
+@charset "UTF-8";
+
+body{
+	min-height:100vh;
+	display:flex;
+	flex-direction:column;	
+}
+
+h1{
+	text-align:center
+}
+
+.header ul{
+		list-style-type: none;
+  		margin: 0;
+  		padding: 0;
+}
+
+.header li {
+  	display: inline;
+}		
+
+.footer{
+	margin-top:auto;
+}
+
+.product_table{
+	margin-top: 5%;
+}
+
+.product_table h2{
+	text-align:center;
+}
+
+.product_table table, th, td{
+	margin-left: auto;
+	margin-right: auto;
+	text-align:center;
+	widht: 50%;
+	border: 2px solid;
+	border-collapse: collapse;
+	vertical-alignment: center;
+	padding: 10px;
+	
+}
+
+.cart_table{
+	margin-top: 5%;
+}
+
+.cart_table h2{
+	text-align:center;
+}
+
+.cart_table table, th, td{
+	margin-left: auto;
+	margin-right: auto;
+	text-align:center;
+	widht: 50%;
+	border: 2px solid;
+	border-collapse: collapse;
+	vertical-alignment: center;
+	padding: 10px;
+	
+}	
+
+/* unvisited link */
+a:link {
+  color: blue;
+  font-weight: bold;
+}
+
+/* visited link */
+a:visited {
+  color: blue;
+  font-weight: bold;
+}
+
+/* mouse over link */
+a:hover {
+  color: red;
+  font-weight: bold;
+}
+
+/* selected link */
+a:active {
+  color: blue;
+  font-weight: bold;
+}

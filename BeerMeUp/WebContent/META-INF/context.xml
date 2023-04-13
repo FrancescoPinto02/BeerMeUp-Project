@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
 
 <Context>
-    <Resource name="jdbc/storage"
+    <Resource name="jdbc/beer_me_up"
         auth="Container"
         driverClassName="com.mysql.cj.jdbc.Driver"
         type="javax.sql.DataSource"
         username="root"
         password="1234"
-        url="jdbc:mysql://localhost:3306/beermeup?useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC"/>
+        url="jdbc:mysql://localhost:3306/beer_me_up?useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC"/>
 </Context>
