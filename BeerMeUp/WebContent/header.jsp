@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-	<head>
+	<head lang="it">
 		<meta charset="UTF-8">
 		<title>Header</title>
 		<link rel="stylesheet" href="style.css">
@@ -11,7 +11,7 @@
 		<div class="header">
 			<ul>
 				<li><a href="home.jsp">Home</a></li>
-  				<li><a href="catalogo.jsp">Catalogo</a></li>
+				<li><a href="catalogo.jsp">Catalogo</a></li>
 			</ul>
 		</div>
 	</body>

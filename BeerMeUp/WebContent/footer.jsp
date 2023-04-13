@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-	<head>
+	<head lang="ít">
 		<meta charset="UTF-8">
 		<title>Footer</title>
 		<link rel="stylesheet" href="style.css">
