@@ -1,30 +1,53 @@
 package it.beermeup.model;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class Cart {
-	private List<Beer> products;
+	private List<CartProduct> products;
 	
 	public Cart() {
-		products = new ArrayList<Beer>();
+		products = new ArrayList<CartProduct>();
 	}
 	
 	public void addProduct(Beer product) {
-		products.add(product);
+		addProduct(product, 1);
+	}
+	
+	public void addProduct(Beer product, int qta) {
+		boolean found = false;
+		
+		for(CartProduct x : products) {
+			if(x.getProduct().equals(product)) {
+				x.setQta(x.getQta() + qta);
+				x.setPrice(x.getPrice().add(x.getProduct().getPrezzo().multiply(new BigDecimal(qta))));
+				found = true;
+				break;
+			}
+		}
+		
+		if(!found) {
+			CartProduct prod = new CartProduct();
+			prod.setProduct(product);
+			prod.setQta(qta);
+			prod.setPrice(product.getPrezzo().multiply(new BigDecimal(qta)));
+			products.add(prod);                      
+		}
+		
 	}
 	
 	public void deleteProduct(Beer product) {
-		for(Beer x : products) {
-			if(x.getId() == product.getId()) {
+		for(CartProduct x : products) {
+			if(x.getProduct().equals(product)) {
 				products.remove(x);
 				break;
 			}
 		}
  	}
 	
-	public List<Beer> getProducts() {
+	public List<CartProduct> getProducts() {
 		return  products;
 	}
 }

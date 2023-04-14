@@ -21,18 +21,12 @@
 
 <!DOCTYPE html>
 <html lang="it">
-<%@ page contentType="text/html; charset=UTF-8" import="java.util.*,it.beermeup.model.Beer,it.beermeup.model.Cart"%>
+<%@ page contentType="text/html; charset=UTF-8" import="java.util.*,it.beermeup.model.Beer,it.beermeup.model.Cart,it.beermeup.model.CartProduct"%>
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Catalogo BeerMeUp</title>
-	<style>
-		body{
-			min-height:100vh;
-			display:flex;
-			flex-direction:column;	
-		}
-	</style>
+	<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -77,15 +71,19 @@
 			<tr>
 				<th>Codice</th>
 				<th>Nome</th>
+				<th>Quantità</th>
+				<th>Prezzo Totale</th>
 				<th>Action</th>
 			</tr>
-			<% List<Beer> prodcart = cart.getProducts(); 	
-		   	for(Beer beancart: prodcart) {
+			<% List<CartProduct> prodcart = cart.getProducts(); 	
+		   	for(CartProduct x: prodcart) {
 			%>
 			<tr>
-				<td><%=beancart.getId()%></td>
-				<td><%=beancart.getNome()%></td>
-				<td><a href="catalogo_control?action=deleteFromCart&id=<%=beancart.getId()%>">Delete from cart</a></td>
+				<td><%=x.getProduct().getId()%></td>
+				<td><%=x.getProduct().getNome()%></td>
+				<td><%=x.getQta()%></td>
+				<td><%=x.getPrice()%></td>
+				<td><a href="catalogo_control?action=deleteFromCart&id=<%=x.getProduct().getId()%>">Delete from cart</a></td>
 			</tr>
 			<%} %>
 		</table>		
