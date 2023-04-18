@@ -30,19 +30,19 @@ CREATE TABLE indirizzo(
         ON UPDATE CASCADE
 );
 
-CREATE TABLE produttore(
+CREATE TABLE brewery(
 	id INT NOT NULL AUTO_INCREMENT,
-	nome VARCHAR(255) NOT NULL,
-    storia VARCHAR(1000) NOT NULL,
-    nazione VARCHAR(255) NOT NULL,
+	brewery_name VARCHAR(255) NOT NULL,
+    story VARCHAR(1000) NOT NULL,
+    nation VARCHAR(255) NOT NULL,
     
     PRIMARY KEY(id)
 );
 
-CREATE TABLE stile(
+CREATE TABLE style(
 	id INT NOT NULL AUTO_INCREMENT,
-    nome VARCHAR(255) NOT NULL,
-    caratteristiche VARCHAR(1000) NOT NULL,
+    style_name VARCHAR(255) NOT NULL,
+    traits VARCHAR(1000) NOT NULL,
     
     PRIMARY KEY(id)
 );
@@ -62,10 +62,10 @@ CREATE TABLE birra(
     sconto INT NOT NULL CHECK(sconto>=0 AND sconto<100),
     
     PRIMARY KEY(id),
-    FOREIGN KEY(produttore_id) REFERENCES produttore(id)
+    FOREIGN KEY(produttore_id) REFERENCES brewery(id)
 		ON DELETE CASCADE
         ON UPDATE CASCADE,
-	FOREIGN KEY(stile_id) REFERENCES stile(id)
+	FOREIGN KEY(stile_id) REFERENCES style(id)
 		ON DELETE CASCADE
         ON UPDATE CASCADE
 );
@@ -120,7 +120,7 @@ CREATE TABLE dettagli_ordine(
         ON UPDATE CASCADE
 );
 
-INSERT INTO produttore (nome, storia, nazione)
+INSERT INTO brewery (brewery_name, story, nation)
 VALUES ('Antikorpo', 'Antikorpo Brewing è un giovane birrificio italiano “nato nel bel mezzo di una pandemia”, come lo descrive il birraio stesso, Davide Galliussi che, 
 con Cristina Mirizzi, ha creato il progetto nei primi mesi del 2020, da una costola dello storico birrificio Cittavecchia di Sgonico (TS).
 In pochi anni il birrificio è cresciuto alla velocità della luce, producendo birre che ti invogliano ad un secondo sorso, dagli stili molto apprezzati e in voga, 
@@ -129,7 +129,7 @@ Oltre ad una particolare attenzione verso il mondo gluten free che, diciamocelo,
 Birre dal forte carattere, indimenticabili, in lattina, dalla veste grafica fortemente riconoscibile, 
 grazie anche all`eccentrica linea di grafiche realizzate da tatuatori di fama internazionale.' , 'Italia' );
 
-INSERT INTO stile (nome, caratteristiche)
+INSERT INTO style (style_name, traits)
 VALUES ('Stout' , 'Delicate, con un corpo medio ed una carbonatazione moderata, evidenziano note di cioccolato e caffè, 
 con toni secondari di cacao o cereale torrefatto. 
 La cremosità e il tenue fruttato/luppolato donano equilibrio a queste birre.');
@@ -140,7 +140,7 @@ La scorza d`arancia candita presente nella ricetta emerge all`olfatto in primiss
 e da una chiaro ricordo di caffè espresso con pennellate balsamiche e floreali che richiamano l`anice verde e la violetta.' ,
 'Ebano' , 'Orzo', '8' , '4.90', '22', '20', '0' );
 
-INSERT INTO stile (nome, caratteristiche)
+INSERT INTO style (style_name, traits)
 VALUES ('Pale Ale' , 'Originario della Gran Bretagna, ad oggi è uno dei principali stili birrai al mondo. 
 Vede l’impiego di lievito ad alta fermentazione e malto prevalentemente chiaro che determina il colore dorato della birra. 
 Differenti tecniche di produzione e luppolature, con una vasta gamma di gusti e gradazioni alcoliche.');
@@ -154,6 +154,6 @@ che si esprimono in uno sfondo di panificato chiaro punteggiato da un tocco di c
 'Dorato Chiaro' , 'Orzo', '5' , '4.50', '22', '10', '0' );
 
 select * from birra;
-select * from produttore;
-select * from stile;
+select * from brewery;
+select * from style;
 
