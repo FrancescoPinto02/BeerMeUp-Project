@@ -5,10 +5,8 @@
 	Collection<?> products = (Collection<?>) request.getAttribute("products");
 	if(products == null) {
 		response.sendRedirect("./catalogo_control?action=retrieveAllBeers");
-		
 		return;
 	}
-	
 	
 	Beer product = (Beer) request.getAttribute("product");
 	Cart cart = (Cart) request.getSession().getAttribute("cart");
@@ -24,16 +22,18 @@
 <%@ page contentType="text/html; charset=UTF-8" import="java.util.*,it.beermeup.model.Beer,it.beermeup.model.Cart,it.beermeup.model.CartProduct"%>
 
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta charset="UTF-8">
+	<meta http-equiv="Content-Type" content="text/html">
 	<title>Catalogo BeerMeUp</title>
-	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="BeerMeUpStyle.css">	
 </head>
 
 <body>
 	<%@ include file="header.jsp" %>
+	<h1>Catalogo</h1>
 	<div class="product_table">
 		<h2>Prodotti</h2>
-		<table border="1">
+		<table>
 			<tr>
 				<th>Codice <a href="catalogo_control?action=retrieveAllBeers&sort=id">Sort</a></th>
 				<th>Nome <a href="catalogo_control?action=retrieveAllBeers&sort=nome">Sort</a></th>
@@ -67,7 +67,7 @@
 	<div class="cart_table">
 		<% if(cart != null) { %>
 			<h2>Carrello</h2>
-			<table border="1">
+			<table>
 			<tr>
 				<th>Codice</th>
 				<th>Nome</th>
@@ -86,7 +86,7 @@
 				<td><a href="catalogo_control?action=deleteFromCart&id=<%=x.getProduct().getId()%>">Delete from cart</a></td>
 			</tr>
 			<%} %>
-		</table>		
+			</table>		
 		<% } %>	
 	</div>
 		<div class="footer">

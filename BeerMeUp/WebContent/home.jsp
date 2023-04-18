@@ -4,8 +4,8 @@
 <html lang="it">
 	<head>
 		<meta charset="UTF-8">
-		<title>Insert title here</title>
-		<link rel="stylesheet" href="style.css">
+		<title>Home</title>
+		<link rel="stylesheet" href="BeerMeUpStyle.css">		
 		
 	</head>
 	
