@@ -31,11 +31,14 @@ h1{
 	text-align:center;
 }
 
-.product_table table, th, td{
+.product_table table{
+	width: 50%;
+}
+
+.product_table table, th, td, tr{
 	margin-left: auto;
 	margin-right: auto;
 	text-align:center;
-	width: 50%;
 	border: 2px solid;
 	border-collapse: collapse;
 	vertical-align: center;
@@ -51,11 +54,14 @@ h1{
 	text-align:center;
 }
 
+.cart_table table{
+	width: 50%;
+}
+
 .cart_table table, th, td{
 	margin-left: auto;
 	margin-right: auto;
 	text-align:center;
-	width: 50%;
 	border: 2px solid;
 	border-collapse: collapse;
 	vertical-align: center;

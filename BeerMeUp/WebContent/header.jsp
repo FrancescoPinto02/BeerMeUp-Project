@@ -13,6 +13,7 @@
 			<ul>
 				<li><a href="home.jsp">Home</a></li>
 				<li><a href="catalogo.jsp">Catalogo</a></li>
+				<li><a href="cart.jsp">Carrello</a></li>
 			</ul>
 		</div>
 	</body>

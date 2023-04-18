@@ -47,6 +47,21 @@ public class Cart {
 		}
  	}
 	
+	public void deleteProduct(Beer product, int qta) {
+		for(CartProduct x : products) {
+			if(x.getProduct().equals(product)) {
+				x.setQta(x.getQta() - qta);
+				if(x.getQta()<=0) {
+					products.remove(x);
+				}
+				else {
+					x.setPrice(x.getPrice().subtract(x.getProduct().getPrezzo().divide(new BigDecimal(qta))));
+				}
+				break;
+			}
+		}
+	}
+	
 	public List<CartProduct> getProducts() {
 		return  products;
 	}

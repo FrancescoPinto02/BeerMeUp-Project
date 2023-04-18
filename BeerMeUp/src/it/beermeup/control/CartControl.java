@@ -29,10 +29,18 @@ public class CartControl extends HttpServlet {
 		
 		try {
 			if(action!=null) {
-				//Aggiunta prodotto al carrello
-				if (action.equalsIgnoreCase("addToCart")) {
+				//Aumenta quantità prodotto
+				if (action.equalsIgnoreCase("increaseQta")) {
 					int id = Integer.parseInt(request.getParameter("id"));
 					cart.addProduct(model.doRetrieveByKey(id));
+					request.getSession().setAttribute("cart", cart);
+					request.setAttribute("cart", cart);
+				}
+				
+				//Decrementa quantità prodotto
+				if (action.equalsIgnoreCase("decreaseQta")) {
+					int id = Integer.parseInt(request.getParameter("id"));
+					cart.deleteProduct(model.doRetrieveByKey(id),1);
 					request.getSession().setAttribute("cart", cart);
 					request.setAttribute("cart", cart);
 				}
@@ -58,7 +66,7 @@ public class CartControl extends HttpServlet {
 			System.out.println("Errore:" + e.getMessage());
 		}
 		
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/catalogo.jsp");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/cart.jsp");
 		dispatcher.forward(request, response);
 	}
 	
