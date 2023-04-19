@@ -45,12 +45,12 @@ public class CatalogoControl extends HttpServlet {
 				//Richiesta di tutti i prodotti
 				else if(action.equalsIgnoreCase("retrieveAllBeers")) {
 					String sort = request.getParameter("sort");
-					request.removeAttribute("products");
-					request.setAttribute("products", model.doRetrieveAll(sort));
+					request.removeAttribute("productsList");
+					request.setAttribute("productsList", model.doRetrieveAll(sort));
 				}
 				
 				//Aggiungi prodotto al carrello
-				else if (action.equalsIgnoreCase("addToCart")) {
+				else if (action.equalsIgnoreCase("addToCart")) {	
 					int id = Integer.parseInt(request.getParameter("id"));
 					cart.addProduct(model.doRetrieveByKey(id));
 					request.getSession().setAttribute("cart", cart);

@@ -30,17 +30,18 @@ if(cart==null){
 			</tr>
 			<% if(cart != null ) { 
 				List<CartProduct> prodcart = cart.getProducts(); 	
-		   		for(CartProduct x: prodcart) { %>
+		   		for(CartProduct x: prodcart) { 
+		   			Beer beer = x.getProduct();%>
 			<tr>
-				<td><%=x.getProduct().getId()%></td>
-				<td><%=x.getProduct().getNome()%></td>
+				<td><%=beer.getId()%></td>
+				<td><%=beer.getName()%></td>
 				<td>
 					<%=x.getQta()%>
-					<a href="cart_control?action=increaseQta&id=<%=x.getProduct().getId()%>">+</a>
-					<a href="cart_control?action=decreaseQta&id=<%=x.getProduct().getId()%>">-</a>
+					<a href="cart_control?action=increaseQta&id=<%=beer.getId()%>">+</a>
+					<a href="cart_control?action=decreaseQta&id=<%=beer.getId()%>">-</a>
 				</td>
 				<td><%=x.getPrice()%></td>
-				<td><a href="cart_control?action=deleteFromCart&id=<%=x.getProduct().getId()%>">Delete from cart</a></td>
+				<td><a href="cart_control?action=deleteFromCart&id=<%=beer.getId()%>">Delete from cart</a></td>
 			</tr>
 			<% } %>
 			</table>		

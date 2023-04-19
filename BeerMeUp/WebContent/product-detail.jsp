@@ -16,7 +16,7 @@
 <body>
 	<%@ include file="header.jsp"%>
 	
-	<h1><%=beer.getNome()%></h1>
+	<h1><%=beer.getName()%></h1>
 	<div class="product_table">
 		<table>
 			<tr>
@@ -33,9 +33,9 @@
 				<td><%=beer.getId()%></td>
 				<td><%=brewery.getName()%></td>
 				<td><%=style.getName()%></td>
-				<td><%=beer.getColore()%></td>
-				<td><%=beer.getGradazione()%>%</td>
-				<td><%=beer.getPrezzo()%>€</td>
+				<td><%=beer.getColor()%></td>
+				<td><%=beer.getGradation()%>%</td>
+				<td><%=beer.getPrice()%>€</td>
 				<td><%=beer.getStock()%></td>
 				<td><a href="catalogo_control?action=addToCart&id=<%=beer.getId()%>">Add to cart</a></td>
 			</tr>
@@ -44,12 +44,12 @@
 	
 	<div style="text-align:center;">
 		<h2>Descrizione</h2>
-		<p><%=beer.getDescrizione()%></p>
+		<p><%=beer.getDescription()%></p>
 	</div>
 	
 	<div style="text-align:center;">
 		<h2>Allergeni</h2>
-		<p><%=beer.getIngredienti()%></p>
+		<p><%=beer.getIngredients()%></p>
 	</div>
 	
 	

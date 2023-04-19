@@ -22,7 +22,7 @@ public class Cart {
 		for(CartProduct x : products) {
 			if(x.getProduct().equals(product)) {
 				x.setQta(x.getQta() + qta);
-				x.setPrice(x.getPrice().add(x.getProduct().getPrezzo().multiply(new BigDecimal(qta))));
+				x.setPrice(x.getPrice().add(x.getProduct().getPrice().multiply(new BigDecimal(qta))));
 				found = true;
 				break;
 			}
@@ -32,7 +32,7 @@ public class Cart {
 			CartProduct prod = new CartProduct();
 			prod.setProduct(product);
 			prod.setQta(qta);
-			prod.setPrice(product.getPrezzo().multiply(new BigDecimal(qta)));
+			prod.setPrice(product.getPrice().multiply(new BigDecimal(qta)));
 			products.add(prod);                      
 		}
 		
@@ -55,7 +55,7 @@ public class Cart {
 					products.remove(x);
 				}
 				else {
-					x.setPrice(x.getPrice().subtract(x.getProduct().getPrezzo().divide(new BigDecimal(qta))));
+					x.setPrice(x.getPrice().subtract(x.getProduct().getPrice().divide(new BigDecimal(qta))));
 				}
 				break;
 			}

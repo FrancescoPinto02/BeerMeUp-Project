@@ -14,7 +14,7 @@ import javax.sql.DataSource;
 
 public class BeerDao implements Dao<Beer> {
 	
-	private static final String TABLE_NAME = "birra";
+	private static final String TABLE_NAME = "beer";
 	
 	private static DataSource ds;
 	
@@ -52,17 +52,17 @@ public class BeerDao implements Dao<Beer> {
 			rs = ps.executeQuery();
 			while(rs.next()) {
 				bean.setId(rs.getInt("id"));
-				bean.setProduttore_id(rs.getInt("produttore_id"));
-				bean.setStile_id(rs.getInt("stile_id"));
-				bean.setNome(rs.getString("nome"));
-				bean.setDescrizione(rs.getString("descrizione"));
-				bean.setColore(rs.getString("colore"));
-				bean.setIngredienti(rs.getString("ingredienti"));
-				bean.setGradazione(rs.getBigDecimal("gradazione"));
-				bean.setPrezzo(rs.getBigDecimal("prezzo"));
+				bean.setBrewery_id(rs.getInt("brewery_id"));
+				bean.setStyle_id(rs.getInt("style_id"));
+				bean.setName(rs.getString("beer_name"));
+				bean.setDescription(rs.getString("beer_description"));
+				bean.setColor(rs.getString("color"));
+				bean.setIngredients(rs.getString("ingredients"));
+				bean.setGradation(rs.getBigDecimal("gradation"));
+				bean.setPrice(rs.getBigDecimal("price"));
 				bean.setIva(rs.getBigDecimal("iva"));
 				bean.setStock(rs.getInt("stock"));
-				bean.setSconto(rs.getInt("sconto"));
+				bean.setDiscount(rs.getInt("discount"));
 			}		
 		}
 		finally {
@@ -102,18 +102,17 @@ public class BeerDao implements Dao<Beer> {
 				Beer bean = new Beer();
 				
 				bean.setId(rs.getInt("id"));
-				bean.setProduttore_id(rs.getInt("produttore_id"));
-				bean.setStile_id(rs.getInt("stile_id"));
-				bean.setNome(rs.getString("nome"));
-				bean.setDescrizione(rs.getString("descrizione"));
-				bean.setColore(rs.getString("colore"));
-				bean.setIngredienti(rs.getString("ingredienti"));
-				bean.setGradazione(rs.getBigDecimal("gradazione"));
-				bean.setPrezzo(rs.getBigDecimal("prezzo"));
+				bean.setBrewery_id(rs.getInt("brewery_id"));
+				bean.setStyle_id(rs.getInt("style_id"));
+				bean.setName(rs.getString("beer_name"));
+				bean.setDescription(rs.getString("beer_description"));
+				bean.setColor(rs.getString("color"));
+				bean.setIngredients(rs.getString("ingredients"));
+				bean.setGradation(rs.getBigDecimal("gradation"));
+				bean.setPrice(rs.getBigDecimal("price"));
 				bean.setIva(rs.getBigDecimal("iva"));
 				bean.setStock(rs.getInt("stock"));
-				bean.setSconto(rs.getInt("sconto"));
-				
+				bean.setDiscount(rs.getInt("discount"));
 				collection.add(bean);
 			}		
 		}
@@ -137,24 +136,24 @@ public class BeerDao implements Dao<Beer> {
 	public synchronized void doSave(Beer bean) throws SQLException {
 		Connection connection = null;
 		PreparedStatement ps = null;
-		String sql = "INSERT INTO " + BeerDao.TABLE_NAME + " (produttore_id , stile_id, nome, descrizione, colore, ingredienti, gradazione, prezzo, iva, stock, sconto) " + 
+		String sql = "INSERT INTO " + BeerDao.TABLE_NAME + " (brewery_id , style_id, beer_name, beer_description, color, ingredients, gradation, price, iva, stock, discount) " + 
 				"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		
 		try {
 			connection = ds.getConnection(); 
 			
 			ps = connection.prepareStatement(sql);
-			ps.setInt(1, bean.getProduttore_id());
-			ps.setInt(2, bean.getStile_id());
-			ps.setString(3, bean.getNome());
-			ps.setString(4, bean.getDescrizione());
-			ps.setString(5, bean.getColore());
-			ps.setString(6, bean.getIngredienti());
-			ps.setBigDecimal(7, bean.getGradazione());
-			ps.setBigDecimal(8, bean.getPrezzo());
+			ps.setInt(1, bean.getBrewery_id());
+			ps.setInt(2, bean.getStyle_id());
+			ps.setString(3, bean.getName());
+			ps.setString(4, bean.getDescription());
+			ps.setString(5, bean.getColor());
+			ps.setString(6, bean.getIngredients());
+			ps.setBigDecimal(7, bean.getGradation());
+			ps.setBigDecimal(8, bean.getPrice());
 			ps.setBigDecimal(9, bean.getIva());
 			ps.setInt(10, bean.getStock());
-			ps.setInt(11, bean.getSconto());
+			ps.setInt(11, bean.getDiscount());
 			
 			ps.executeUpdate();
 			connection.commit();		

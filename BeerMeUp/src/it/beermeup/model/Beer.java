@@ -5,18 +5,17 @@ import java.math.BigDecimal;
 public class Beer {
 
 	private int id = 0;
-	private int produttore_id = 0;
-	private int stile_id = 0;
-	private String nome = "";
-	private String descrizione = "";
-	private String colore = "";
-	private String ingredienti= "";
-	private BigDecimal gradazione = new BigDecimal(0);
-	private BigDecimal prezzo = new BigDecimal(0);
+	private int brewery_id = 0;
+	private int style_id = 0;
+	private String name = "";
+	private String description = "";
+	private String color = "";
+	private String ingredients= "";
+	private BigDecimal gradation = new BigDecimal(0);
+	private BigDecimal price = new BigDecimal(0);
 	private BigDecimal iva = new BigDecimal(0);
 	private int stock = 0;
-	private int sconto = 0;
-	
+	private int discount = 0;
 	
 	public int getId() {
 		return id;
@@ -24,53 +23,53 @@ public class Beer {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getProduttore_id() {
-		return produttore_id;
+	public int getBrewery_id() {
+		return brewery_id;
 	}
-	public void setProduttore_id(int produttore_id) {
-		this.produttore_id = produttore_id;
+	public void setBrewery_id(int brewery_id) {
+		this.brewery_id = brewery_id;
 	}
-	public int getStile_id() {
-		return stile_id;
+	public int getStyle_id() {
+		return style_id;
 	}
-	public void setStile_id(int stile_id) {
-		this.stile_id = stile_id;
+	public void setStyle_id(int style_id) {
+		this.style_id = style_id;
 	}
-	public String getNome() {
-		return nome;
+	public String getName() {
+		return name;
 	}
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setName(String name) {
+		this.name = name;
 	}
-	public String getDescrizione() {
-		return descrizione;
+	public String getDescription() {
+		return description;
 	}
-	public void setDescrizione(String descrizione) {
-		this.descrizione = descrizione;
+	public void setDescription(String description) {
+		this.description = description;
 	}
-	public String getColore() {
-		return colore;
+	public String getColor() {
+		return color;
 	}
-	public void setColore(String colore) {
-		this.colore = colore;
+	public void setColor(String color) {
+		this.color = color;
 	}
-	public String getIngredienti() {
-		return ingredienti;
+	public String getIngredients() {
+		return ingredients;
 	}
-	public void setIngredienti(String ingredienti) {
-		this.ingredienti = ingredienti;
+	public void setIngredients(String ingredients) {
+		this.ingredients = ingredients;
 	}
-	public BigDecimal getGradazione() {
-		return gradazione;
+	public BigDecimal getGradation() {
+		return gradation;
 	}
-	public void setGradazione(BigDecimal gradazione) {
-		this.gradazione = gradazione;
+	public void setGradation(BigDecimal gradation) {
+		this.gradation = gradation;
 	}
-	public BigDecimal getPrezzo() {
-		return prezzo;
+	public BigDecimal getPrice() {
+		return price;
 	}
-	public void setPrezzo(BigDecimal prezzo) {
-		this.prezzo = prezzo;
+	public void setPrice(BigDecimal price) {
+		this.price = price;
 	}
 	public BigDecimal getIva() {
 		return iva;
@@ -84,18 +83,11 @@ public class Beer {
 	public void setStock(int stock) {
 		this.stock = stock;
 	}
-	public int getSconto() {
-		return sconto;
+	public int getDiscount() {
+		return discount;
 	}
-	public void setSconto(int sconto) {
-		this.sconto = sconto;
-	}
-	
-	
-	@Override
-	public String toString() {
-		return "Beer [id=" + id + ", nome=" + nome + ", gradazione=" + gradazione + ", prezzo=" + prezzo + ", iva="
-				+ iva + ", stock=" + stock + "]";
+	public void setDiscount(int discount) {
+		this.discount = discount;
 	}
 	
 	@Override
@@ -111,6 +103,14 @@ public class Beer {
 			return false;
 		return true;
 	}
+	
+	@Override
+	public String toString() {
+		return "Beer [id=" + id + ", name=" + name + ", price=" + price + "]";
+	}
+	
+	
+	
 	
 	
 	

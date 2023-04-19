@@ -2,8 +2,8 @@
 	pageEncoding="UTF-8"%>
 
 <%
-	Collection<?> products = (Collection<?>) request.getAttribute("products");
-	if(products == null) {
+	Collection<?> productsList = (Collection<?>) request.getAttribute("productsList");
+	if(productsList == null) {
 		response.sendRedirect("./catalogo_control?action=retrieveAllBeers");
 		return;
 	}
@@ -32,15 +32,15 @@
 				<th>Action</th>
 			</tr>
 			<%
-				if (products != null && products.size() != 0) {
-					Iterator<?> it = products.iterator();
+				if (productsList != null && productsList.size() != 0) {
+					Iterator<?> it = productsList.iterator();
 					while (it.hasNext()) {
 						Beer bean = (Beer) it.next();
 			%>
 			<tr>
 				<td><%=bean.getId()%></td>
-				<td><%=bean.getNome()%></td>
-				<td><%=bean.getPrezzo()%></td>
+				<td><%=bean.getName()%></td>
+				<td><%=bean.getPrice()%></td>
 				<td>
 					<p><a href="catalogo_control?action=addToCart&id=<%=bean.getId()%>">Add to cart</a></p>
 					<p><a href="productDetail_control?action=showProductDetails&id=<%=bean.getId()%>">Dettagli</a></p>
