@@ -16,12 +16,12 @@
   </resource-ref>
   
   <servlet>
-    <servlet-name>BeerControl</servlet-name>
-    <servlet-class>it.beermeup.control.BeerControl</servlet-class>
+    <servlet-name>ProductDetailControl</servlet-name>
+    <servlet-class>it.beermeup.control.ProductDetailControl</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>BeerControl</servlet-name>
-    <url-pattern>/beer_control</url-pattern>
+    <servlet-name>ProductDetailControl</servlet-name>
+    <url-pattern>/productDetail_control</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>CartControl</servlet-name>

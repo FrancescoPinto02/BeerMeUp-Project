@@ -16,10 +16,7 @@
 <%@ page contentType="text/html; charset=UTF-8" import="java.util.*,it.beermeup.model.Beer,it.beermeup.model.Cart,it.beermeup.model.CartProduct"%>
 
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="Content-Type" content="text/html">
-	<title>Catalogo BeerMeUp</title>
-	<link rel="stylesheet" href="BeerMeUpStyle.css">	
+	<%@ include file="head.jsp"%>
 </head>
 
 <body>
@@ -44,7 +41,10 @@
 				<td><%=bean.getId()%></td>
 				<td><%=bean.getNome()%></td>
 				<td><%=bean.getPrezzo()%></td>
-				<td><a href="catalogo_control?action=addToCart&id=<%=bean.getId()%>">Add to cart</a></td>
+				<td>
+					<p><a href="catalogo_control?action=addToCart&id=<%=bean.getId()%>">Add to cart</a></p>
+					<p><a href="productDetail_control?action=showProductDetails&id=<%=bean.getId()%>">Dettagli</a></p>
+				</td>
 			</tr>
 			<%
 					}

@@ -1,12 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
-	<head lang="it">
-		<meta charset="UTF-8">
-		<title>Header</title>
-		<link rel="stylesheet" href="BeerMeUpStyle.css">
-				
+<html lang="it">
+	<head>
+		<%@ include file="head.jsp"%>		
 	</head>
 	<body>
 		<div class="header">

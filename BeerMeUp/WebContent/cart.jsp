@@ -11,10 +11,9 @@ if(cart==null){
 
 <!DOCTYPE html>
 <%@ page contentType="text/html; charset=UTF-8" import="java.util.*,it.beermeup.model.*"%> 
-<html>
+<html lang="it">
 <head>
-	<meta charset="UTF-8">
-	<title>Carrello</title>
+	<%@ include file="head.jsp"%>
 </head>
 <body>
 	<%@ include file="header.jsp" %>
@@ -43,7 +42,7 @@ if(cart==null){
 				<td><%=x.getPrice()%></td>
 				<td><a href="cart_control?action=deleteFromCart&id=<%=x.getProduct().getId()%>">Delete from cart</a></td>
 			</tr>
-			<%} %>
+			<% } %>
 			</table>		
 		<% } %>	
 	</div>

@@ -3,10 +3,7 @@
 <!DOCTYPE html>
 <html lang="it">
 	<head>
-		<meta charset="UTF-8">
-		<title>Home</title>
-		<link rel="stylesheet" href="BeerMeUpStyle.css">		
-		
+		<%@ include file="head.jsp"%>			
 	</head>
 	
 	

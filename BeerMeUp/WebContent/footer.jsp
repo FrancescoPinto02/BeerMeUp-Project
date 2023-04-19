@@ -1,11 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
-	<head lang="ít">
-		<meta charset="UTF-8">
-		<title>Footer</title>
-		<link rel="stylesheet" href="BeerMeUpStyle.css">		
+<html lang="ít">
+	<head>
+		<%@ include file="head.jsp"%>	
 	</head>
 	<body>
 		<div class="footer">
