@@ -212,7 +212,6 @@ public class BeerDao implements Dao<Beer> {
 				}
 			}
 		}
-		
 		return;
 	}
 
