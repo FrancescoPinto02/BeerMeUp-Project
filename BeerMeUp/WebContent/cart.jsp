@@ -36,9 +36,9 @@ if(cart==null){
 				<td><%=beer.getId()%></td>
 				<td><%=beer.getName()%></td>
 				<td>
-					<a href="cart_control?action=increaseQta&id=<%=beer.getId()%>">+ </a>
+					<a href="cart_control?action=increaseQta&id=<%=beer.getId()%>">+</a>
 					<%=x.getQta()%>
-					<a href="cart_control?action=decreaseQta&id=<%=beer.getId()%>"> -</a>
+					<a href="cart_control?action=decreaseQta&id=<%=beer.getId()%>">-</a>
 				</td>
 				<td><%=x.getPrice()%></td>
 				<td><a href="cart_control?action=deleteFromCart&id=<%=beer.getId()%>">Delete from cart</a></td>
