@@ -146,7 +146,34 @@ public class StyleDao implements Dao<Style> {
 
 	@Override
 	public synchronized void doUpdate(Style bean) throws SQLException {
-		//non ancora implementata
+		Connection connection = null;
+		PreparedStatement ps = null;
+		String sql = "UPDATE "+ StyleDao.TABLE_NAME + "SET style_name= ?, traits = ? WHERE id = ?";
+		try {
+			connection = ds.getConnection(); 
+			
+			ps = connection.prepareStatement(sql);
+			ps.setString(1, bean.getName());
+			ps.setString(2, bean.getTraits());
+			ps.setInt(3, bean.getId());
+			
+			ps.executeUpdate();
+			connection.commit();		
+		}
+		finally {
+			try {
+				if(ps != null) {
+					ps.close();
+				}
+			}
+			finally {
+				if(connection != null) {
+					connection.close();
+				}
+			}
+		}
+		
+	
 		return;
 	}
 
