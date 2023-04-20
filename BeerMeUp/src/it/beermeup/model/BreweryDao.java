@@ -149,7 +149,33 @@ public class BreweryDao implements Dao<Brewery> {
 
 	@Override
 	public synchronized void doUpdate(Brewery bean) throws SQLException {
-		//non ancora implementata
+		Connection connection = null;
+		PreparedStatement ps = null;
+		String sql = "UPDATE"+ BreweryDao.TABLE_NAME + "SET brewery_name =?, story = ?, nation= ? WHERE id = ?";
+		try {
+			connection = ds.getConnection(); 
+			
+			ps = connection.prepareStatement(sql);
+			ps.setString(1, bean.getName());
+			ps.setString(2, bean.getStory());
+			ps.setString(3, bean.getNation());
+			ps.setInt(4, bean.getId());
+			
+			ps.executeUpdate();
+			connection.commit();		
+		}
+		finally {
+			try {
+				if(ps != null) {
+					ps.close();
+				}
+			}
+			finally {
+				if(connection != null) {
+					connection.close();
+				}
+			}
+		}
 		return;
 	}
 
