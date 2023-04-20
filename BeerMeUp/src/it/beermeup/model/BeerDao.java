@@ -175,7 +175,44 @@ public class BeerDao implements Dao<Beer> {
 
 	@Override
 	public synchronized void doUpdate(Beer bean) throws SQLException {
-		//Non ancora implementata
+		Connection connection = null;
+		PreparedStatement ps = null;
+		String sql = "UPDATE "+ BeerDao.TABLE_NAME + "SET brewery_id =?, style_id = ?, beer_name= ? , beer_description= ?, color = ?, ingredients = ?, gradation = ?,"+
+		"price = ? ,iva = ? , stock = ?, discount = ? WHERE id = ?";
+		
+		try {
+			connection = ds.getConnection(); 
+			
+			ps = connection.prepareStatement(sql);
+			ps.setInt(1, bean.getBrewery_id());
+			ps.setInt(2, bean.getStyle_id());
+			ps.setString(3, bean.getName());
+			ps.setString(4, bean.getDescription());
+			ps.setString(5, bean.getColor());
+			ps.setString(6, bean.getIngredients());
+			ps.setBigDecimal(7, bean.getGradation());
+			ps.setBigDecimal(8, bean.getPrice());
+			ps.setBigDecimal(9, bean.getIva());
+			ps.setInt(10, bean.getStock());
+			ps.setInt(11, bean.getDiscount());
+			ps.setInt(12, bean.getId());
+			
+			ps.executeUpdate();
+			connection.commit();		
+		}
+		finally {
+			try {
+				if(ps != null) {
+					ps.close();
+				}
+			}
+			finally {
+				if(connection != null) {
+					connection.close();
+				}
+			}
+		}
+		
 		return;
 	}
 
