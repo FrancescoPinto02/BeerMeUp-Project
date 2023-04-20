@@ -4,9 +4,10 @@
 <%	
 	Collection<?> breweryList = (Collection<?>) request.getAttribute("breweryList");
 	Collection<?> styleList = (Collection<?>) request.getAttribute("styleList");
+	Collection<?> beerList = (Collection<?>) request.getAttribute("beerList");
 	
-	if(breweryList==null || styleList==null) {
-		response.sendRedirect("./productManager_control?action=retrieveBreweryStyle");
+	if(breweryList==null || styleList==null || beerList==null) {
+		response.sendRedirect("./productManager_control?action=initialize");
 		return;
 	}
 
@@ -85,6 +86,29 @@
 			%>
 		</select><br><br>
 		
+		<input type="submit" value="Submit">
+	</form>
+	
+	<hr>
+	
+	<h2>Rimuovi Birra</h2>
+	<form action="./productManager_control" method="post">
+		<input type="hidden" name="action" id="action" value="deleteBeer">
+		
+		<label for="beerId">Birra: </label><br>
+		<select name="beerId" id="beerId" required>
+			<%
+			if (beerList != null && beerList.size() != 0) {
+				Iterator<?> beerIt = beerList.iterator();
+				while (beerIt.hasNext()) {
+					Beer beer = (Beer) beerIt.next();
+			%>
+				<option value="<%=beer.getId()%>"><%=beer.getName()%></option>
+			<%
+				}
+			} 
+			%>
+		</select><br><br>
 		<input type="submit" value="Submit">
 	</form>
 	

@@ -12,10 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import it.beermeup.model.Beer;
 import it.beermeup.model.BeerDao;
-import it.beermeup.model.Brewery;
 import it.beermeup.model.BreweryDao;
-import it.beermeup.model.Cart;
-import it.beermeup.model.Style;
 import it.beermeup.model.StyleDao;
 
 public class ProductManagerControl extends HttpServlet {
@@ -33,7 +30,7 @@ public class ProductManagerControl extends HttpServlet {
 		try {
 			if (action != null) {
 		
-				//Richiesta di tutti i prodotti
+				//Inserimento Birra
 				if(action.equalsIgnoreCase("insertBeer")) {
 					Beer beer = new Beer();
 					beer.setName(request.getParameter("beerName"));
@@ -49,6 +46,13 @@ public class ProductManagerControl extends HttpServlet {
 					beer.setStyle_id(Integer.parseInt(request.getParameter("beerStyle")));
 					
 					beerModel.doSave(beer);
+				}
+				
+				//Rimozione Birra
+				else if(action.equalsIgnoreCase("deleteBeer")) {
+					
+					int beerId = Integer.parseInt(request.getParameter("beerId"));
+					beerModel.doDelete(beerId);
 				}
 				
 			}			
@@ -69,11 +73,13 @@ public class ProductManagerControl extends HttpServlet {
 			if (action != null) {
 		
 				//Richiesta di tutti i prodotti
-				if(action.equalsIgnoreCase("retrieveBreweryStyle")) {
+				if(action.equalsIgnoreCase("initialize")) {
 					request.removeAttribute("breweryList");
 					request.setAttribute("breweryList", breweryModel.doRetrieveAll("brewery_name"));
 					request.removeAttribute("styleList");
 					request.setAttribute("styleList", styleModel.doRetrieveAll("style_name"));
+					request.removeAttribute("beerList");
+					request.setAttribute("beerList", beerModel.doRetrieveAll("beer_name"));
 				}
 				
 			}			
