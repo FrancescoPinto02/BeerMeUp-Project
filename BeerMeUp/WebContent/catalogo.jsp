@@ -27,8 +27,8 @@
 		<table>
 			<tr>
 				<th>Codice <a href="catalogo_control?action=retrieveAllBeers&sort=id">Sort</a></th>
-				<th>Nome <a href="catalogo_control?action=retrieveAllBeers&sort=nome">Sort</a></th>
-				<th>Prezzo <a href="catalogo_control?action=retrieveAllBeers&sort=prezzo">Sort</a></th>
+				<th>Nome <a href="catalogo_control?action=retrieveAllBeers&sort=beer_name">Sort</a></th>
+				<th>Prezzo <a href="catalogo_control?action=retrieveAllBeers&sort=price">Sort</a></th>
 				<th>Action</th>
 			</tr>
 			<%

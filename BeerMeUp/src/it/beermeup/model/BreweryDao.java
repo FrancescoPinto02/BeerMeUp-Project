@@ -92,7 +92,7 @@ public class BreweryDao implements Dao<Brewery> {
 				Brewery bean = new Brewery();
 				
 				bean.setId(rs.getInt("id"));
-				bean.setName(rs.getString("style_name"));
+				bean.setName(rs.getString("brewery_name"));
 				bean.setStory(rs.getString("story"));
 				bean.setNation(rs.getString("nation"));
 				

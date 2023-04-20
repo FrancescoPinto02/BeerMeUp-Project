@@ -11,6 +11,7 @@
 				<li><a href="home.jsp">Home</a></li>
 				<li><a href="catalogo.jsp">Catalogo</a></li>
 				<li><a href="cart.jsp">Carrello</a></li>
+				<li><a href="product-manager.jsp">Manager</a></li>
 			</ul>
 		</div>
 	</body>

@@ -39,4 +39,13 @@
     <servlet-name>CatalogoControl</servlet-name>
     <url-pattern>/catalogo_control</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>ProductManagerControl</servlet-name>
+    <servlet-class>it.beermeup.control.ProductManagerControl</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProductManagerControl</servlet-name>
+    <url-pattern>/productManager_control</url-pattern>
+  </servlet-mapping>
 </web-app>
