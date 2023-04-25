@@ -1,7 +1,6 @@
 package it.beermeup.control;
 
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
@@ -10,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import it.beermeup.model.Beer;
 import it.beermeup.model.BeerDao;
 import it.beermeup.model.BreweryDao;
 import it.beermeup.model.StyleDao;
@@ -29,27 +27,9 @@ public class ProductManagerControl extends HttpServlet {
 		
 		try {
 			if (action != null) {
-		
-				//Inserimento Birra
-				if(action.equalsIgnoreCase("insertBeer")) {
-					Beer beer = new Beer();
-					beer.setName(request.getParameter("beerName"));
-					beer.setColor(request.getParameter("beerColor"));
-					beer.setGradation(new BigDecimal(request.getParameter("beerGradation")));
-					beer.setPrice(new BigDecimal(request.getParameter("beerPrice")));
-					beer.setIva(new BigDecimal(request.getParameter("beerIva")));
-					beer.setStock(Integer.parseInt(request.getParameter("beerStock")));
-					beer.setDiscount(Integer.parseInt(request.getParameter("beerDiscount")));
-					beer.setDescription(request.getParameter("beerDescription"));
-					beer.setIngredients(request.getParameter("beerIngredients"));
-					beer.setBrewery_id(Integer.parseInt(request.getParameter("beerBrewery")));
-					beer.setStyle_id(Integer.parseInt(request.getParameter("beerStyle")));
-					
-					beerModel.doSave(beer);
-				}
 				
 				//Rimozione Birra
-				else if(action.equalsIgnoreCase("deleteBeer")) {
+				if(action.equalsIgnoreCase("deleteBeer")) {
 					
 					int beerId = Integer.parseInt(request.getParameter("beerId"));
 					beerModel.doDelete(beerId);

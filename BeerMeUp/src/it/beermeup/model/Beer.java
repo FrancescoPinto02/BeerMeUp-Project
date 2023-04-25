@@ -1,6 +1,9 @@
 package it.beermeup.model;
 
+import java.io.InputStream;
 import java.math.BigDecimal;
+
+
 
 public class Beer {
 
@@ -16,6 +19,8 @@ public class Beer {
 	private BigDecimal iva = new BigDecimal(0);
 	private int stock = 0;
 	private int discount = 0;
+	private String base64Image = "";
+	private InputStream inputStreamImage = null;
 	
 	public int getId() {
 		return id;
@@ -88,6 +93,19 @@ public class Beer {
 	}
 	public void setDiscount(int discount) {
 		this.discount = discount;
+	}
+	public String getBase64Image() {
+		return base64Image;
+	}
+	public void setBase64Image(String base64Image) {
+		this.base64Image = base64Image;
+	}
+	
+	public InputStream getInputStreamImage() {
+		return inputStreamImage;
+	}
+	public void setInputStreamImage(InputStream inputStreamImage) {
+		this.inputStreamImage = inputStreamImage;
 	}
 	
 	@Override

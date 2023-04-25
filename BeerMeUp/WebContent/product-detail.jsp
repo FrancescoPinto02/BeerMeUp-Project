@@ -12,11 +12,13 @@
 	<%@ page contentType="text/html; charset=UTF-8" import="java.util.*,it.beermeup.model.*"%>
 <head>
 	<%@ include file="head.jsp"%>
+	<link rel="stylesheet" href="BeerMeUpStyle.css">
 </head>
 <body>
 	<%@ include file="header.jsp"%>
 	
 	<h1><%=beer.getName()%></h1>
+	<img src="data:image/png;base64,<%=beer.getBase64Image()%>" style="width: 25%; text-align: center; margin-left: auto; margin-right: auto;" >
 	<div class="product_table">
 		<table>
 			<tr>

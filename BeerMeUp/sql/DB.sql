@@ -2,6 +2,8 @@ DROP SCHEMA IF EXISTS beer_me_up;
 CREATE SCHEMA beer_me_up;
 USE beer_me_up;
 
+
+
 CREATE TABLE site_user(
 	id INT NOT NULL AUTO_INCREMENT,
     email VARCHAR(255) NOT NULL,
@@ -60,6 +62,7 @@ CREATE TABLE beer(
     iva DECIMAL(3,1) NOT NULL CHECK(iva>=0),
     stock INT NOT NULL CHECK(stock>=0),
     discount INT NOT NULL CHECK(discount>=0 AND discount<100),
+    img LONGBLOB NOT NULL,
     
     PRIMARY KEY(id),
     FOREIGN KEY(brewery_id) REFERENCES brewery(id)
@@ -120,6 +123,8 @@ CREATE TABLE order_details(
         ON UPDATE CASCADE
 );
 
+GRANT ALL PRIVILEGES ON beer_me_up.* TO 'root'@'localhost';
+
 INSERT INTO brewery (brewery_name, story, nation)
 VALUES ('Antikorpo', 'Antikorpo Brewing è un giovane birrificio italiano “nato nel bel mezzo di una pandemia”, come lo descrive il birraio stesso, Davide Galliussi che, 
 con Cristina Mirizzi, ha creato il progetto nei primi mesi del 2020, da una costola dello storico birrificio Cittavecchia di Sgonico (TS).
@@ -134,24 +139,24 @@ VALUES ('Stout' , 'Delicate, con un corpo medio ed una carbonatazione moderata, 
 con toni secondari di cacao o cereale torrefatto. 
 La cremosità e il tenue fruttato/luppolato donano equilibrio a queste birre.');
 
-INSERT INTO beer (brewery_id , style_id, beer_name, beer_description, color, ingredients, gradation, price, iva, stock, discount)
+INSERT INTO beer (brewery_id , style_id, beer_name, beer_description, color, ingredients, gradation, price, iva, stock, discount, img)
 VALUES ('1', '1', 'See Ya In The Pit', 'Dal colore ebano e impenetrabile, posta alla luce del sole mostra suggestivi riflessi rubini sotto una sottile nuvola di schiuma color cappuccino.
 La scorza d`arancia candita presente nella ricetta emerge all`olfatto in primissima battuta, accompagnata da note di liquirizia gommosa 
 e da una chiaro ricordo di caffè espresso con pennellate balsamiche e floreali che richiamano l`anice verde e la violetta.' ,
-'Ebano' , 'Orzo', '8' , '4.90', '22', '20', '0' );
+'Ebano' , 'Orzo', '8' , '4.90', '22', '20', '0', LOAD_FILE('C:/birre/Beer1.PNG'));
 
 INSERT INTO style (style_name, traits)
 VALUES ('Pale Ale' , 'Originario della Gran Bretagna, ad oggi è uno dei principali stili birrai al mondo. 
 Vede l’impiego di lievito ad alta fermentazione e malto prevalentemente chiaro che determina il colore dorato della birra. 
 Differenti tecniche di produzione e luppolature, con una vasta gamma di gusti e gradazioni alcoliche.');
 
-INSERT INTO beer (brewery_id , style_id, beer_name, beer_description, color, ingredients, gradation, price, iva, stock, discount)
+INSERT INTO beer (brewery_id , style_id, beer_name, beer_description, color, ingredients, gradation, price, iva, stock, discount, img)
 VALUES ('1', '2', 'Impact Zone', 'Dal colore dorato chiaro, opalescente, fa sfoggio di una schiuma candida, compatta e fine.
 Il bouquet presenta una sinergia tra sentori agrumati (mandarino e arancia tarocco), più calde evocazioni tropicali, 
 con il passion fruit in prima fila, e di matura frutta estiva che giungono fino alla pesca sciroppata.
 Non manca anche una rinfrescante vena resinosa a precedere l`emersione in superficie degli aromi legati alla base maltata, 
 che si esprimono in uno sfondo di panificato chiaro punteggiato da un tocco di crosta di pan brioche.' ,
-'Dorato Chiaro' , 'Orzo', '5' , '4.50', '22', '10', '0' );
+'Dorato Chiaro' , 'Orzo', '5' , '4.50', '22', '10', '0', LOAD_FILE('C:/birre/Beer2.PNG'));
 
 select * from beer;
 select * from brewery;

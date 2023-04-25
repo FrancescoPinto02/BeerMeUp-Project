@@ -23,8 +23,10 @@
 <body>
 	<%@ include file="header.jsp" %>
 	
+	
+	
 	<h2>Aggiungi Birra</h2>
-	<form action="./productManager_control" method="post">
+	<form action="./addProduct" method="post" enctype="multipart/form-data" >
 		<input type="hidden" name="action" id="action" value="insertBeer">
 		
 		<label for="beerName">Nome: </label><br>
@@ -54,7 +56,8 @@
 		<label for="beerIngredients">Ingredienti: </label><br>
 		<textarea name="beerIngredients" id="beerIngredients" rows="4" cols="40" required></textarea><br>
 		
-		
+		<label for="beerImg">Immagine: </label><br>
+		<input type="file" name="beerImg" id="beerImg" required><br>
 		
 		<label for="beerStyle">Stile: </label><br>
 		<select name="beerStyle" id="beerStyle" required>

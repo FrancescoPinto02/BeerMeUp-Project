@@ -27,6 +27,7 @@
 		<table>
 			<tr>
 				<th>Codice <a href="catalogo_control?action=retrieveAllBeers&sort=id">Sort</a></th>
+				<th>Immagine</th>
 				<th>Nome <a href="catalogo_control?action=retrieveAllBeers&sort=beer_name">Sort</a></th>
 				<th>Prezzo <a href="catalogo_control?action=retrieveAllBeers&sort=price">Sort</a></th>
 				<th>Action</th>
@@ -39,6 +40,7 @@
 			%>
 			<tr>
 				<td><%=bean.getId()%></td>
+				<td><img src="data:image/png;base64,<%=bean.getBase64Image()%>" width="250" height="300"></td>
 				<td><%=bean.getName()%></td>
 				<td><%=bean.getPrice()%></td>
 				<td>
