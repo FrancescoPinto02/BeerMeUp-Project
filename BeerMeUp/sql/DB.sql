@@ -8,7 +8,9 @@ CREATE TABLE site_user(
 	id INT NOT NULL AUTO_INCREMENT,
     email VARCHAR(255) NOT NULL,
     pw VARCHAR(255) NOT NULL,
-    username VARCHAR(255) NOT NULL,
+    first_name VARCHAR(255) NOT NULL,
+    last_name VARCHAR(255) NOT NULL,
+    telephone VARCHAR(15) NOT NULL,
     is_admin BOOLEAN NOT NULL,
     
     PRIMARY KEY(id)
@@ -17,9 +19,6 @@ CREATE TABLE site_user(
 CREATE TABLE address(
 	id INT NOT NULL AUTO_INCREMENT,
     user_id INT NOT NULL,
-    first_name VARCHAR(255) NOT NULL,
-    last_name VARCHAR(255) NOT NULL,
-    telephone VARCHAR(15) NOT NULL,
     street VARCHAR(255) NOT NULL,
     num VARCHAR(5) NOT NULL,
     cap VARCHAR(5) NOT NULL,
