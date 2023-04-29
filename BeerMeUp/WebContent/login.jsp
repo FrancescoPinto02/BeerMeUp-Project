@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,17 +13,50 @@
 			</h1>
 		</div>
 
-   <form action="Login" method ="post">
+   <form action="./Login" method ="post">
+   Login
+   <input type ="hidden" name="action" value="login">
    	<fieldset>
    		<label for="username">Login </label>
-   		<input id="username" type="text" name="username" >
+   		<input id="username" type="text" name="username" required >
    		<br>
    		<label for="password">Password</label>
-   		<input id="password" type="password" name="password">
+   		<input id="password" type="password" name="password" required>
+
    		<input type = "submit" value="Login"/>
    		<input type ="submit" value ="Reset"/>
    	</fieldset>
    </form>
+   <br>
+   <form action="./Login" method ="post">
+   Sign-in
+   <input type ="hidden" name="action" value="sign-in">
+   	<fieldset>
+   		<label for="email">Email</label>
+   		<input id="email" type="email" name="email"required>
+   		<br>
+   		<label for="password">Password</label>
+   		<input id="password" type="password" name="password" required>
+   		<br>
+   		<label for="cpassword">Conferma Password</label>
+   		<input id="cpassword" type="password" name="cpassword" required> <!-- FARE VERIFICA PASSWORD UGUALI? !-->
+   		<br>
+   		<label for="first_name">Nome</label>
+   		<input id="first_name" type="text" name="first_name" required>
+   		<br>
+   		<label for="last_name">Cognome</label>
+   		<input id="last_name" type="text" name="last_name" required>
+   		<br>
+   		<label for="telephone">Telefono</label>
+   		<input id="telephone" type="text" name="telephone" required>
+   		
+   		<!--  ATTRIBUTI PER INDIRIZZO -->
+   		
+   		<input type = "submit" value="Sign-in"/>
+   		<input type ="submit" value ="Reset"/>
+   	</fieldset>
+   </form>
+   
 
 <%@ include file="footer.jsp" %>
 </body>

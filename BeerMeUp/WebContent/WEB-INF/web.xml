@@ -57,4 +57,17 @@
     <servlet-name>AddProduct</servlet-name>
     <url-pattern>/addProduct</url-pattern>
   </servlet-mapping>
+  
+   
+  <servlet>
+    <servlet-name>Login</servlet-name>
+    <servlet-class>it.beermeup.control.Login</servlet-class>
+  </servlet>
+  
+  
+   
+  <servlet>
+    <servlet-name>Logout</servlet-name>
+    <servlet-class>it.beermeup.control.Logout</servlet-class>
+  </servlet>
 </web-app>
