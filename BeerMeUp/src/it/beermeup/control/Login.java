@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Collection;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,7 +16,6 @@ import it.beermeup.model.User;
 import it.beermeup.model.UserDao;
 
 
-@WebServlet("/Login")
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -89,7 +88,7 @@ public class Login extends HttpServlet {
 
 			try {
 				User p = new User();
-				p=userModel.doRetrieveByEmail(email);
+				p=userModel.doRetrieveByEmail(u.getEmail());
 				if (p.getEmail().equals(u.getEmail()))
 					{
 						response.sendRedirect(request.getContextPath() + "/login.jsp"); //EMAIL GIA' ESISTENTE
@@ -124,7 +123,10 @@ public class Login extends HttpServlet {
 				e.printStackTrace();
 			}
 	}
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login.jsp");
+		dispatcher.forward(request, response);
 }
+	
 }
 	
 

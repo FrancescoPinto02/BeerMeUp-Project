@@ -13,7 +13,7 @@
 			</h1>
 		</div>
 
-   <form action="./Login" method ="post">
+   <form action="./login" method ="post">
    Login
    <input type ="hidden" name="action" value="login">
    	<fieldset>
@@ -28,7 +28,7 @@
    	</fieldset>
    </form>
    <br>
-   <form action="./Login" method ="post">
+   <form action="./login" method ="post">
    Sign-in
    <input type ="hidden" name="action" value="sign-in">
    	<fieldset>
