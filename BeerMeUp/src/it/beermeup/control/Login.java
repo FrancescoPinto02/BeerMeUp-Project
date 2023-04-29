@@ -88,8 +88,9 @@ public class Login extends HttpServlet {
 			//Verifica email già esistente
 
 			try {
-				String email2 = u.getEmail();
-				if (userModel.doRetrieveByEmail(email).equals(email2))
+				User p = new User();
+				p=userModel.doRetrieveByEmail(email);
+				if (p.getEmail().equals(u.getEmail()))
 					{
 						response.sendRedirect(request.getContextPath() + "/login.jsp"); //EMAIL GIA' ESISTENTE
 					}
