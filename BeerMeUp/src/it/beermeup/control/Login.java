@@ -34,7 +34,7 @@ public class Login extends HttpServlet {
 		
 		if(action.equals("login"))
 		{
-		String username = request.getParameter("username");
+		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		
 		
@@ -44,21 +44,30 @@ public class Login extends HttpServlet {
 			for (User x: utenti)
 			{
 				
-			if(	x.getEmail().equals(username) && x.getPw().equals(password) && x.isAdmin())
+			if(	x.getEmail().equals(email) && x.getPw().equals(password) && x.isAdmin())
 				{
+				request.getSession().removeAttribute("AdminRoles");
 				request.getSession().setAttribute("AdminRoles", true ) ;
+				request.getSession().removeAttribute("user-id");
+				request.getSession().setAttribute("user-id", x.getId());
 				response.sendRedirect(request.getContextPath()+ "/product-manager.jsp");
+				return;
 				}
-			else if(x.getEmail().equals(username) && x.getPw().equals(password) && x.isAdmin()!= true)
+			else if(x.getEmail().equals(email) && x.getPw().equals(password) && x.isAdmin()==false)
 			{
-				request.getSession().setAttribute("User", true ) ;
-				request.getSession().setAttribute("AdminRoles", false ) ;
+				request.getSession().removeAttribute("AdminRoles");
+				request.getSession().setAttribute("AdminRoles", false) ;
+				request.getSession().removeAttribute("user-id");
+				request.getSession().setAttribute("user-id", x.getId());
 				response.sendRedirect(request.getContextPath()); ////////???????????????
+				return;
 			}
 			else {
-				request.getSession().setAttribute("User", false ) ;
-				request.getSession().setAttribute("AdminRoles", false) ;
+				request.getSession().removeAttribute("AdminRoles");
+				request.getSession().removeAttribute("user-id");
+				request.getSession().setAttribute("invalid-login", true);
 				response.sendRedirect(request.getContextPath() + "/login.jsp");
+				return;
 			}
 			}
 		}
@@ -84,7 +93,7 @@ public class Login extends HttpServlet {
 			u.setLast_name(last_name);
 			u.setTelephone(telephone);
 			
-			//Verifica email già esistente
+			//Verifica email giï¿½ esistente
 
 			try {
 				User p = new User();
@@ -92,6 +101,7 @@ public class Login extends HttpServlet {
 				if (p.getEmail().equals(u.getEmail()))
 					{
 						response.sendRedirect(request.getContextPath() + "/login.jsp"); //EMAIL GIA' ESISTENTE
+						return;
 					}
 				else {
 				String street = request.getParameter("street");
@@ -112,6 +122,7 @@ public class Login extends HttpServlet {
 					userModel.doSave(u);
 					addressModel.doSave(a);
 					response.sendRedirect(request.getContextPath() + "/login.jsp"); //OPERAZIONE ANDATA A BUON FINE
+					return;
 				} 
 				catch (SQLException e) {
 					System.out.println("Errore:" + e.getMessage());

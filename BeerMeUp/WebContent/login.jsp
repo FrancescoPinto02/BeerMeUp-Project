@@ -7,18 +7,20 @@
 	
 <body>
 		
-		<div>
-			<h1>
-				LOGIN PAGE
-			</h1>
-		</div>
+	<div>
+		<h1>LOGIN PAGE</h1>
+		<%if(request.getSession().getAttribute("invalid-login")!=null){ %>
+			<h2 style="color:red;">Credenziali Errate</h2>
+		<%	request.getSession().removeAttribute("invalid-login");
+		}%>
+	</div>
 
    <form action="./login" method ="post">
    Login
    <input type ="hidden" name="action" value="login">
    	<fieldset>
-   		<label for="username">Login </label>
-   		<input id="username" type="text" name="username" required >
+   		<label for="email">E-mail </label>
+   		<input id="email" type="text" name="email" required >
    		<br>
    		<label for="password">Password</label>
    		<input id="password" type="password" name="password" required>
