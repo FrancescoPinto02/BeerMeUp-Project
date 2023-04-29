@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
+import it.beermeup.model.Address;
 import it.beermeup.model.User;
 import it.beermeup.model.UserDao;
 
@@ -83,7 +83,20 @@ public class Login extends HttpServlet {
 			u.setLast_name(last_name);
 			u.setTelephone(telephone);
 			
-			//FARE INDIRIZZO QUI
+			String street = request.getParameter("street");
+			String num = request.getParameter("num");
+			String cap = request.getParameter("cap");
+			String city = request.getParameter("city");
+			String nation = request.getParameter("nation");
+			
+			Address a = new Address();
+			a.setUserId(u.getId());
+			a.setStreet(street);
+			a.setNum(num);
+			a.setCap(cap);
+			a.setCity(city);
+			a.setNation(nation);
+
 			try {
 				userModel.doSave(u);
 			} 

@@ -49,9 +49,22 @@
    		<br>
    		<label for="telephone">Telefono</label>
    		<input id="telephone" type="text" name="telephone" required>
-   		
-   		<!--  ATTRIBUTI PER INDIRIZZO -->
-   		
+   		<br>
+   		<label for="street">Via</label>
+   		<input id="street" type="text" name="street" required>
+   		<br>
+   		<label for="num">Numero Civico</label>
+   		<input id="num" type="text" name="num" required>
+   		<br>
+   		<label for="cap">CAP</label>
+   		<input id="cap" type="text" name="cap" required>
+   		<br>
+   		<label for="city">Città</label>
+   		<input id="city" type="text" name="city" required>
+   		<br>
+   		<label for="nation">Nazione</label>
+   		<input id="nation" type="text" name="nation" required>
+
    		<input type = "submit" value="Sign-in"/>
    		<input type ="submit" value ="Reset"/>
    	</fieldset>
