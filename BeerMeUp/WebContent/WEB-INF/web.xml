@@ -59,15 +59,24 @@
   </servlet-mapping>
   
    
+   
   <servlet>
     <servlet-name>Login</servlet-name>
     <servlet-class>it.beermeup.control.Login</servlet-class>
   </servlet>
+  <servlet-mapping>
+    <servlet-name>Login</servlet-name>
+    <url-pattern>/Login</url-pattern>
+  </servlet-mapping>
   
-  
-   
   <servlet>
     <servlet-name>Logout</servlet-name>
     <servlet-class>it.beermeup.control.Logout</servlet-class>
   </servlet>
+  <servlet-mapping>
+    <servlet-name>Logout</servlet-name>
+    <url-pattern>/Logout</url-pattern>
+  </servlet-mapping>
+  
+  
 </web-app>

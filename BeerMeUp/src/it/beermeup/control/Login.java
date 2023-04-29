@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import it.beermeup.model.Address;
+import it.beermeup.model.AddressDao;
 import it.beermeup.model.User;
 import it.beermeup.model.UserDao;
 
@@ -20,7 +21,7 @@ public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	public static UserDao userModel = new UserDao();
-
+	public static AddressDao addressModel = new AddressDao();
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -28,6 +29,7 @@ public class Login extends HttpServlet {
 	}
 
 
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action = request.getParameter("action");
 		
@@ -83,27 +85,43 @@ public class Login extends HttpServlet {
 			u.setLast_name(last_name);
 			u.setTelephone(telephone);
 			
-			String street = request.getParameter("street");
-			String num = request.getParameter("num");
-			String cap = request.getParameter("cap");
-			String city = request.getParameter("city");
-			String nation = request.getParameter("nation");
-			
-			Address a = new Address();
-			a.setUserId(u.getId());
-			a.setStreet(street);
-			a.setNum(num);
-			a.setCap(cap);
-			a.setCity(city);
-			a.setNation(nation);
+			//Verifica email già esistente
 
 			try {
-				userModel.doSave(u);
-			} 
-			catch (SQLException e) {
-				System.out.println("Errore:" + e.getMessage());
-		}
-		
+				String email2 = u.getEmail();
+				if (userModel.doRetrieveByEmail(email).equals(email2))
+					{
+						response.sendRedirect(request.getContextPath() + "/login.jsp"); //EMAIL GIA' ESISTENTE
+					}
+				else {
+				String street = request.getParameter("street");
+				String num = request.getParameter("num");
+				String cap = request.getParameter("cap");
+				String city = request.getParameter("city");
+				String nation = request.getParameter("nation");
+				
+				Address a = new Address();
+				a.setUserId(u.getId());
+				a.setStreet(street);
+				a.setNum(num);
+				a.setCap(cap);
+				a.setCity(city);
+				a.setNation(nation);
+
+				try {
+					userModel.doSave(u);
+					addressModel.doSave(a);
+					response.sendRedirect(request.getContextPath() + "/login.jsp"); //OPERAZIONE ANDATA A BUON FINE
+				} 
+				catch (SQLException e) {
+					System.out.println("Errore:" + e.getMessage());
+}
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	}
 }
 }
