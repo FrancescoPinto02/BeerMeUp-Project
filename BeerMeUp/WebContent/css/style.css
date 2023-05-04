@@ -1,0 +1,179 @@
+@charset "UTF-8";
+
+*{
+    margin:0; padding:0;
+    box-sizing: border-box;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    outline: none; 
+	border: none;
+    text-decoration: none;
+    text-transform: capitalize;
+    list-style: none;
+    /*transition: .2s linear;*/
+}
+
+html{
+    font-size: 100%;
+    scroll-behavior: smooth;
+    scroll-padding-top: 4rem;
+    overflow-x: hidden;
+}
+
+
+main{
+	display:flex;
+	align-items: center;
+	min-height: 100vh;
+	margin-top:5.2rem;
+	
+}
+
+main .home{
+	width:100%;
+}
+
+main .home h1{
+	text-align: center;
+}
+
+main form input, textarea, select{
+	border: 1px solid black;
+}
+
+
+footer{
+	margin-top: auto;
+	width: 100%;
+	background-color: blue;
+}
+
+footer h1{
+	text-align: center;
+	color: white;
+}
+
+/*------------------- CATALOGO --------------------------*/
+
+#catalog{
+	width:100%;
+	text-align:center;
+}
+
+#catalog .product-container{
+	margin-top: 5rem;
+}
+
+#catalog .product-container .product-table{
+	margin-left:auto;
+	margin-right:auto;
+	border-collapse: collapse;
+}
+
+#catalog .product-container .product-table th, td{
+	border: 2px solid black;
+	padding: 1rem 2rem;
+}
+
+#catalog .product-container .product-table th{
+	height: 2rem;
+	font-size: 1.5rem;
+}
+/*------------------- CATALOGO --------------------------*/
+
+/*------------------- DETTAGLI PRODOTTO --------------------------*/
+#product-page{
+	width:100%;
+	text-align:center;
+}
+
+#product-page .product-detail-table{
+	margin-left:auto;
+	margin-right:auto;
+	border-collapse: collapse;
+}
+
+#product-page .product-detail-table th, td{
+	border: 2px solid black;
+	padding: 1rem 2rem;
+}
+
+#product-page .product-detail-table th{
+	height: 2rem;
+	font-size: 1.5rem;
+}
+
+#product-page .product-description{
+	margin-top: 2rem;
+}
+
+
+#product-page .product-ingredients{
+	margin-top: 2rem;
+}
+
+#product-page .product-description p , #product-page .product-ingredients p{
+	font-size: 1.2rem;
+}
+
+/*------------------- DETTAGLI PRODOTTO --------------------------*/
+
+/*------------------- LOGIN PAGE --------------------------*/
+#login-page{
+	width: 100%;
+	padding-left:1rem;
+}
+
+#login-page .login-page-form{
+	padding: 2rem 0;
+}
+
+#login-page .login-page-form form input{
+	text-transform: none;
+}
+
+/*------------------- LOGIN PAGE --------------------------*/
+
+
+/*------------------- ADMIN PAGE --------------------------*/
+#admin-page{
+	width: 100%;
+	padding-left:1rem;
+}
+
+#admin-page .admin-page-form{
+	padding: 2rem 0;
+}
+
+#admin-page .admin-page-form form input{
+	text-transform: none;
+}
+
+/*------------------- ADMIN PAGE --------------------------*/
+
+
+
+@media (max-width: 990px){
+    html{
+        font-size: 90%;
+    }
+
+@media (max-width: 450px){
+    html{
+        font-size: 70%;
+    }
+}
+
+/*Galaxy A51/71*/
+@media (max-width: 400px){
+    html{
+        font-size: 65%;
+    }
+}
+
+/*Galaxy Fold*/
+@media (max-width: 300px){
+    html{
+        font-size: 50%;
+    }
+}
+

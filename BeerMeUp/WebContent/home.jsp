@@ -3,18 +3,18 @@
 <!DOCTYPE html>
 <html lang="it">
 	<head>
-		<%@ include file="head.jsp"%>			
+		<%@ include file="head.jsp"%>	
 	</head>
 	
 	
 	<body>
 		<%@ include file="header.jsp" %>
 		
-		<div>
-			<h1>
-				HOME PAGE
-			</h1>
-		</div>
+		<main>
+			<div class="home">
+				<h1>HOME PAGE</h1>	
+			</div>				
+		</main>
 		
 		<%@ include file="footer.jsp" %>
 	</body>

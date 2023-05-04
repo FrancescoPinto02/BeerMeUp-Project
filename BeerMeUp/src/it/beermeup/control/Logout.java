@@ -13,8 +13,8 @@ public class Logout extends HttpServlet {
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		request.getSession().removeAttribute("adminRoles");
-		request.getSession().removeAttribute("user");
+		request.getSession().removeAttribute("admin-roles");
+		request.getSession().removeAttribute("user-id");
 		request.getSession().invalidate();
 		response.sendRedirect(request.getContextPath()+ "/Home.jsp"); //o login.jsp?
 	}

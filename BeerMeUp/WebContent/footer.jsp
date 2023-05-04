@@ -6,8 +6,8 @@
 		<%@ include file="head.jsp"%>	
 	</head>
 	<body>
-		<div class="footer">
+		<footer>
 				<h1>FOOTER</h1>
-		</div>
+		</footer>
 	</body>
 </html>

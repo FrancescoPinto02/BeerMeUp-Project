@@ -157,7 +157,10 @@ Non manca anche una rinfrescante vena resinosa a precedere l`emersione in superf
 che si esprimono in uno sfondo di panificato chiaro punteggiato da un tocco di crosta di pan brioche.' ,
 'Dorato Chiaro' , 'Orzo', '5' , '4.50', '22', '10', '0', LOAD_FILE('C:/birre/Beer2.PNG'));
 
+INSERT INTO site_user (email, pw, first_name, last_name, telephone, is_admin) 
+VALUES ('beermeup@gmail.com' , '1234', 'admin', 'admin', '3458467475', TRUE);
+
 select * from beer;
 select * from brewery;
 select * from style;
-
+select * from site_user;

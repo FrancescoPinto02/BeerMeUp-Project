@@ -1,0 +1,125 @@
+@charset "UTF-8";
+header{
+    position: fixed;
+    top:0; left:0; right:0;
+    background: #ffcf00;
+    padding: 1.3rem 9%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1000;
+    box-shadow: 0 .5rem 1rem black;
+}
+
+header .logo{
+    font-size: 2rem;
+    color: black;
+    font-weight: bolder;
+}
+
+header nav ul li{
+    display: inline-block;
+}
+
+
+header nav ul li a{
+    font-size: 1.3rem;
+    padding: 0 1rem;
+    color: black;
+}
+
+header nav ul li a:hover{
+    color: #0030ff;
+    font-weight: bolder;
+}
+
+header .icons a{
+    font-size: 1.8rem;
+    margin-left: 1rem;
+    color: black;
+}
+
+header .icons a:hover{
+    color: #0030ff;
+    font-weight: bolder;
+}
+
+header #toggler{
+    display: none;  
+}
+
+header .fa-bars{
+    font-size: 2rem;
+    color: black;
+    border-radius: .3rem;
+    padding: .3rem 1rem;
+    cursor:pointer;
+    display: none;
+}
+
+@media (max-width: 990px){
+	header{
+        padding: 1.3rem;
+    }
+}
+
+@media (max-width: 770px){
+    header .fa-bars{
+        display: block;
+    }
+
+    header .logo{
+        margin-left: 4rem;
+    }
+
+    header nav{
+        position:absolute;
+        top: 100%; left: 0; right: 0;
+        background: black;
+        border-top: .1rem solid black; 
+    }
+
+    header nav ul{
+        position: fixed;
+        width: 100%;
+        height: auto;
+        background: #ffda33;
+        top: 5rem;
+        left: -100%;
+        text-align: center;
+        border: 5px solid black;
+        box-shadow: 0 .5rem 1rem black;
+        transition: .2s linear;
+    }
+
+    header nav ul li{
+        display: block;
+        margin: 0;
+        border: 2px solid black;
+        line-height: 5rem;
+    }
+
+    header nav ul li:hover{
+        background-color: #0030ff;
+    }
+
+    header nav ul li:hover a{
+        color: white;
+    }
+
+    header nav ul li a{
+        font-size: 1.6rem;
+    }
+
+    header nav ul li a:hover{
+        background: none;
+    }
+
+    header #toggler:checked ~ nav ul{
+        left: 0;
+        transition: .2s linear;
+    }
+}
+
+
+
