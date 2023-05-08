@@ -13,7 +13,12 @@ if(cart==null){
 <%@ page contentType="text/html; charset=UTF-8" import="java.util.*,it.beermeup.model.*"%> 
 <html lang="it">
 <head>
-	<%@ include file="head.jsp"%>
+		<meta charset="UTF-8">
+		<meta http-equiv="Content-Type" content="text/html">
+		<title>Beer Me Up</title>
+		<meta name="viewport" content="widht=device-width, initial-scale=1">
+		<link rel="stylesheet" href="css/style.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
@@ -25,6 +30,7 @@ if(cart==null){
 		<h2><a href="cart_control?action=deleteCart">Svuota Carrello</a></h2>
 		<div class="product-container"> <!--È solo temporaneo, bisogna modificarlo-->
 			<table class="product-table"> <!--È solo temporaneo, bisogna modificarlo-->
+				<caption>tabella carrello</caption>
 				<tr>
 					<th>Codice</th>
 					<th>Nome</th>

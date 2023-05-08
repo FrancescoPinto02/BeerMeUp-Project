@@ -16,7 +16,12 @@
 <%@ page contentType="text/html; charset=UTF-8" import="java.util.*,it.beermeup.model.Beer,it.beermeup.model.Cart,it.beermeup.model.CartProduct"%>
 
 <head>
-	<%@ include file="head.jsp"%>
+	<meta charset="UTF-8">
+	<meta http-equiv="Content-Type" content="text/html">
+	<title>Beer Me Up</title>
+	<meta name="viewport" content="widht=device-width, initial-scale=1">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
@@ -28,6 +33,7 @@
 			<h2>Prodotti</h2>
 			<div class="product-container">
 				<table class="product-table">
+				<caption>tabella catalogo</caption>
 					<tr>
 						<th>Codice <a href="catalogo_control?action=retrieveAllBeers&sort=id">Sort</a></th>
 						<th>Immagine</th>
