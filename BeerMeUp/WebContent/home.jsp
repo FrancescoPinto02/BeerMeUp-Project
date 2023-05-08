@@ -14,7 +14,6 @@
 	
 	<body>
 		<%@ include file="header.jsp" %>
-		
 		<main>
 			<div class="home">
 				<h1>HOME PAGE</h1>	
