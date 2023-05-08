@@ -49,7 +49,7 @@
 					%>
 					<tr>
 						<td><%=bean.getId()%></td>
-						<td><img src="data:image/png;base64,<%=bean.getBase64Image()%>" width="250" height="300"></td>
+						<td><img src="data:image/png;base64,<%=bean.getBase64Image()%>" width="250" height="300" alt="prodotto"></td>
 						<td><%=bean.getName()%></td>
 						<td><%=bean.getPrice()%></td>
 						<td>

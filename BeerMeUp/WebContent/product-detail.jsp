@@ -8,7 +8,8 @@
 		response.sendRedirect("catalogo.jsp");
 	}%>
 <!DOCTYPE html>
-<html> <%@ page contentType="text/html; charset=UTF-8" import="java.util.*,it.beermeup.model.*"%>
+<html lang="it"> 
+<%@ page contentType="text/html; charset=UTF-8" import="java.util.*,it.beermeup.model.*"%>
 
 <head>
 	<meta charset="UTF-8">
@@ -25,8 +26,9 @@
 	<main>
 		<div id=product-page>
 			<h1><%=beer.getName()%></h1>
-			<img src="data:image/png;base64,<%=beer.getBase64Image()%>" style="width: 25%; text-align: center; margin-left: auto; margin-right: auto;" >
+			<img src="data:image/png;base64,<%=beer.getBase64Image()%>" alt="prodotto" style="width: 25%; text-align: center; margin-left: auto; margin-right: auto;" >
 			<table class="product-detail-table">
+			<caption></caption>
 				<tr>
 					<th>ID</th>
 					<th>Birrificio</th>
