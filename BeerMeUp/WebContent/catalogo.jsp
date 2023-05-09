@@ -33,7 +33,7 @@
 			<h2>Prodotti</h2>
 			<div class="product-container">
 				<table class="product-table">
-				<caption>tabella catalogo</caption>
+				<caption></caption>
 					<tr>
 						<th>Codice <a href="catalogo_control?action=retrieveAllBeers&sort=id">Sort</a></th>
 						<th>Immagine</th>

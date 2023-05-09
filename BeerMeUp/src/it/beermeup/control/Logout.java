@@ -16,7 +16,7 @@ public class Logout extends HttpServlet {
 		request.getSession().removeAttribute("admin-roles");
 		request.getSession().removeAttribute("user-id");
 		request.getSession().invalidate();
-		response.sendRedirect(request.getContextPath()+ "/Home.jsp"); //o login.jsp?
+		response.sendRedirect(request.getContextPath()+ "/home.jsp"); //o login.jsp?
 	}
 
 	

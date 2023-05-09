@@ -78,5 +78,13 @@
     <url-pattern>/logout</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+    <servlet-name>UserControl</servlet-name>
+    <servlet-class>it.beermeup.control.UserControl</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UserControl</servlet-name>
+    <url-pattern>/user_control</url-pattern>
+  </servlet-mapping>
   
 </web-app>

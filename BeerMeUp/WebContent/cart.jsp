@@ -30,7 +30,7 @@ if(cart==null){
 		<h2><a href="cart_control?action=deleteCart">Svuota Carrello</a></h2>
 		<div class="product-container"> <!--È solo temporaneo, bisogna modificarlo-->
 			<table class="product-table"> <!--È solo temporaneo, bisogna modificarlo-->
-				<caption>tabella carrello</caption>
+				<caption></caption>
 				<tr>
 					<th>Codice</th>
 					<th>Nome</th>

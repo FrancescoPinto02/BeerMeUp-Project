@@ -1,6 +1,17 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    
+<%
+	Integer userId = (Integer)((request.getSession().getAttribute("user-id")));
+	if(userId != null && userId.intValue()>0) {
+		response.sendRedirect("./user-profile.jsp");
+		return;
+	}
+%>  
 
 <!DOCTYPE html>
 <html lang="it">
+	<%@ page contentType="text/html; charset=UTF-8" import="java.util.*,it.beermeup.model.*"%>
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="Content-Type" content="text/html">
@@ -30,7 +41,7 @@
    					<label for="password">Password</label>
    					<input id="password" type="password" name="password" required><br>
 					<input type = "submit" value="Login"/>
-   					<input type ="submit" value ="Reset"/>
+   					<input type ="reset" value ="Reset"/>
    				</form>
 			</div>
 			
@@ -56,12 +67,12 @@
    					<input id="num" type="text" name="num" required><br>
    					<label for="cap">CAP</label>
    					<input id="cap" type="text" name="cap" required><br>
-   					<label for="city">Citt‡</label>
+   					<label for="city">Citt√†</label>
    					<input id="city" type="text" name="city" required><br>
    					<label for="nation">Nazione</label>
    					<input id="nation" type="text" name="nation" required><br>
    					<input type = "submit" value="Sign-in"/>
-   					<input type ="submit" value ="Reset"/>
+   					<input type ="reset" value ="Reset"/>
    				</form>
 			</div>
 		</div>
