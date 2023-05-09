@@ -22,7 +22,6 @@ html{
 
 main{
 	display:flex;
-	align-items: center;
 	min-height: 100vh;
 	margin-top:5.2rem;
 	
