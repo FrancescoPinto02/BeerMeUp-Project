@@ -1,0 +1,129 @@
+@charset "UTF-8";
+
+footer{
+	margin-top: auto;
+	width: 100%;
+	background: #111;
+	height: auto;
+	padding-top: 40px;
+    color: #fff;
+}
+
+footer .footer-content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+footer .footer-content h3{
+    font-size: 3.1rem;
+    font-weight: 500;
+    text-transform: capitalize;
+    line-height: 3rem;
+}
+
+footer .footer-content p{
+    max-width: 33.5rem;
+    margin: 0.7rem auto;
+    line-height: 1.8rem;
+    font-size: 0.9rem;
+    color: #cacdd2;
+    text-transform: none;
+}
+
+footer .footer-content .socials ul{
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem 0 3rem 0;
+}
+
+footer .footer-content .socials ul li{
+    margin: 0 0.6rem;
+}
+
+footer .footer-content .socials ul li a{
+    text-decoration: none;
+    color: #fff;
+    border: 1.1px solid white;
+    padding: 0.3rem;
+    border-radius: 50%;
+}
+
+footer .footer-content .socials ul li a i{
+    font-size: 1.1rem;
+    width: 1.3rem;
+    transition: color .4s ease;
+}
+
+footer .footer-content .socials ul li a:hover i{
+    color: #0030ff;
+    font-weight: bolder;
+}
+
+footer .footer-content .footer-menu{
+	margin-bottom: 1.1rem;
+}
+
+footer .footer-content .footer-menu ul{
+	display: flex;
+}
+
+footer .footer-content .footer-menu ul li{
+	padding-right: 0.7rem;
+	display: block;
+}
+
+footer .footer-content .footer-menu ul li a{
+	color: #cfd2d6;
+	border: 1.3px solid white;
+	padding: 0.3rem 0.9rem;
+	border-radius: 3.1rem;
+	text-decoration: none;
+}
+
+footer .footer-content .footer-menu ul li a:hover{
+	color: #0030ff;
+    font-weight: bolder;
+}
+
+footer .footer-content .footer-bottom{
+    background: #000;
+    margin-top: 1.1rem;
+    width: 100%;
+    padding: 1rem;
+    text-align: center;
+}
+
+footer .footer-content .footer-bottom p{
+    text-align:center;
+    font-size: 0.8rem;
+    word-spacing: 0.1rem;
+    text-transform: capitalize;
+}
+
+footer .footer-content .footer-bottom p a{
+    color: #44bae8;
+    font-size: 1rem;
+    text-decoration: none;
+}
+
+footer .footer-content .footer-bottom span{
+    opacity: .4;
+    font-weight: 200;
+    text-transform: uppercase;
+}
+
+
+@media (max-width:500px){
+	footer .footer-content .footer-menu ul{
+		display: inline;
+	}
+	
+	footer .footer-content .footer-menu ul li{
+		margin-bottom: 1.2rem;
+	}
+}

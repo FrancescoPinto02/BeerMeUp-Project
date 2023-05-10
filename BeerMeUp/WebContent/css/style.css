@@ -19,12 +19,17 @@ html{
     overflow-x: hidden;
 }
 
+body{
+	min-height:100vh;
+	display: flex;
+	flex-direction: column;
+}
 
 main{
 	display:flex;
-	min-height: 100vh;
+	min-height:100vh;
 	margin-top:5.2rem;
-	
+	flex-direction: column;
 }
 
 main .home{
@@ -40,16 +45,7 @@ main form input, textarea, select{
 }
 
 
-footer{
-	margin-top: auto;
-	width: 100%;
-	background-color: blue;
-}
 
-footer h1{
-	text-align: center;
-	color: white;
-}
 
 /*------------------- CATALOGO --------------------------*/
 
