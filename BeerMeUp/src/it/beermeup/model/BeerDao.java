@@ -183,7 +183,8 @@ public class BeerDao implements Dao<Beer> {
 				"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		
 		try {
-			connection = ds.getConnection(); 
+			connection = ds.getConnection();
+			connection.setAutoCommit(false);
 			
 			ps = connection.prepareStatement(sql);
 			ps.setInt(1, bean.getBrewery_id());
@@ -221,11 +222,12 @@ public class BeerDao implements Dao<Beer> {
 	public synchronized void doUpdate(Beer bean) throws SQLException {
 		Connection connection = null;
 		PreparedStatement ps = null;
-		String sql = "UPDATE "+ BeerDao.TABLE_NAME + "SET brewery_id =?, style_id = ?, beer_name= ? , beer_description= ?, color = ?, ingredients = ?, gradation = ?,"+
+		String sql = "UPDATE "+ BeerDao.TABLE_NAME + " SET brewery_id =?, style_id = ?, beer_name= ? , beer_description= ?, color = ?, ingredients = ?, gradation = ?,"+
 		"price = ? ,iva = ? , stock = ?, discount = ? WHERE id = ?";
 		
 		try {
 			connection = ds.getConnection(); 
+			connection.setAutoCommit(false);
 			
 			ps = connection.prepareStatement(sql);
 			ps.setInt(1, bean.getBrewery_id());
@@ -267,7 +269,8 @@ public class BeerDao implements Dao<Beer> {
 		int result = 0;
 		
 		try {
-			connection = ds.getConnection(); 
+			connection = ds.getConnection();
+			connection.setAutoCommit(false);
 			
 			ps = connection.prepareStatement(sql);
 			ps.setInt(1, id);

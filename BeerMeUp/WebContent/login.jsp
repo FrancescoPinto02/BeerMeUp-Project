@@ -59,18 +59,6 @@
    					<input id="first_name" type="text" name="first_name" required><br>
    					<label for="last_name">Cognome</label>
    					<input id="last_name" type="text" name="last_name" required><br>
-   					<label for="telephone">Telefono</label>
-   					<input id="telephone" type="text" name="telephone" required><br>
-   					<label for="street">Via</label>
-   					<input id="street" type="text" name="street" required><br>
-   					<label for="num">Numero Civico</label>
-   					<input id="num" type="text" name="num" required><br>
-   					<label for="cap">CAP</label>
-   					<input id="cap" type="text" name="cap" required><br>
-   					<label for="city">Città</label>
-   					<input id="city" type="text" name="city" required><br>
-   					<label for="nation">Nazione</label>
-   					<input id="nation" type="text" name="nation" required><br>
    					<input type = "submit" value="Sign-in"/>
    					<input type ="reset" value ="Reset"/>
    				</form>

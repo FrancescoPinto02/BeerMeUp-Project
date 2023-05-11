@@ -87,4 +87,22 @@
     <url-pattern>/user_control</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+    <servlet-name>AddressControl</servlet-name>
+    <servlet-class>it.beermeup.control.AddressControl</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddressControl</servlet-name>
+    <url-pattern>/address_control</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>CheckoutControl</servlet-name>
+    <servlet-class>it.beermeup.control.CheckoutControl</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CheckoutControl</servlet-name>
+    <url-pattern>/checkout_control</url-pattern>
+  </servlet-mapping>
+  
 </web-app>

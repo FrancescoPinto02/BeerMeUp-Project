@@ -18,23 +18,29 @@ public class Cart {
 	}
 	
 	public void addProduct(Beer product, int qta) {
-		boolean found = false;
-		
-		for(CartProduct x : products) {
-			if(x.getProduct().equals(product)) {
-				x.setQta(x.getQta() + qta);
-				found = true;
-				break;
+		if(product.getStock() > 0) {
+			
+			if(product.getStock() < qta) {
+				qta = product.getStock();
+			}
+			
+			boolean found = false;
+			
+			for(CartProduct x : products) {
+				if(x.getProduct().equals(product)) {
+					x.setQta(x.getQta() + qta);
+					found = true;
+					break;
+				}
+			}
+			
+			if(!found) {
+				CartProduct prod = new CartProduct();
+				prod.setProduct(product);
+				prod.setQta(qta);
+				products.add(prod);                      
 			}
 		}
-		
-		if(!found) {
-			CartProduct prod = new CartProduct();
-			prod.setProduct(product);
-			prod.setQta(qta);
-			products.add(prod);                      
-		}
-		
 	}
 	
 	public void deleteProduct(Beer product) {
@@ -62,12 +68,20 @@ public class Cart {
 		return  products;
 	}
 	
-	public BigDecimal cartTotalPrice(boolean discount) {
+	public BigDecimal getTotalPrice(boolean discount) {
 		BigDecimal tot = new BigDecimal(0);
 		for(CartProduct x : products) {
-			tot.add(x.getPrice(discount));
+			tot = tot.add(x.getPrice(discount));
 		}
-		
 		return tot.setScale(2, RoundingMode.HALF_EVEN);
+	}
+	
+	public boolean isEmpty() {
+		if(products.size()==0) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 }

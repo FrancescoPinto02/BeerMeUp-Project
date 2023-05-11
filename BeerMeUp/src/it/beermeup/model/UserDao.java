@@ -53,7 +53,6 @@ public class UserDao implements Dao<User> {
 				bean.setEmail(rs.getString("email"));
 				bean.setFirst_name(rs.getString("first_name"));
 				bean.setLast_name(rs.getString("last_name"));
-				bean.setTelephone(rs.getString("telephone"));
 				bean.setAdmin(rs.getBoolean("is_admin"));
 				
 			}		
@@ -95,7 +94,6 @@ public class UserDao implements Dao<User> {
 				bean.setEmail(rs.getString("email"));
 				bean.setFirst_name(rs.getString("first_name"));
 				bean.setLast_name(rs.getString("last_name"));
-				bean.setTelephone(rs.getString("telephone"));
 				bean.setAdmin(rs.getBoolean("is_admin"));
 				
 			}		
@@ -141,7 +139,6 @@ public class UserDao implements Dao<User> {
 				bean.setEmail(rs.getString("email"));
 				bean.setFirst_name(rs.getString("first_name"));
 				bean.setLast_name(rs.getString("last_name"));
-				bean.setTelephone(rs.getString("telephone"));
 				bean.setAdmin(rs.getBoolean("is_admin"));
 				
 				
@@ -168,19 +165,19 @@ public class UserDao implements Dao<User> {
 	public void doSave(User bean) throws SQLException {
 		Connection connection = null;
 		PreparedStatement ps = null;
-		String sql = "INSERT INTO " + UserDao.TABLE_NAME + " ( email, pw, first_name, last_name, telephone, is_admin)"
-				+ " VALUES (?, ?, ?, ?, ?, ?) ";
+		String sql = "INSERT INTO " + UserDao.TABLE_NAME + " ( email, pw, first_name, last_name, is_admin)"
+				+ " VALUES (?, ?, ?, ?, ?) ";
 		
 		try {
-			connection = ds.getConnection(); 
+			connection = ds.getConnection();
+			connection.setAutoCommit(false);
 
 			ps = connection.prepareStatement(sql);
 			ps.setString(1, bean.getEmail());
 			ps.setString(2, bean.getPw());
 			ps.setString(3, bean.getFirst_name());
 			ps.setString(4, bean.getLast_name());
-			ps.setString(5, bean.getTelephone());
-			ps.setBoolean(6, bean.isAdmin());
+			ps.setBoolean(5, bean.isAdmin());
 			
 			ps.executeUpdate();
 			connection.commit();		
@@ -203,8 +200,7 @@ public class UserDao implements Dao<User> {
 
 	@Override
 	public void doUpdate(User bean) throws SQLException {
-		
-		
+		return;		
 	}
 
 	@Override
@@ -215,7 +211,8 @@ public class UserDao implements Dao<User> {
 		int result = 0;
 		
 		try {
-			connection = ds.getConnection(); 
+			connection = ds.getConnection();
+			connection.setAutoCommit(false);
 			
 			ps = connection.prepareStatement(sql);
 			ps.setInt(1, id);

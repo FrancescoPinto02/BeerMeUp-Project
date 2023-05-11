@@ -121,6 +121,7 @@ public class StyleDao implements Dao<Style> {
 		
 		try {
 			connection = ds.getConnection(); 
+			connection.setAutoCommit(false);
 			
 			ps = connection.prepareStatement(sql);
 			ps.setString(1, bean.getName());
@@ -151,6 +152,7 @@ public class StyleDao implements Dao<Style> {
 		String sql = "UPDATE "+ StyleDao.TABLE_NAME + "SET style_name= ?, traits = ? WHERE id = ?";
 		try {
 			connection = ds.getConnection(); 
+			connection.setAutoCommit(false);
 			
 			ps = connection.prepareStatement(sql);
 			ps.setString(1, bean.getName());
@@ -185,7 +187,8 @@ public class StyleDao implements Dao<Style> {
 		int result = 0;
 		
 		try {
-			connection = ds.getConnection(); 
+			connection = ds.getConnection();
+			connection.setAutoCommit(false);
 			
 			ps = connection.prepareStatement(sql);
 			ps.setInt(1, id);

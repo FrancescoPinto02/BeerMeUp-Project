@@ -9,7 +9,16 @@ public class Address {
 	private String cap = "";
 	private String city = "";
 	private String nation = "";
+	private String telephone = "";
 	
+	public String getTelephone() {
+		return telephone;
+	}
+
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -68,7 +77,6 @@ public class Address {
 	
 	@Override
 	public String toString() {
-		return "Address [id=" + id + ", user_id=" + user_id + ", street=" + street + ", num=" + num + ", cap="
-				+ cap + ", city=" + city + ", nation=" + nation + "]";
+		return street + " " + num + ", " + cap + ", " + city + ", " + nation + ", Tel: " + telephone;
 	}
 }

@@ -33,6 +33,8 @@
 		<div id="profile-page">
 			<h1>Profilo Utente: <span><a href="./logout"> Logout</a></span></h1>
 			<h2><%=user.getFirst_name()%>  <%=user.getLast_name()%></h2>
+			<br><br>
+			<a href="user-address.jsp">I miei Indirizzi</a>
 		</div>				
 	</main>
 	<%@ include file="footer.jsp" %>

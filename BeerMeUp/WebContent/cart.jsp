@@ -55,7 +55,8 @@ if(cart==null){
 				</tr>
 					<% } %>
 				<% } %>	
-			</table>		
+			</table><br><br>
+			<h2><a href="checkout.jsp">Checkout</a></h2>		
 		</div>
 	</div>
 	</main>

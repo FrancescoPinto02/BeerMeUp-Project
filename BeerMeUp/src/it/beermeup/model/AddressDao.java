@@ -57,6 +57,7 @@ public class AddressDao implements Dao<Address> {
 				bean.setCap(rs.getString("cap"));
 				bean.setCity(rs.getString("city"));
 				bean.setNation(rs.getString("nation"));
+				bean.setTelephone(rs.getString("telephone"));
 				
 			}		
 		}
@@ -103,7 +104,52 @@ public class AddressDao implements Dao<Address> {
 				bean.setCap(rs.getString("cap"));
 				bean.setCity(rs.getString("city"));
 				bean.setNation(rs.getString("nation"));
+				bean.setTelephone(rs.getString("telephone"));
 				
+				collection.add(bean);
+			}		
+		}
+		finally {
+				try {
+					if(ps != null) {
+						ps.close();
+					}
+				}
+				finally {
+					if(connection != null) {
+						connection.close();
+					}
+				}
+		}
+		
+		return collection;
+	}
+	
+	public Collection<Address> doRetrieveByUser(int userId) throws SQLException {
+		
+		Connection connection = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Collection<Address> collection = new ArrayList<Address>(); 
+		
+		String sql = "SELECT * FROM " + AddressDao.TABLE_NAME + " WHERE (user_id=?)";
+		
+		try {
+			connection = ds.getConnection(); 
+			ps = connection.prepareStatement(sql);
+			ps.setInt(1, userId);
+			
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				Address bean = new Address();
+				bean.setId(rs.getInt("id"));
+				bean.setUserId(rs.getInt("user_id"));
+				bean.setStreet(rs.getString("street"));
+				bean.setNum(rs.getString("num"));
+				bean.setCap(rs.getString("cap"));
+				bean.setCity(rs.getString("city"));
+				bean.setNation(rs.getString("nation"));
+				bean.setTelephone(rs.getString("telephone"));
 				
 				collection.add(bean);
 			}		
@@ -128,11 +174,12 @@ public class AddressDao implements Dao<Address> {
 	public void doSave(Address bean) throws SQLException {
 		Connection connection = null;
 		PreparedStatement ps = null;
-		String sql = "INSERT INTO " + AddressDao.TABLE_NAME + " ( user_id, street, num, cap, city, nation)"
-				+ " VALUES (?, ?, ?, ?, ?, ?) ";
+		String sql = "INSERT INTO " + AddressDao.TABLE_NAME + " ( user_id, street, num, cap, city, nation, telephone)"
+				+ " VALUES (?, ?, ?, ?, ?, ?, ?) ";
 		
 		try {
-			connection = ds.getConnection(); 
+			connection = ds.getConnection();
+			connection.setAutoCommit(false);
 
 			ps = connection.prepareStatement(sql);
 			
@@ -142,6 +189,7 @@ public class AddressDao implements Dao<Address> {
 			ps.setString(4, bean.getCap());
 			ps.setString(5, bean.getCity());
 			ps.setString(6, bean.getNation());
+			ps.setString(7, bean.getTelephone());
 			
 			ps.executeUpdate();
 			connection.commit();		
@@ -162,7 +210,7 @@ public class AddressDao implements Dao<Address> {
 
 	@Override
 	public void doUpdate(Address bean) throws SQLException {
-		
+		return;
 	}
 
 	@Override
@@ -173,7 +221,8 @@ public class AddressDao implements Dao<Address> {
 		int result = 0;
 		
 		try {
-			connection = ds.getConnection(); 
+			connection = ds.getConnection();
+			connection.setAutoCommit(false);
 			
 			ps = connection.prepareStatement(sql);
 			ps.setInt(1, id);

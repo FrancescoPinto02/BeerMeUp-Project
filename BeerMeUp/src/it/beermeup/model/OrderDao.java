@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -12,9 +13,8 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-public class BreweryDao implements Dao<Brewery> {
-
-	private static final String TABLE_NAME = "brewery";
+public class OrderDao implements Dao<Order> {
+	private static final String TABLE_NAME = "site_order";
 	
 	private static DataSource ds;
 	
@@ -34,11 +34,11 @@ public class BreweryDao implements Dao<Brewery> {
 	}
 
 	@Override
-	public synchronized Brewery doRetrieveByKey(int id) throws SQLException {
-		Brewery bean = new Brewery();
+	public synchronized Order doRetrieveByKey(int id) throws SQLException {
+		Order bean = new Order();
 		Connection connection = null;
 		PreparedStatement ps = null;
-		String sql = "SELECT * FROM " + BreweryDao.TABLE_NAME + " WHERE id = ?";
+		String sql = "SELECT * FROM " + OrderDao.TABLE_NAME + " WHERE id = ?";
 		ResultSet rs = null;
 		
 		try {
@@ -50,9 +50,12 @@ public class BreweryDao implements Dao<Brewery> {
 			rs = ps.executeQuery();
 			while(rs.next()) {
 				bean.setId(rs.getInt("id"));
-				bean.setName(rs.getString("brewery_name"));
-				bean.setStory(rs.getString("story"));
-				bean.setNation(rs.getString("nation"));
+				bean.setUserId(rs.getInt("user_id"));
+				bean.setShippingAddress(rs.getString("shipping_address"));
+				bean.setPaymentInfo(rs.getString("payment_info"));
+				bean.setStatus(rs.getString("order_status"));
+				bean.setTotal(rs.getBigDecimal("total"));
+				bean.setDate(rs.getDate("order_date"));
 			}		
 		}
 		finally {
@@ -72,13 +75,13 @@ public class BreweryDao implements Dao<Brewery> {
 	}
 
 	@Override
-	public synchronized Collection<Brewery> doRetrieveAll(String order) throws SQLException {
+	public synchronized Collection<Order> doRetrieveAll(String order) throws SQLException {
 		Connection connection = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		Collection<Brewery> collection = new ArrayList<Brewery>(); 
+		Collection<Order> collection = new ArrayList<Order>(); 
 		
-		String sql = "SELECT * FROM " + BreweryDao.TABLE_NAME;
+		String sql = "SELECT * FROM " + OrderDao.TABLE_NAME;
 		if(order!=null && !order.equals("")) {
 			sql = sql + " ORDER BY " + order;
 		}
@@ -89,12 +92,15 @@ public class BreweryDao implements Dao<Brewery> {
 			
 			rs = ps.executeQuery();
 			while(rs.next()) {
-				Brewery bean = new Brewery();
+				Order bean = new Order();
 				
 				bean.setId(rs.getInt("id"));
-				bean.setName(rs.getString("brewery_name"));
-				bean.setStory(rs.getString("story"));
-				bean.setNation(rs.getString("nation"));
+				bean.setUserId(rs.getInt("user_id"));
+				bean.setShippingAddress(rs.getString("shipping_address"));
+				bean.setPaymentInfo(rs.getString("payment_info"));
+				bean.setStatus(rs.getString("order_status"));
+				bean.setTotal(rs.getBigDecimal("total"));
+				bean.setDate(rs.getDate("order_date"));
 				
 				collection.add(bean);
 			}		
@@ -116,19 +122,23 @@ public class BreweryDao implements Dao<Brewery> {
 	}
 
 	@Override
-	public synchronized void doSave(Brewery bean) throws SQLException {
+	public synchronized void doSave(Order bean) throws SQLException {
 		Connection connection = null;
 		PreparedStatement ps = null;
-		String sql = "INSERT INTO " + BreweryDao.TABLE_NAME + " (brewery_name, story, nation) VALUES (?, ?, ?) ";
+		String sql = "INSERT INTO " + OrderDao.TABLE_NAME + " (user_id, shipping_address, billing_address, payment_info, order_status, total, order_date) VALUES (?, ?, ?, ?, ?, ?, ?) ";
 		
 		try {
 			connection = ds.getConnection();
 			connection.setAutoCommit(false);
 			
 			ps = connection.prepareStatement(sql);
-			ps.setString(1, bean.getName());
-			ps.setString(2, bean.getStory());
-			ps.setString(3, bean.getNation());
+			ps.setInt(1, bean.getUserId());
+			ps.setString(2, bean.getShippingAddress());
+			ps.setString(3, bean.getBillingAddress());
+			ps.setString(4, bean.getPaymentInfo());
+			ps.setString(5, bean.getStatus());
+			ps.setBigDecimal(6, bean.getTotal());
+			ps.setDate(7, bean.getDate());
 			
 			ps.executeUpdate();
 			connection.commit();		
@@ -147,24 +157,32 @@ public class BreweryDao implements Dao<Brewery> {
 		}
 		
 	}
-
-	@Override
-	public synchronized void doUpdate(Brewery bean) throws SQLException {
+	
+	public synchronized int doSaveReturnKey(Order bean) throws SQLException{
 		Connection connection = null;
 		PreparedStatement ps = null;
-		String sql = "UPDATE"+ BreweryDao.TABLE_NAME + "SET brewery_name =?, story = ?, nation= ? WHERE id = ?";
+		String sql = "INSERT INTO " + OrderDao.TABLE_NAME + " (user_id, shipping_address, billing_address, payment_info, order_status, total, order_date) VALUES (?, ?, ?, ?, ?, ?, ?) ";
+		int key = 0;
+		
 		try {
-			connection = ds.getConnection();
+			connection = ds.getConnection(); 
 			connection.setAutoCommit(false);
 			
-			ps = connection.prepareStatement(sql);
-			ps.setString(1, bean.getName());
-			ps.setString(2, bean.getStory());
-			ps.setString(3, bean.getNation());
-			ps.setInt(4, bean.getId());
+			ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			ps.setInt(1, bean.getUserId());
+			ps.setString(2, bean.getShippingAddress());
+			ps.setString(3, bean.getBillingAddress());
+			ps.setString(4, bean.getPaymentInfo());
+			ps.setString(5, bean.getStatus());
+			ps.setBigDecimal(6, bean.getTotal());
+			ps.setDate(7, bean.getDate());
 			
 			ps.executeUpdate();
-			connection.commit();		
+			connection.commit();
+			
+			ResultSet rs = ps.getGeneratedKeys();
+			rs.next();
+			key = rs.getInt(1);
 		}
 		finally {
 			try {
@@ -178,39 +196,18 @@ public class BreweryDao implements Dao<Brewery> {
 				}
 			}
 		}
+		
+		return key;
+		
+	}
+
+	@Override
+	public synchronized void doUpdate(Order bean) throws SQLException {
 		return;
 	}
 
 	@Override
 	public synchronized boolean doDelete(int id) throws SQLException {
-		Connection connection = null;
-		PreparedStatement ps = null;
-		String sql = "DELETE FROM " + BreweryDao.TABLE_NAME + " WHERE id = ?";
-		int result = 0;
-		
-		try {
-			connection = ds.getConnection();
-			connection.setAutoCommit(false);
-			
-			ps = connection.prepareStatement(sql);
-			ps.setInt(1, id);
-			
-			result = ps.executeUpdate();
-			connection.commit();		
-		}
-		finally {
-			try {
-				if(ps != null) {
-					ps.close();
-				}
-			}
-			finally {
-				if(connection != null) {
-					connection.close();
-				}
-			}
-		}
-		
-		return (result!=0);
+		return false;
 	}
 }
