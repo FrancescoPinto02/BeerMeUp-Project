@@ -2,6 +2,7 @@ package it.beermeup.model;
 
 import java.io.InputStream;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 
 
@@ -72,6 +73,15 @@ public class Beer {
 	}
 	public BigDecimal getPrice() {
 		return price;
+	}
+	public BigDecimal getPrice(boolean discount) {
+		if(discount==false) {
+			return this.getPrice();
+		}
+		else {
+			BigDecimal sconto = (this.getPrice().divide(new BigDecimal(100))).multiply(new BigDecimal(this.getDiscount()));
+			return (this.getPrice().subtract(sconto)).setScale(2, RoundingMode.HALF_EVEN);
+		}
 	}
 	public void setPrice(BigDecimal price) {
 		this.price = price;

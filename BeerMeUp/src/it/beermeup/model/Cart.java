@@ -1,6 +1,7 @@
 package it.beermeup.model;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +23,6 @@ public class Cart {
 		for(CartProduct x : products) {
 			if(x.getProduct().equals(product)) {
 				x.setQta(x.getQta() + qta);
-				x.setPrice(x.getPrice().add(x.getProduct().getPrice().multiply(new BigDecimal(qta))));
 				found = true;
 				break;
 			}
@@ -32,7 +32,6 @@ public class Cart {
 			CartProduct prod = new CartProduct();
 			prod.setProduct(product);
 			prod.setQta(qta);
-			prod.setPrice(product.getPrice().multiply(new BigDecimal(qta)));
 			products.add(prod);                      
 		}
 		
@@ -54,9 +53,6 @@ public class Cart {
 				if(x.getQta()<=0) {
 					products.remove(x);
 				}
-				else {
-					x.setPrice(x.getPrice().subtract(x.getProduct().getPrice().divide(new BigDecimal(qta))));
-				}
 				break;
 			}
 		}
@@ -64,5 +60,14 @@ public class Cart {
 	
 	public List<CartProduct> getProducts() {
 		return  products;
+	}
+	
+	public BigDecimal cartTotalPrice(boolean discount) {
+		BigDecimal tot = new BigDecimal(0);
+		for(CartProduct x : products) {
+			tot.add(x.getPrice(discount));
+		}
+		
+		return tot.setScale(2, RoundingMode.HALF_EVEN);
 	}
 }

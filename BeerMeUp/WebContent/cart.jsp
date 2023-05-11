@@ -50,7 +50,7 @@ if(cart==null){
 						<%=x.getQta()%>
 						<a class ="no" href="cart_control?action=decreaseQta&id=<%=beer.getId()%>">-</a>
 					</td>
-					<td><%=x.getPrice()%></td>
+					<td><%=x.getPrice(true)%>€</td>
 					<td><a href="cart_control?action=deleteFromCart&id=<%=beer.getId()%>">Delete from cart</a></td>
 				</tr>
 					<% } %>

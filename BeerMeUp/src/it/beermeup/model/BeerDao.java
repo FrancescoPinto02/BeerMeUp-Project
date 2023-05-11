@@ -121,6 +121,10 @@ public class BeerDao implements Dao<Beer> {
 		
 		String sql = "SELECT * FROM " + BeerDao.TABLE_NAME;
 		if(order!=null && !order.equals("")) {
+			if(order.equalsIgnoreCase("price")) {
+				order = "(price - ((price/100)*discount))";
+			}
+			
 			sql = sql + " ORDER BY " + order;
 		}
 		

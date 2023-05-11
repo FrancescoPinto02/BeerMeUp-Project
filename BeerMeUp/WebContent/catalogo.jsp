@@ -51,7 +51,7 @@
 						<td><%=bean.getId()%></td>
 						<td><img src="data:image/png;base64,<%=bean.getBase64Image()%>" width="250" height="300" alt="prodotto"></td>
 						<td><%=bean.getName()%></td>
-						<td><%=bean.getPrice()%></td>
+						<td><%=bean.getPrice(true)%>€</td>
 						<td>
 							<p><a href="catalogo_control?action=addToCart&id=<%=bean.getId()%>">Add to cart</a></p>
 							<p><a href="productDetail_control?action=showProductDetails&id=<%=bean.getId()%>">Dettagli</a></p>
