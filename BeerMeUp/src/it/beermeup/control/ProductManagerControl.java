@@ -2,6 +2,8 @@ package it.beermeup.control;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -19,6 +21,7 @@ public class ProductManagerControl extends HttpServlet {
 	static BeerDao beerModel = new BeerDao();
 	static BreweryDao breweryModel = new BreweryDao();
 	static StyleDao styleModel = new StyleDao();
+	static Logger logger = Logger.getLogger(ProductManagerControl.class.getName());
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		//Azione richiesta
@@ -28,16 +31,13 @@ public class ProductManagerControl extends HttpServlet {
 		try {
 			if (action != null) {
 				
-				//Rimozione Birra
-				if(action.equalsIgnoreCase("deleteBeer")) {
-					
-					int beerId = Integer.parseInt(request.getParameter("beerId"));
-					beerModel.doDelete(beerId);
-				}
-				
+				//Rimozione Birra	
+				int beerId = Integer.parseInt(request.getParameter("beerId"));
+				beerModel.doDelete(beerId);
 			}			
-		} catch (SQLException e) {
-			System.out.println("Errore:" + e.getMessage());
+		} 
+		catch (SQLException e) {
+			ProductManagerControl.logger.log(Level.WARNING, "Errore Servlet Product Manager Control");
 		}
 		
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/product-manager.jsp");
@@ -53,18 +53,15 @@ public class ProductManagerControl extends HttpServlet {
 			if (action != null) {
 		
 				//Richiesta di tutti i prodotti
-				if(action.equalsIgnoreCase("initialize")) {
-					request.removeAttribute("breweryList");
-					request.setAttribute("breweryList", breweryModel.doRetrieveAll("brewery_name"));
-					request.removeAttribute("styleList");
-					request.setAttribute("styleList", styleModel.doRetrieveAll("style_name"));
-					request.removeAttribute("beerList");
-					request.setAttribute("beerList", beerModel.doRetrieveAll("beer_name"));
-				}
-				
-			}			
+				request.removeAttribute("breweryList");
+				request.setAttribute("breweryList", breweryModel.doRetrieveAll("brewery_name"));
+				request.removeAttribute("styleList");
+				request.setAttribute("styleList", styleModel.doRetrieveAll("style_name"));
+				request.removeAttribute("beerList");
+				request.setAttribute("beerList", beerModel.doRetrieveAll("beer_name"));
+			}		
 		} catch (SQLException e) {
-			System.out.println("Errore:" + e.getMessage());
+			ProductManagerControl.logger.log(Level.WARNING, "Errore Servlet Product Manager Control");
 		}
 		
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/product-manager.jsp");

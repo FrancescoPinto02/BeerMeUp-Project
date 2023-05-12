@@ -11,6 +11,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Collection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -22,6 +24,7 @@ public class BeerDao implements Dao<Beer> {
 	private static final String TABLE_NAME = "beer";
 	
 	private static DataSource ds;
+	static Logger logger = Logger.getLogger(BeerDao.class.getName());
 	
 	//Inizializzazione DataSource
 	static {
@@ -34,7 +37,7 @@ public class BeerDao implements Dao<Beer> {
 			ds = (DataSource) envCtx.lookup("jdbc/beer_me_up");
 
 		} catch (NamingException e) {
-			System.out.println("Errore: " + e.getMessage());
+			BeerDao.logger.log(Level.WARNING, "Errore DataSource");
 		}
 	}
 	
@@ -92,7 +95,7 @@ public class BeerDao implements Dao<Beer> {
 					bean.setBase64Image(imgConvert(rs.getBlob("img")));
 				} 
 				catch (IOException e) {
-					System.out.println("Errore Lettura immagine");
+					BeerDao.logger.log(Level.WARNING, "Errore Lettura Immagine");
 				}
 			}		
 		}
@@ -153,7 +156,7 @@ public class BeerDao implements Dao<Beer> {
 					bean.setBase64Image(imgConvert(rs.getBlob("img")));
 				} 
 				catch (IOException e) {
-					System.out.println("Errore Lettura immagine");
+					BeerDao.logger.log(Level.WARNING, "Errore Lettura Immagine");
 				}
 				
 				collection.add(bean);

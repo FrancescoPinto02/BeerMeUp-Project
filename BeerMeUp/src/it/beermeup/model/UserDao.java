@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -17,6 +19,7 @@ public class UserDao implements Dao<User> {
 	private static final String TABLE_NAME = "site_user";
 	
 	private static DataSource ds;
+	static Logger logger = Logger.getLogger(UserDao.class.getName());
 	
 	//Inizializzazione DataSource
 	static {
@@ -29,7 +32,7 @@ public class UserDao implements Dao<User> {
 			ds = (DataSource) envCtx.lookup("jdbc/beer_me_up");
 
 		} catch (NamingException e) {
-			System.out.println("Errore: " + e.getMessage());
+			UserDao.logger.log(Level.WARNING, "Errore DataSource");
 		}
 	}
 	@Override
