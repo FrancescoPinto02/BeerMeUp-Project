@@ -17,9 +17,11 @@ import javax.sql.DataSource;
 public class AddressDao{
 
 	private static final String TABLE_NAME = "address";
+	private static final String SELECT_ALL = "SELECT * FROM address";
 	
 	private static DataSource ds;
 	static Logger logger = Logger.getLogger(AddressDao.class.getName());
+	
 	
 	//Inizializzazione DataSource
 	static {
@@ -50,11 +52,23 @@ public class AddressDao{
 		return bean;
 	}
 	
+	private void terminateQuery(PreparedStatement ps, Connection connection) throws SQLException {
+		try {
+			if(ps != null) {
+				ps.close();
+			}
+		}
+		finally {
+			if(connection != null) {
+				connection.close();
+			}
+		}
+	}
 	
 	public Address doRetrieveByKey(int id) throws SQLException {
 		Connection connection = null;
 		PreparedStatement ps = null;
-		String sql = "SELECT * FROM " + AddressDao.TABLE_NAME + " WHERE id = ?";
+		String sql = SELECT_ALL + " WHERE id = ?";
 		ResultSet rs = null;
 		Address bean = new Address();
 		
@@ -70,16 +84,7 @@ public class AddressDao{
 			}		
 		}
 		finally {
-			try {
-				if(ps != null) {
-					ps.close();
-				}
-			}
-			finally {
-				if(connection != null) {
-					connection.close();
-				}
-			}
+			terminateQuery(ps, connection);
 		}
 		
 		return bean;
@@ -92,7 +97,7 @@ public class AddressDao{
 		ResultSet rs = null;
 		Collection<Address> collection = new ArrayList<>(); 
 		
-		String sql = "SELECT * FROM " + AddressDao.TABLE_NAME;
+		String sql = SELECT_ALL;
 		if(order!=null && !order.equals("")) {
 			sql = sql + " ORDER BY " + order;
 		}
@@ -109,16 +114,7 @@ public class AddressDao{
 			}		
 		}
 		finally {
-				try {
-					if(ps != null) {
-						ps.close();
-					}
-				}
-				finally {
-					if(connection != null) {
-						connection.close();
-					}
-				}
+			terminateQuery(ps, connection);
 		}
 		
 		return collection;
@@ -131,7 +127,7 @@ public class AddressDao{
 		ResultSet rs = null;
 		Collection<Address> collection = new ArrayList<>(); 
 		
-		String sql = "SELECT * FROM " + AddressDao.TABLE_NAME + " WHERE (user_id=?)";
+		String sql = SELECT_ALL + " WHERE (user_id=?)";
 		
 		try {
 			connection = ds.getConnection(); 
@@ -146,16 +142,7 @@ public class AddressDao{
 			}		
 		}
 		finally {
-				try {
-					if(ps != null) {
-						ps.close();
-					}
-				}
-				finally {
-					if(connection != null) {
-						connection.close();
-					}
-				}
+			terminateQuery(ps, connection);
 		}
 		
 		return collection;
@@ -185,16 +172,7 @@ public class AddressDao{
 			connection.commit();		
 		}
 		finally {
-			try {
-				if(ps != null) {
-					ps.close();
-				}
-			}
-			finally {
-				if(connection != null) {
-					connection.close();
-				}
-			}
+			terminateQuery(ps, connection);
 		}
 	}
 
@@ -215,16 +193,7 @@ public class AddressDao{
 			connection.commit();		
 		}
 		finally {
-			try {
-				if(ps != null) {
-					ps.close();
-				}
-			}
-			finally {
-				if(connection != null) {
-					connection.close();
-				}
-			}
+			terminateQuery(ps, connection);
 		}
 		
 		return (result!=0);
