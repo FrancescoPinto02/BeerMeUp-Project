@@ -42,7 +42,7 @@ public class OrderDetailsDao implements Dao<OrderDetails> {
 		Connection connection = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		Collection<OrderDetails> collection = new ArrayList<OrderDetails>(); 
+		Collection<OrderDetails> collection = new ArrayList<>(); 
 		
 		String sql = "SELECT * FROM " + OrderDetailsDao.TABLE_NAME;
 		
@@ -125,7 +125,6 @@ public class OrderDetailsDao implements Dao<OrderDetails> {
 
 	@Override
 	public synchronized void doUpdate(OrderDetails bean) throws SQLException {
-		return;
 	}
 
 	@Override

@@ -5,8 +5,8 @@ public class User {
 	private int id = 0;
 	private String email = "";
 	private String pw = "";
-	private String first_name = "";
-	private String last_name = "";
+	private String firstName = "";
+	private String lastName = "";
 	private boolean admin = false ;
 	public int getId() {
 		return id;
@@ -27,16 +27,16 @@ public class User {
 		this.pw = pw;
 	}
 	public String getFirst_name() {
-		return first_name;
+		return firstName;
 	}
-	public void setFirst_name(String first_name) {
-		this.first_name = first_name;
+	public void setFirst_name(String firstName) {
+		this.firstName = firstName;
 	}
 	public String getLast_name() {
-		return last_name;
+		return lastName;
 	}
-	public void setLast_name(String last_name) {
-		this.last_name = last_name;
+	public void setLast_name(String lastName) {
+		this.lastName = lastName;
 	}
 	public boolean isAdmin() {
 		return admin;
@@ -50,8 +50,8 @@ public class User {
 	
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", email=" + email + ", pw=" + pw + ", first_name=" + first_name + ", last_name="
-				+ last_name + ", admin=" + admin + "]";
+		return "User [id=" + id + ", email=" + email + ", pw=" + pw + ", first_name=" + firstName + ", last_name="
+				+ lastName + ", admin=" + admin + "]";
 	}
 	
 	

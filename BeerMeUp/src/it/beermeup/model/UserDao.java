@@ -120,7 +120,7 @@ public class UserDao implements Dao<User> {
 		Connection connection = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		Collection<User> collection = new ArrayList<User>(); 
+		Collection<User> collection = new ArrayList<>(); 
 		
 		String sql = "SELECT * FROM " + UserDao.TABLE_NAME;
 		if(order!=null && !order.equals("")) {
@@ -199,8 +199,7 @@ public class UserDao implements Dao<User> {
 	}
 
 	@Override
-	public void doUpdate(User bean) throws SQLException {
-		return;		
+	public void doUpdate(User bean) throws SQLException {		
 	}
 
 	@Override

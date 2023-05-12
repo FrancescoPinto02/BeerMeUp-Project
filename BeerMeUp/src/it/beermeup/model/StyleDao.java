@@ -75,7 +75,7 @@ public class StyleDao implements Dao<Style> {
 		Connection connection = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		Collection<Style> collection = new ArrayList<Style>(); 
+		Collection<Style> collection = new ArrayList<>(); 
 		
 		String sql = "SELECT * FROM " + StyleDao.TABLE_NAME;
 		if(order!=null && !order.equals("")) {
@@ -174,9 +174,6 @@ public class StyleDao implements Dao<Style> {
 				}
 			}
 		}
-		
-	
-		return;
 	}
 
 	@Override

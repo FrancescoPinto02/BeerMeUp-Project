@@ -68,9 +68,7 @@ public class OrderDetails {
 		OrderDetails other = (OrderDetails) obj;
 		if (beerId != other.beerId)
 			return false;
-		if (orderId != other.orderId)
-			return false;
-		return true;
+		return orderId == other.orderId;
 	}
 	
 	@Override

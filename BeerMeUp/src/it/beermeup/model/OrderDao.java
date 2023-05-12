@@ -79,7 +79,7 @@ public class OrderDao implements Dao<Order> {
 		Connection connection = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		Collection<Order> collection = new ArrayList<Order>(); 
+		Collection<Order> collection = new ArrayList<>(); 
 		
 		String sql = "SELECT * FROM " + OrderDao.TABLE_NAME;
 		if(order!=null && !order.equals("")) {
@@ -203,7 +203,6 @@ public class OrderDao implements Dao<Order> {
 
 	@Override
 	public synchronized void doUpdate(Order bean) throws SQLException {
-		return;
 	}
 
 	@Override
