@@ -36,13 +36,27 @@ public class AddressDao{
 		}
 	}
 
-	public Address doRetrieveByKey(int id) throws SQLException {
-		
+	//Funzione per recuperare tutti i dati necessari da una riga del result set
+	private Address getAddressFromRS(ResultSet rs) throws SQLException {
 		Address bean = new Address();
+		bean.setId(rs.getInt("id"));
+		bean.setUserId(rs.getInt("user_id"));
+		bean.setStreet(rs.getString("street"));
+		bean.setNum(rs.getString("num"));
+		bean.setCap(rs.getString("cap"));
+		bean.setCity(rs.getString("city"));
+		bean.setNation(rs.getString("nation"));
+		bean.setTelephone(rs.getString("telephone"));
+		return bean;
+	}
+	
+	
+	public Address doRetrieveByKey(int id) throws SQLException {
 		Connection connection = null;
 		PreparedStatement ps = null;
 		String sql = "SELECT * FROM " + AddressDao.TABLE_NAME + " WHERE id = ?";
 		ResultSet rs = null;
+		Address bean = new Address();
 		
 		try {
 			connection = ds.getConnection(); 
@@ -52,15 +66,7 @@ public class AddressDao{
 			
 			rs = ps.executeQuery();
 			while(rs.next()) {
-				bean.setId(rs.getInt("id"));
-				bean.setUserId(rs.getInt("user_id"));
-				bean.setStreet(rs.getString("street"));
-				bean.setNum(rs.getString("num"));
-				bean.setCap(rs.getString("cap"));
-				bean.setCity(rs.getString("city"));
-				bean.setNation(rs.getString("nation"));
-				bean.setTelephone(rs.getString("telephone"));
-				
+				bean = getAddressFromRS(rs);	
 			}		
 		}
 		finally {
@@ -97,15 +103,7 @@ public class AddressDao{
 			
 			rs = ps.executeQuery();
 			while(rs.next()) {
-				Address bean = new Address();
-				bean.setId(rs.getInt("id"));
-				bean.setUserId(rs.getInt("user_id"));
-				bean.setStreet(rs.getString("street"));
-				bean.setNum(rs.getString("num"));
-				bean.setCap(rs.getString("cap"));
-				bean.setCity(rs.getString("city"));
-				bean.setNation(rs.getString("nation"));
-				bean.setTelephone(rs.getString("telephone"));
+				Address bean = getAddressFromRS(rs);
 				
 				collection.add(bean);
 			}		
@@ -142,15 +140,7 @@ public class AddressDao{
 			
 			rs = ps.executeQuery();
 			while(rs.next()) {
-				Address bean = new Address();
-				bean.setId(rs.getInt("id"));
-				bean.setUserId(rs.getInt("user_id"));
-				bean.setStreet(rs.getString("street"));
-				bean.setNum(rs.getString("num"));
-				bean.setCap(rs.getString("cap"));
-				bean.setCity(rs.getString("city"));
-				bean.setNation(rs.getString("nation"));
-				bean.setTelephone(rs.getString("telephone"));
+				Address bean = getAddressFromRS(rs);
 				
 				collection.add(bean);
 			}		
