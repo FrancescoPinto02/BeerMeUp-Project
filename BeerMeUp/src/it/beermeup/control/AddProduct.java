@@ -24,7 +24,7 @@ public class AddProduct extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	static BeerDao beerModel = new BeerDao();
-	static Logger logger = Logger.getLogger(CheckoutControl.class.getName());
+	static Logger logger = Logger.getLogger(AddProduct.class.getName());
 	
 	//Metodo per convertire il valore di un oggetto Part p in una String
 	private String stringValue(Part p) {

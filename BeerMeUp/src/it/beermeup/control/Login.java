@@ -106,7 +106,7 @@ public class Login extends HttpServlet {
 				}
 				
 			} catch (SQLException e) {
-				Login.logger.log(Level.WARNING, "Errore Servlet Login" + e.getMessage());
+				Login.logger.log(Level.WARNING, "Errore Servlet Login");
 			}
 		}
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login.jsp");

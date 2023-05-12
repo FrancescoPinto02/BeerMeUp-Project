@@ -66,7 +66,7 @@ public class CartControl extends HttpServlet {
 			
 		}
 		catch(Exception e) {
-			CartControl.logger.log(Level.WARNING, "Errore Servlet Cart Control:" + e.getMessage());
+			CartControl.logger.log(Level.WARNING, "Errore Servlet Cart Control:");
 		}
 		
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/cart.jsp");

@@ -50,7 +50,7 @@ public class AddressControl extends HttpServlet {
 			}	
 		}
 		catch(Exception e) {
-			AddressControl.logger.log(Level.WARNING, "Errore Servlet Address Control:" + e.getMessage());
+			AddressControl.logger.log(Level.WARNING, "Errore Servlet Address Control");
 		}
 		
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/user-address.jsp");
@@ -91,7 +91,7 @@ public class AddressControl extends HttpServlet {
 			}	
 		}
 		catch(Exception e) {
-			AddressControl.logger.log(Level.WARNING, "Errore Servlet Address Control:" + e.getMessage());
+			AddressControl.logger.log(Level.WARNING, "Errore Servlet Address Control:");
 		}
 		
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/user-address.jsp");

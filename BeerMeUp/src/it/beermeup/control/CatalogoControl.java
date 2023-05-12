@@ -69,7 +69,7 @@ public class CatalogoControl extends HttpServlet {
 				}
 			}			
 		} catch (SQLException e) {
-			CatalogoControl.logger.log(Level.WARNING, "Errore Servlet Address Control:" + e.getMessage());
+			CatalogoControl.logger.log(Level.WARNING, "Errore Servlet Address Control:");
 		}
 		
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/catalogo.jsp");
