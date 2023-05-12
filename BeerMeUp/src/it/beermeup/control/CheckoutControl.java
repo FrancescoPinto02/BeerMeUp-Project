@@ -31,7 +31,7 @@ public class CheckoutControl extends HttpServlet {
 	static OrderDao orderModel = new OrderDao();
 	static OrderDetailsDao orderDetailsModel = new OrderDetailsDao();
 	static BeerDao beerModel = new BeerDao();
-	static private Logger logger = Logger.getLogger(CheckoutControl.class.getName());
+	static Logger logger = Logger.getLogger(CheckoutControl.class.getName());
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		//Azione richiesta
