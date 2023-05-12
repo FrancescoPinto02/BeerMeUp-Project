@@ -56,7 +56,6 @@ public class ProductDetailControl extends HttpServlet {
 			}			
 		} catch (SQLException e) {
 			ProductDetailControl.logger.log(Level.WARNING, "Errore Servlet Product Detail Control");
-			System.out.println("Errore:" + e.getMessage());
 		}
 		
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/product-detail.jsp");

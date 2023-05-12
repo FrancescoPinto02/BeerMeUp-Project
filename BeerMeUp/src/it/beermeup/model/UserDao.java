@@ -14,7 +14,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-public class UserDao implements Dao<User> {
+public class UserDao{
 
 	private static final String TABLE_NAME = "site_user";
 	
@@ -35,7 +35,7 @@ public class UserDao implements Dao<User> {
 			UserDao.logger.log(Level.WARNING, "Errore DataSource");
 		}
 	}
-	@Override
+	
 	public User doRetrieveByKey(int id) throws SQLException {
 		User bean = new User();
 		Connection connection = null;
@@ -118,7 +118,7 @@ public class UserDao implements Dao<User> {
 	
 		
 	}
-	@Override
+	
 	public Collection<User> doRetrieveAll(String order) throws SQLException {
 		Connection connection = null;
 		PreparedStatement ps = null;
@@ -164,7 +164,6 @@ public class UserDao implements Dao<User> {
 		return collection;
 	}
 
-	@Override
 	public void doSave(User bean) throws SQLException {
 		Connection connection = null;
 		PreparedStatement ps = null;
@@ -201,11 +200,6 @@ public class UserDao implements Dao<User> {
 		
 	}
 
-	@Override
-	public void doUpdate(User bean) throws SQLException {		
-	}
-
-	@Override
 	public boolean doDelete(int id) throws SQLException {
 		Connection connection = null;
 		PreparedStatement ps = null;

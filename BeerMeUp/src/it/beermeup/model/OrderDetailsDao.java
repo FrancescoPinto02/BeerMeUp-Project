@@ -14,7 +14,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-public class OrderDetailsDao implements Dao<OrderDetails> {
+public class OrderDetailsDao{
 	private static final String TABLE_NAME = "order_details";
 	
 	private static DataSource ds;
@@ -35,11 +35,6 @@ public class OrderDetailsDao implements Dao<OrderDetails> {
 		}
 	}
 
-	@Override
-	//Non Utilizzare
-	public synchronized OrderDetails doRetrieveByKey(int id) throws SQLException {
-		return null;
-	}
 
 	public synchronized Collection<OrderDetails> doRetrieveByOrder(int orderId) throws SQLException {
 		Connection connection = null;
@@ -85,13 +80,6 @@ public class OrderDetailsDao implements Dao<OrderDetails> {
 		return collection;
 	}
 	
-	//Non Usare
-	@Override
-	public synchronized Collection<OrderDetails> doRetrieveAll(String order) throws SQLException {
-		return null;
-	}
-
-	@Override
 	public synchronized void doSave(OrderDetails bean) throws SQLException {
 		Connection connection = null;
 		PreparedStatement ps = null;
@@ -127,12 +115,4 @@ public class OrderDetailsDao implements Dao<OrderDetails> {
 		
 	}
 
-	@Override
-	public synchronized void doUpdate(OrderDetails bean) throws SQLException {
-	}
-
-	@Override
-	public synchronized boolean doDelete(int id) throws SQLException {
-		return false;
-	}
 }

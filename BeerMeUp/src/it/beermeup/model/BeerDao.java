@@ -19,7 +19,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-public class BeerDao implements Dao<Beer> {
+public class BeerDao{
 	
 	private static final String TABLE_NAME = "beer";
 	
@@ -61,8 +61,6 @@ public class BeerDao implements Dao<Beer> {
 	}
 	
 	
-
-	@Override
 	public synchronized Beer doRetrieveByKey(int id) throws SQLException {
 		Beer bean = new Beer();
 		Connection connection = null;
@@ -115,7 +113,6 @@ public class BeerDao implements Dao<Beer> {
 		return bean;
 	}
 
-	@Override
 	public Collection<Beer> doRetrieveAll(String order) throws SQLException {
 		Connection connection = null;
 		PreparedStatement ps = null;
@@ -178,7 +175,6 @@ public class BeerDao implements Dao<Beer> {
 		return collection;
 	}
 
-	@Override
 	public synchronized void doSave(Beer bean) throws SQLException {
 		Connection connection = null;
 		PreparedStatement ps = null;
@@ -221,49 +217,6 @@ public class BeerDao implements Dao<Beer> {
 		
 	}
 
-	@Override
-	public synchronized void doUpdate(Beer bean) throws SQLException {
-		Connection connection = null;
-		PreparedStatement ps = null;
-		String sql = "UPDATE "+ BeerDao.TABLE_NAME + " SET brewery_id =?, style_id = ?, beer_name= ? , beer_description= ?, color = ?, ingredients = ?, gradation = ?,"+
-		"price = ? ,iva = ? , stock = ?, discount = ? WHERE id = ?";
-		
-		try {
-			connection = ds.getConnection(); 
-			connection.setAutoCommit(false);
-			
-			ps = connection.prepareStatement(sql);
-			ps.setInt(1, bean.getBreweryId());
-			ps.setInt(2, bean.getStyleId());
-			ps.setString(3, bean.getName());
-			ps.setString(4, bean.getDescription());
-			ps.setString(5, bean.getColor());
-			ps.setString(6, bean.getIngredients());
-			ps.setBigDecimal(7, bean.getGradation());
-			ps.setBigDecimal(8, bean.getPrice());
-			ps.setBigDecimal(9, bean.getIva());
-			ps.setInt(10, bean.getStock());
-			ps.setInt(11, bean.getDiscount());
-			ps.setInt(12, bean.getId());
-			
-			ps.executeUpdate();
-			connection.commit();		
-		}
-		finally {
-			try {
-				if(ps != null) {
-					ps.close();
-				}
-			}
-			finally {
-				if(connection != null) {
-					connection.close();
-				}
-			}
-		}
-	}
-
-	@Override
 	public synchronized boolean doDelete(int id) throws SQLException {
 		Connection connection = null;
 		PreparedStatement ps = null;

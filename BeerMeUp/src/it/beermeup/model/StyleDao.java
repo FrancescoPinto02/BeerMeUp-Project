@@ -14,7 +14,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-public class StyleDao implements Dao<Style> {
+public class StyleDao{
 
 	private static final String TABLE_NAME = "style";
 	
@@ -37,7 +37,6 @@ public class StyleDao implements Dao<Style> {
 		}
 	}
 
-	@Override
 	public synchronized Style doRetrieveByKey(int id) throws SQLException {
 		Style bean = new Style();
 		Connection connection = null;
@@ -74,7 +73,6 @@ public class StyleDao implements Dao<Style> {
 		return bean;
 	}
 
-	@Override
 	public synchronized Collection<Style> doRetrieveAll(String order) throws SQLException {
 		Connection connection = null;
 		PreparedStatement ps = null;
@@ -117,7 +115,6 @@ public class StyleDao implements Dao<Style> {
 		return collection;
 	}
 
-	@Override
 	public synchronized void doSave(Style bean) throws SQLException {
 		Connection connection = null;
 		PreparedStatement ps = null;
@@ -149,38 +146,6 @@ public class StyleDao implements Dao<Style> {
 		
 	}
 
-	@Override
-	public synchronized void doUpdate(Style bean) throws SQLException {
-		Connection connection = null;
-		PreparedStatement ps = null;
-		String sql = "UPDATE "+ StyleDao.TABLE_NAME + "SET style_name= ?, traits = ? WHERE id = ?";
-		try {
-			connection = ds.getConnection(); 
-			connection.setAutoCommit(false);
-			
-			ps = connection.prepareStatement(sql);
-			ps.setString(1, bean.getName());
-			ps.setString(2, bean.getTraits());
-			ps.setInt(3, bean.getId());
-			
-			ps.executeUpdate();
-			connection.commit();		
-		}
-		finally {
-			try {
-				if(ps != null) {
-					ps.close();
-				}
-			}
-			finally {
-				if(connection != null) {
-					connection.close();
-				}
-			}
-		}
-	}
-
-	@Override
 	public synchronized boolean doDelete(int id) throws SQLException {
 		Connection connection = null;
 		PreparedStatement ps = null;

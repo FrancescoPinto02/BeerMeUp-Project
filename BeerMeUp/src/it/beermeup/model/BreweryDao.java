@@ -14,7 +14,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-public class BreweryDao implements Dao<Brewery> {
+public class BreweryDao{
 
 	private static final String TABLE_NAME = "brewery";
 	
@@ -36,7 +36,6 @@ public class BreweryDao implements Dao<Brewery> {
 		}
 	}
 
-	@Override
 	public synchronized Brewery doRetrieveByKey(int id) throws SQLException {
 		Brewery bean = new Brewery();
 		Connection connection = null;
@@ -74,7 +73,6 @@ public class BreweryDao implements Dao<Brewery> {
 		return bean;
 	}
 
-	@Override
 	public synchronized Collection<Brewery> doRetrieveAll(String order) throws SQLException {
 		Connection connection = null;
 		PreparedStatement ps = null;
@@ -118,7 +116,6 @@ public class BreweryDao implements Dao<Brewery> {
 		return collection;
 	}
 
-	@Override
 	public synchronized void doSave(Brewery bean) throws SQLException {
 		Connection connection = null;
 		PreparedStatement ps = null;
@@ -151,39 +148,6 @@ public class BreweryDao implements Dao<Brewery> {
 		
 	}
 
-	@Override
-	public synchronized void doUpdate(Brewery bean) throws SQLException {
-		Connection connection = null;
-		PreparedStatement ps = null;
-		String sql = "UPDATE"+ BreweryDao.TABLE_NAME + "SET brewery_name =?, story = ?, nation= ? WHERE id = ?";
-		try {
-			connection = ds.getConnection();
-			connection.setAutoCommit(false);
-			
-			ps = connection.prepareStatement(sql);
-			ps.setString(1, bean.getName());
-			ps.setString(2, bean.getStory());
-			ps.setString(3, bean.getNation());
-			ps.setInt(4, bean.getId());
-			
-			ps.executeUpdate();
-			connection.commit();		
-		}
-		finally {
-			try {
-				if(ps != null) {
-					ps.close();
-				}
-			}
-			finally {
-				if(connection != null) {
-					connection.close();
-				}
-			}
-		}
-	}
-
-	@Override
 	public synchronized boolean doDelete(int id) throws SQLException {
 		Connection connection = null;
 		PreparedStatement ps = null;

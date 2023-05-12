@@ -14,7 +14,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-public class AddressDao implements Dao<Address> {
+public class AddressDao{
 
 	private static final String TABLE_NAME = "address";
 	
@@ -36,7 +36,6 @@ public class AddressDao implements Dao<Address> {
 		}
 	}
 
-	@Override
 	public Address doRetrieveByKey(int id) throws SQLException {
 		
 		Address bean = new Address();
@@ -80,7 +79,6 @@ public class AddressDao implements Dao<Address> {
 		return bean;
 	}
 
-	@Override
 	public Collection<Address> doRetrieveAll(String order) throws SQLException {
 		
 		Connection connection = null;
@@ -173,7 +171,6 @@ public class AddressDao implements Dao<Address> {
 		return collection;
 	}
 
-	@Override
 	public void doSave(Address bean) throws SQLException {
 		Connection connection = null;
 		PreparedStatement ps = null;
@@ -211,11 +208,6 @@ public class AddressDao implements Dao<Address> {
 		}
 	}
 
-	@Override
-	public void doUpdate(Address bean) throws SQLException {
-	}
-
-	@Override
 	public boolean doDelete(int id) throws SQLException {
 		Connection connection = null;
 		PreparedStatement ps = null;
