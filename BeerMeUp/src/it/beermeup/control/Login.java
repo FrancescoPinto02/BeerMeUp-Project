@@ -35,82 +35,88 @@ public class Login extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action = request.getParameter("action");
 		
-		if(action.equals("login")){
-			String email = request.getParameter("email");
-			String password = request.getParameter("password");
-		
-			try {
-				boolean found = false;
-				Collection<User> utenti = userModel.doRetrieveAll(null);
-				for (User x: utenti){
-					if(	x.getEmail().equalsIgnoreCase(email) && x.getPw().equals(password)){
-						found = true;
-						request.getSession().removeAttribute("user-id");
-						request.getSession().setAttribute("user-id", x.getId());
-						request.getSession().removeAttribute("invalid-login");
-					
-						if(x.isAdmin()) {
-							request.getSession().removeAttribute(ADMIN_ROLES);
-							request.getSession().setAttribute(ADMIN_ROLES, true) ;
-						}
-						else {
-							request.getSession().removeAttribute(ADMIN_ROLES);
-							request.getSession().setAttribute(ADMIN_ROLES, false) ;
-						}
-					
-					break;
-					}
-				}
-				
-				if(!found) {
-					request.getSession().setAttribute("invalid-login", true);
-					response.sendRedirect("./login.jsp");
-					return;
-				}
-				else {
-					response.sendRedirect("./user-profile.jsp");
+		try {
+			if(action!=null) {
+				if(action.equalsIgnoreCase("login")) {
+					doLogin(request, response);
 					return;
 				}
 				
+				else if(action.equalsIgnoreCase("sign-in")) {
+					doSignIn(request, response);
+					return;
+				}
+			}
 				
-			}
-			catch (Exception e){
-				Login.logger.log(Level.WARNING, "Errore Servlet Login");
-			}
 		}
-		
-		
-		if(action.equals("sign-in")){
-			String password = request.getParameter("password");
-			String email = request.getParameter("email");
-			String firstName = request.getParameter("first_name");
-			String lastName = request.getParameter("last_name");
-			
-			User u = new User();
-			u.setEmail(email);
-			u.setPw(password);
-			u.setFirstName(firstName);
-			u.setLastName(lastName);
-			
-			//Verifica email gia esistente
-			try {
-				User p=userModel.doRetrieveByEmail(u.getEmail());
-				if (p.getEmail().equalsIgnoreCase(u.getEmail())){
-					response.sendRedirect(request.getContextPath() + "/login.jsp"); //EMAIL GIA' ESISTENTE
-					return;
-				}
-				else {
-					userModel.doSave(u);
-					response.sendRedirect(request.getContextPath() + "/login.jsp"); //OPERAZIONE ANDATA A BUON FINE
-					return;
-				}
-				
-			} catch (SQLException e) {
-				Login.logger.log(Level.WARNING, "Errore Servlet Login");
-			}
+		catch (Exception e){
+			Login.logger.log(Level.WARNING, "Errore Servlet Login");
 		}
+
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login.jsp");
 		dispatcher.forward(request, response);
+	}
+	
+	
+	private void doLogin(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException{
+		boolean found = false;
+		Collection<User> utenti = userModel.doRetrieveAll(null);
+		String email = request.getParameter("email");
+		String password = request.getParameter("password");
+		
+		for (User x: utenti){	
+			if(	x.getEmail().equalsIgnoreCase(email) && x.getPw().equals(password)){
+				found = true;
+				request.getSession().removeAttribute("user-id");
+				request.getSession().setAttribute("user-id", x.getId());
+				request.getSession().removeAttribute("invalid-login");
+			
+				if(x.isAdmin()) {
+					request.getSession().removeAttribute(ADMIN_ROLES);
+					request.getSession().setAttribute(ADMIN_ROLES, true) ;
+				}
+				else {
+					request.getSession().removeAttribute(ADMIN_ROLES);
+					request.getSession().setAttribute(ADMIN_ROLES, false) ;
+				}
+			
+				break;
+			}
+		}
+		
+		if(!found) {
+			request.getSession().setAttribute("invalid-login", true);
+			response.sendRedirect("./login.jsp");
+			return;
+		}
+		else {
+			response.sendRedirect("./user-profile.jsp");
+			return;
+		}
+	}
+	
+	private void doSignIn(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+		String password = request.getParameter("password");
+		String email = request.getParameter("email");
+		String firstName = request.getParameter("first_name");
+		String lastName = request.getParameter("last_name");
+		
+		User u = new User();
+		u.setEmail(email);
+		u.setPw(password);
+		u.setFirstName(firstName);
+		u.setLastName(lastName);
+		
+		if(!existingEmail(email)) {
+			userModel.doSave(u);
+		}
+		
+		response.sendRedirect(request.getContextPath() + "/login.jsp");
+	}
+	
+	private boolean existingEmail(String email) throws SQLException {
+		User p=userModel.doRetrieveByEmail(email);
+		return p.getEmail().equalsIgnoreCase(email);
 	}
 }
 	
