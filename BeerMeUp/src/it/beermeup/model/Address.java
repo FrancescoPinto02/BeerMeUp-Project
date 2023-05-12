@@ -3,7 +3,7 @@ package it.beermeup.model;
 public class Address {
 	
 	private int id = 0;
-	private int user_id = 0;
+	private int userId = 0;
 	private String street = "";
 	private String num = "";
 	private String cap = "";
@@ -28,11 +28,11 @@ public class Address {
 	}
 	
 	public int getUserId() {
-		return user_id;
+		return userId;
 	}
 	
-	public void setUserId(int user_id) {
-		this.user_id = user_id;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 	
 	public String getStreet() {

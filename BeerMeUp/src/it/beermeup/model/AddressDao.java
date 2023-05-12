@@ -83,7 +83,7 @@ public class AddressDao implements Dao<Address> {
 		Connection connection = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		Collection<Address> collection = new ArrayList<Address>(); 
+		Collection<Address> collection = new ArrayList<>(); 
 		
 		String sql = "SELECT * FROM " + AddressDao.TABLE_NAME;
 		if(order!=null && !order.equals("")) {
@@ -130,7 +130,7 @@ public class AddressDao implements Dao<Address> {
 		Connection connection = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		Collection<Address> collection = new ArrayList<Address>(); 
+		Collection<Address> collection = new ArrayList<>(); 
 		
 		String sql = "SELECT * FROM " + AddressDao.TABLE_NAME + " WHERE (user_id=?)";
 		
@@ -210,7 +210,6 @@ public class AddressDao implements Dao<Address> {
 
 	@Override
 	public void doUpdate(Address bean) throws SQLException {
-		return;
 	}
 
 	@Override

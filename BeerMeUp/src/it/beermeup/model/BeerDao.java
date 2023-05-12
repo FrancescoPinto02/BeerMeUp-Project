@@ -117,7 +117,7 @@ public class BeerDao implements Dao<Beer> {
 		Connection connection = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		Collection<Beer> collection = new ArrayList<Beer>(); 
+		Collection<Beer> collection = new ArrayList<>(); 
 		
 		String sql = "SELECT * FROM " + BeerDao.TABLE_NAME;
 		if(order!=null && !order.equals("")) {
@@ -258,7 +258,6 @@ public class BeerDao implements Dao<Beer> {
 				}
 			}
 		}
-		return;
 	}
 
 	@Override

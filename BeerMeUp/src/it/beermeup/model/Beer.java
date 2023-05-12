@@ -9,8 +9,8 @@ import java.math.RoundingMode;
 public class Beer {
 
 	private int id = 0;
-	private int brewery_id = 0;
-	private int style_id = 0;
+	private int breweryId = 0;
+	private int styleId = 0;
 	private String name = "";
 	private String description = "";
 	private String color = "";
@@ -30,16 +30,16 @@ public class Beer {
 		this.id = id;
 	}
 	public int getBrewery_id() {
-		return brewery_id;
+		return breweryId;
 	}
-	public void setBrewery_id(int brewery_id) {
-		this.brewery_id = brewery_id;
+	public void setBrewery_id(int breweryId) {
+		this.breweryId = breweryId;
 	}
 	public int getStyle_id() {
-		return style_id;
+		return styleId;
 	}
-	public void setStyle_id(int style_id) {
-		this.style_id = style_id;
+	public void setStyle_id(int styleId) {
+		this.styleId = styleId;
 	}
 	public String getName() {
 		return name;
@@ -75,7 +75,7 @@ public class Beer {
 		return price;
 	}
 	public BigDecimal getPrice(boolean discount) {
-		if(discount==false) {
+		if(!discount) {
 			return this.getPrice();
 		}
 		else {
