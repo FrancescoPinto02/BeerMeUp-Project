@@ -140,7 +140,7 @@ public class BeerDao{
 		return bean;
 	}
 
-	public Collection<Beer> doRetrieveAll(String order) throws SQLException {
+	public synchronized Collection<Beer> doRetrieveAll(String order) throws SQLException {
 		Connection connection = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;

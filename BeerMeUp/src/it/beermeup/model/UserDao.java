@@ -64,7 +64,7 @@ public class UserDao{
 		return bean;
 	}
 	
-	public User doRetrieveByKey(int id) throws SQLException {
+	public synchronized User doRetrieveByKey(int id) throws SQLException {
 		User bean = new User();
 		Connection connection = null;
 		PreparedStatement ps = null;
@@ -88,7 +88,7 @@ public class UserDao{
 		return bean;
 	}
 	
-	public User doRetrieveByEmail(String email) throws SQLException {
+	public synchronized User doRetrieveByEmail(String email) throws SQLException {
 		User bean = new User();
 		Connection connection = null;
 		PreparedStatement ps = null;
@@ -116,7 +116,7 @@ public class UserDao{
 		
 	}
 	
-	public Collection<User> doRetrieveAll(String order) throws SQLException {
+	public synchronized Collection<User> doRetrieveAll(String order) throws SQLException {
 		Connection connection = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -144,7 +144,7 @@ public class UserDao{
 		return collection;
 	}
 
-	public void doSave(User bean) throws SQLException {
+	public synchronized void doSave(User bean) throws SQLException {
 		Connection connection = null;
 		PreparedStatement ps = null;
 		String sql = "INSERT INTO " + UserDao.TABLE_NAME + " ( email, pw, first_name, last_name, is_admin)"
@@ -171,7 +171,7 @@ public class UserDao{
 		
 	}
 
-	public boolean doDelete(int id) throws SQLException {
+	public synchronized boolean doDelete(int id) throws SQLException {
 		Connection connection = null;
 		PreparedStatement ps = null;
 		String sql = "DELETE FROM " + UserDao.TABLE_NAME + " WHERE id = ?";
