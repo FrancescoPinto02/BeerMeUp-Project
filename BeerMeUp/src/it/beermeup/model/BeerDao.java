@@ -76,8 +76,8 @@ public class BeerDao implements Dao<Beer> {
 			rs = ps.executeQuery();
 			while(rs.next()) {
 				bean.setId(rs.getInt("id"));
-				bean.setBrewery_id(rs.getInt("brewery_id"));
-				bean.setStyle_id(rs.getInt("style_id"));
+				bean.setBreweryId(rs.getInt("brewery_id"));
+				bean.setStyleId(rs.getInt("style_id"));
 				bean.setName(rs.getString("beer_name"));
 				bean.setDescription(rs.getString("beer_description"));
 				bean.setColor(rs.getString("color"));
@@ -137,8 +137,8 @@ public class BeerDao implements Dao<Beer> {
 				Beer bean = new Beer();
 				
 				bean.setId(rs.getInt("id"));
-				bean.setBrewery_id(rs.getInt("brewery_id"));
-				bean.setStyle_id(rs.getInt("style_id"));
+				bean.setBreweryId(rs.getInt("brewery_id"));
+				bean.setStyleId(rs.getInt("style_id"));
 				bean.setName(rs.getString("beer_name"));
 				bean.setDescription(rs.getString("beer_description"));
 				bean.setColor(rs.getString("color"));
@@ -187,8 +187,8 @@ public class BeerDao implements Dao<Beer> {
 			connection.setAutoCommit(false);
 			
 			ps = connection.prepareStatement(sql);
-			ps.setInt(1, bean.getBrewery_id());
-			ps.setInt(2, bean.getStyle_id());
+			ps.setInt(1, bean.getBreweryId());
+			ps.setInt(2, bean.getStyleId());
 			ps.setString(3, bean.getName());
 			ps.setString(4, bean.getDescription());
 			ps.setString(5, bean.getColor());
@@ -230,8 +230,8 @@ public class BeerDao implements Dao<Beer> {
 			connection.setAutoCommit(false);
 			
 			ps = connection.prepareStatement(sql);
-			ps.setInt(1, bean.getBrewery_id());
-			ps.setInt(2, bean.getStyle_id());
+			ps.setInt(1, bean.getBreweryId());
+			ps.setInt(2, bean.getStyleId());
 			ps.setString(3, bean.getName());
 			ps.setString(4, bean.getDescription());
 			ps.setString(5, bean.getColor());

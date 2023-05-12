@@ -51,8 +51,8 @@ public class UserDao implements Dao<User> {
 				bean.setId(rs.getInt("id"));
 				bean.setPw(rs.getString("pw"));
 				bean.setEmail(rs.getString("email"));
-				bean.setFirst_name(rs.getString("first_name"));
-				bean.setLast_name(rs.getString("last_name"));
+				bean.setFirstName(rs.getString("first_name"));
+				bean.setLastName(rs.getString("last_name"));
 				bean.setAdmin(rs.getBoolean("is_admin"));
 				
 			}		
@@ -92,8 +92,8 @@ public class UserDao implements Dao<User> {
 				bean.setId(rs.getInt("id"));
 				bean.setPw(rs.getString("pw"));
 				bean.setEmail(rs.getString("email"));
-				bean.setFirst_name(rs.getString("first_name"));
-				bean.setLast_name(rs.getString("last_name"));
+				bean.setFirstName(rs.getString("first_name"));
+				bean.setLastName(rs.getString("last_name"));
 				bean.setAdmin(rs.getBoolean("is_admin"));
 				
 			}		
@@ -137,8 +137,8 @@ public class UserDao implements Dao<User> {
 				bean.setId(rs.getInt("id"));
 				bean.setPw(rs.getString("pw"));
 				bean.setEmail(rs.getString("email"));
-				bean.setFirst_name(rs.getString("first_name"));
-				bean.setLast_name(rs.getString("last_name"));
+				bean.setFirstName(rs.getString("first_name"));
+				bean.setLastName(rs.getString("last_name"));
 				bean.setAdmin(rs.getBoolean("is_admin"));
 				
 				
@@ -175,8 +175,8 @@ public class UserDao implements Dao<User> {
 			ps = connection.prepareStatement(sql);
 			ps.setString(1, bean.getEmail());
 			ps.setString(2, bean.getPw());
-			ps.setString(3, bean.getFirst_name());
-			ps.setString(4, bean.getLast_name());
+			ps.setString(3, bean.getFirstName());
+			ps.setString(4, bean.getLastName());
 			ps.setBoolean(5, bean.isAdmin());
 			
 			ps.executeUpdate();

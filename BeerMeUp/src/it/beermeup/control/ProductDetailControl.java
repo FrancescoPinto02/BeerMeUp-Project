@@ -42,8 +42,8 @@ public class ProductDetailControl extends HttpServlet {
 					}
 					
 					Beer beer = beerModel.doRetrieveByKey(id);
-					Brewery brewery = breweryModel.doRetrieveByKey(beer.getBrewery_id());
-					Style style = styleModel.doRetrieveByKey(beer.getStyle_id());
+					Brewery brewery = breweryModel.doRetrieveByKey(beer.getBreweryId());
+					Style style = styleModel.doRetrieveByKey(beer.getStyleId());
 					
 					request.removeAttribute("product");
 					request.setAttribute("product", beer);

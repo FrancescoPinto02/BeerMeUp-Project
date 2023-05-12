@@ -74,10 +74,10 @@ public class AddProduct extends HttpServlet {
 				beer.setIngredients(stringValue(p));
 			}
 			else if(p.getName().equals("beerBrewery")) {
-				beer.setBrewery_id(Integer.parseInt(stringValue(p)));
+				beer.setBreweryId(Integer.parseInt(stringValue(p)));
 			}
 			else if(p.getName().equals("beerStyle")) {
-				beer.setStyle_id(Integer.parseInt(stringValue(p)));
+				beer.setStyleId(Integer.parseInt(stringValue(p)));
 			}
 			else if(p.getName().equals("beerImg")) {
 				beer.setInputStreamImage(p.getInputStream());

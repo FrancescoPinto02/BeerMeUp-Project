@@ -29,16 +29,16 @@ public class Beer {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getBrewery_id() {
+	public int getBreweryId() {
 		return breweryId;
 	}
-	public void setBrewery_id(int breweryId) {
+	public void setBreweryId(int breweryId) {
 		this.breweryId = breweryId;
 	}
-	public int getStyle_id() {
+	public int getStyleId() {
 		return styleId;
 	}
-	public void setStyle_id(int styleId) {
+	public void setStyleId(int styleId) {
 		this.styleId = styleId;
 	}
 	public String getName() {

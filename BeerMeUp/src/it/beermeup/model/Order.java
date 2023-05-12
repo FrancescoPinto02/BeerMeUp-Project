@@ -83,9 +83,7 @@ public class Order {
 		Order other = (Order) obj;
 		if (id != other.id)
 			return false;
-		if (userId != other.userId)
-			return false;
-		return true;
+		return userId == other.userId;
 	}
 	
 	@Override

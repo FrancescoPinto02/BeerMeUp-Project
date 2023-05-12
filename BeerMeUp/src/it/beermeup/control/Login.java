@@ -89,8 +89,8 @@ public class Login extends HttpServlet {
 			User u = new User();
 			u.setEmail(email);
 			u.setPw(password);
-			u.setFirst_name(firstName);
-			u.setLast_name(lastName);
+			u.setFirstName(firstName);
+			u.setLastName(lastName);
 			
 			//Verifica email gia esistente
 			try {

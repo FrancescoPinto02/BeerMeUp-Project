@@ -26,16 +26,16 @@ public class User {
 	public void setPw(String pw) {
 		this.pw = pw;
 	}
-	public String getFirst_name() {
+	public String getFirstName() {
 		return firstName;
 	}
-	public void setFirst_name(String firstName) {
+	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
-	public String getLast_name() {
+	public String getLastName() {
 		return lastName;
 	}
-	public void setLast_name(String lastName) {
+	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
 	public boolean isAdmin() {
