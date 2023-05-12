@@ -87,11 +87,9 @@ public class Login extends HttpServlet {
 		if(!found) {
 			request.getSession().setAttribute("invalid-login", true);
 			response.sendRedirect("./login.jsp");
-			return;
 		}
 		else {
 			response.sendRedirect("./user-profile.jsp");
-			return;
 		}
 	}
 	
@@ -109,8 +107,7 @@ public class Login extends HttpServlet {
 		
 		if(!existingEmail(email)) {
 			userModel.doSave(u);
-		}
-		
+		}		
 		response.sendRedirect(request.getContextPath() + "/login.jsp");
 	}
 	
