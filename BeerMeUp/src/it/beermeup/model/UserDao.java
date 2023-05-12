@@ -92,7 +92,7 @@ public class UserDao{
 		User bean = new User();
 		Connection connection = null;
 		PreparedStatement ps = null;
-		String sql = "SELECT * FROM " + UserDao.TABLE_NAME + " WHERE email = ?";
+		String sql = SELECT_ALL + " WHERE email = ?";
 		ResultSet rs = null;
 		
 		try {
@@ -122,7 +122,7 @@ public class UserDao{
 		ResultSet rs = null;
 		Collection<User> collection = new ArrayList<>(); 
 		
-		String sql = "SELECT * FROM " + UserDao.TABLE_NAME;
+		String sql = SELECT_ALL;
 		if(order!=null && !order.equals("")) {
 			sql = sql + " ORDER BY " + order;
 		}

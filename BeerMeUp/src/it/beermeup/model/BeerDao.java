@@ -22,6 +22,7 @@ import javax.sql.DataSource;
 public class BeerDao{
 	
 	private static final String TABLE_NAME = "beer";
+	private static final String  SELECT_ALL = "SELECT * FROM beer";
 	
 	private static DataSource ds;
 	static Logger logger = Logger.getLogger(BeerDao.class.getName());
@@ -145,7 +146,7 @@ public class BeerDao{
 		ResultSet rs = null;
 		Collection<Beer> collection = new ArrayList<>(); 
 		
-		String sql = "SELECT * FROM " + BeerDao.TABLE_NAME;
+		String sql = SELECT_ALL;
 		if(order!=null && !order.equals("")) {
 			if(order.equalsIgnoreCase("price")) {
 				order = "(price - ((price/100)*discount))";
