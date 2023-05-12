@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import it.beermeup.model.Address;
 import it.beermeup.model.AddressDao;
 import it.beermeup.model.User;
 import it.beermeup.model.UserDao;
