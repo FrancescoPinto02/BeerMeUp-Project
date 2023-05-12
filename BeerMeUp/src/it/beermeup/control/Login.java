@@ -3,6 +3,8 @@ package it.beermeup.control;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Collection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -20,6 +22,7 @@ public class Login extends HttpServlet {
        
 	public static UserDao userModel = new UserDao();
 	public static AddressDao addressModel = new AddressDao();
+	static Logger logger = Logger.getLogger(CheckoutControl.class.getName());
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -70,7 +73,7 @@ public class Login extends HttpServlet {
 				
 			}
 			catch (Exception e){
-				e.printStackTrace();
+				Login.logger.log(Level.WARNING, "Errore Servlet Login");
 			}
 		}
 		
@@ -109,8 +112,7 @@ public class Login extends HttpServlet {
 				}
 				
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				Login.logger.log(Level.WARNING, "Errore Servlet Login");
 			}
 		}
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login.jsp");
