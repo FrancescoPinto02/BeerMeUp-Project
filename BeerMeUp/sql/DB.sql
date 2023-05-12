@@ -125,13 +125,7 @@ CREATE TABLE order_details(
 GRANT ALL PRIVILEGES ON beer_me_up.* TO 'root'@'localhost';
 
 INSERT INTO brewery (brewery_name, story, nation)
-VALUES ('Antikorpo', 'Antikorpo Brewing è un giovane birrificio italiano “nato nel bel mezzo di una pandemia”, come lo descrive il birraio stesso, Davide Galliussi che, 
-con Cristina Mirizzi, ha creato il progetto nei primi mesi del 2020, da una costola dello storico birrificio Cittavecchia di Sgonico (TS).
-In pochi anni il birrificio è cresciuto alla velocità della luce, producendo birre che ti invogliano ad un secondo sorso, dagli stili molto apprezzati e in voga, 
-tra i quali ritroviamo per esempio Pacific Pale Ale, West Coast Double IPA, ma anche basse fermentazioni davvero ben riuscite. 
-Oltre ad una particolare attenzione verso il mondo gluten free che, diciamocelo, gli riesce molto bene!
-Birre dal forte carattere, indimenticabili, in lattina, dalla veste grafica fortemente riconoscibile, 
-grazie anche all`eccentrica linea di grafiche realizzate da tatuatori di fama internazionale.' , 'Italia' );
+VALUES ('Antikorpo', 'Antikorpo Brewing è un giovane birrificio italiano “nato nel bel mezzo di una pandemia”, come lo descrive il birraio stesso, Davide Galliussi che, con Cristina Mirizzi, ha creato il progetto nei primi mesi del 2020, da una costola dello storico birrificio Cittavecchia di Sgonico (TS). In pochi anni il birrificio è cresciuto alla velocità della luce, producendo birre che ti invogliano ad un secondo sorso, dagli stili molto apprezzati e in voga, tra i quali ritroviamo per esempio Pacific Pale Ale, West Coast Double IPA, ma anche basse fermentazioni davvero ben riuscite. Oltre ad una particolare attenzione verso il mondo gluten free che, diciamocelo, gli riesce molto bene! Birre dal forte carattere, indimenticabili, in lattina, dalla veste grafica fortemente riconoscibile, grazie anche all`eccentrica linea di grafiche realizzate da tatuatori di fama internazionale.' , 'Italia' );
 
 INSERT INTO brewery (brewery_name, story, nation)
 VALUES ('Impavida', 'Impavida non è soltanto il nome del birrificio artigianale, ma è anche l’aggettivo che descrive meglio il carattere e la personalità delle 
@@ -242,8 +236,3 @@ regina della moda punk inglese.' ,
 
 INSERT INTO site_user (email, pw, first_name, last_name, is_admin) 
 VALUES ('beermeup@gmail.com' , '1234', 'admin', 'admin', TRUE);
-
-select * from beer;
-select * from brewery;
-select * from style;
-select * from site_user;
