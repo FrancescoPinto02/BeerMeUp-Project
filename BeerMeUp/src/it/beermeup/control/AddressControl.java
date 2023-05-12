@@ -1,6 +1,8 @@
 package it.beermeup.control;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,12 +18,13 @@ public class AddressControl extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	static AddressDao model = new AddressDao();
+	static Logger logger = Logger.getLogger(AddressControl.class.getName());
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		//Azione richiesta
 		String action = request.getParameter("action");
 		
-		Integer userId = (Integer)((request.getSession().getAttribute("user-id")));
+		Integer userId = (Integer)(request.getSession().getAttribute("user-id"));
 		if(userId == null || userId.intValue()<=0) {
 			response.sendRedirect("./login.jsp");
 			return;
@@ -37,19 +40,17 @@ public class AddressControl extends HttpServlet {
 				
 				//Rimuovi Indirizzo
 				else if (action.equalsIgnoreCase("deleteAddress")) {
-					int addressId = Integer.valueOf(request.getParameter("address-id"));
+					int addressId = Integer.parseInt(request.getParameter("address-id"));
 					
 					//controllo per maggiore sicurezza
 					if((model.doRetrieveByKey(addressId)).getUserId() == userId.intValue()) {
 						model.doDelete(addressId);
 					}
 				}
-			}
-			
-			
+			}	
 		}
 		catch(Exception e) {
-			System.out.println("Errore:" + e.getMessage());
+			AddressControl.logger.log(Level.WARNING, "Errore Servlet Address Control:" + e.getMessage());
 		}
 		
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/user-address.jsp");
@@ -60,41 +61,37 @@ public class AddressControl extends HttpServlet {
 		//Azione richiesta
 		String action = request.getParameter("action");
 		
-		Integer userId = (Integer)((request.getSession().getAttribute("user-id")));
+		Integer userId = (Integer)(request.getSession().getAttribute("user-id"));
 		if(userId == null || userId.intValue()<=0) {
 			response.sendRedirect("./login.jsp");
 			return;
 		}
 		
 		try {
-			if(action!=null) {
+			if(action!=null && action.equalsIgnoreCase("addAddress")) {
 				//Aggiungi indirizzo
-				if (action.equalsIgnoreCase("addAddress")) {
-					String street = request.getParameter("street");
-					String num = request.getParameter("num");
-					String cap = request.getParameter("cap");
-					String city = request.getParameter("city");
-					String nation = request.getParameter("nation");
-					String telephone = request.getParameter("telephone");
+				String street = request.getParameter("street");
+				String num = request.getParameter("num");
+				String cap = request.getParameter("cap");
+				String city = request.getParameter("city");
+				String nation = request.getParameter("nation");
+				String telephone = request.getParameter("telephone");
 					
-					Address address = new Address();
-					address.setUserId(userId.intValue());
-					address.setStreet(street);
-					address.setNum(num);
-					address.setCap(cap);
-					address.setCity(city);
-					address.setNation(nation);
-					address.setTelephone(telephone);
+				Address address = new Address();
+				address.setUserId(userId.intValue());
+				address.setStreet(street);
+				address.setNum(num);
+				address.setCap(cap);
+				address.setCity(city);
+				address.setNation(nation);
+				address.setTelephone(telephone);
 					
 					
-					model.doSave(address);
-				}
-			}
-			
-			
+				model.doSave(address);
+			}	
 		}
 		catch(Exception e) {
-			System.out.println("Errore:" + e.getMessage());
+			AddressControl.logger.log(Level.WARNING, "Errore Servlet Address Control:" + e.getMessage());
 		}
 		
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/user-address.jsp");

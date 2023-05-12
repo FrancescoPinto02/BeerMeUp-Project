@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -19,9 +21,10 @@ import it.beermeup.model.BeerDao;
 @MultipartConfig
 public class AddProduct extends HttpServlet {
 
-	private static final long serialVersionUID = -7767867502499862155L;
+	private static final long serialVersionUID = 1L;
 	
 	static BeerDao beerModel = new BeerDao();
+	static Logger logger = Logger.getLogger(CheckoutControl.class.getName());
 	
 	//Metodo per convertire il valore di un oggetto Part p in una String
 	private String stringValue(Part p) {
@@ -29,11 +32,10 @@ public class AddProduct extends HttpServlet {
 		try {
 			byteArray = p.getInputStream().readAllBytes();
 		} catch (IOException e) {
-			System.out.println("Errore Lettura Dati Form Multipart");
+			AddProduct.logger.log(Level.WARNING, "Errore Lettura Dati Form Multipart");
 		}
 		
-		String string = new String(byteArray, StandardCharsets.UTF_8);
-		return string;
+		return new String(byteArray, StandardCharsets.UTF_8);
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
@@ -86,7 +88,7 @@ public class AddProduct extends HttpServlet {
 			beerModel.doSave(beer);
 		} 
 		catch (SQLException e) {
-			System.out.println("Errore:" + e.getMessage());
+			AddProduct.logger.log(Level.WARNING, "Errore Servlet AddProduct");
 		}
 		
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/product-manager.jsp");

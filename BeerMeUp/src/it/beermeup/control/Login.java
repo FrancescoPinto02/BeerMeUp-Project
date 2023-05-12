@@ -20,9 +20,10 @@ import it.beermeup.model.UserDao;
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-	public static UserDao userModel = new UserDao();
-	public static AddressDao addressModel = new AddressDao();
-	static Logger logger = Logger.getLogger(CheckoutControl.class.getName());
+	static UserDao userModel = new UserDao();
+	static AddressDao addressModel = new AddressDao();
+	static Logger logger = Logger.getLogger(Login.class.getName());
+	private static final String ADMIN_ROLES = "admin-roles";
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -49,17 +50,18 @@ public class Login extends HttpServlet {
 						request.getSession().removeAttribute("invalid-login");
 					
 						if(x.isAdmin()) {
-							request.getSession().removeAttribute("admin-roles");
-							request.getSession().setAttribute("admin-roles", true) ;
+							request.getSession().removeAttribute(ADMIN_ROLES);
+							request.getSession().setAttribute(ADMIN_ROLES, true) ;
 						}
 						else {
-							request.getSession().removeAttribute("admin-roles");
-							request.getSession().setAttribute("admin-roles", false) ;
+							request.getSession().removeAttribute(ADMIN_ROLES);
+							request.getSession().setAttribute(ADMIN_ROLES, false) ;
 						}
 					
 					break;
 					}
 				}
+				
 				if(!found) {
 					request.getSession().setAttribute("invalid-login", true);
 					response.sendRedirect("./login.jsp");
@@ -81,38 +83,30 @@ public class Login extends HttpServlet {
 		if(action.equals("sign-in")){
 			String password = request.getParameter("password");
 			String email = request.getParameter("email");
-			String first_name = request.getParameter("first_name");
-			String last_name = request.getParameter("last_name");
+			String firstName = request.getParameter("first_name");
+			String lastName = request.getParameter("last_name");
 			
 			User u = new User();
 			u.setEmail(email);
 			u.setPw(password);
-			u.setFirst_name(first_name);
-			u.setLast_name(last_name);
+			u.setFirst_name(firstName);
+			u.setLast_name(lastName);
 			
 			//Verifica email gia esistente
-
 			try {
-				User p = new User();
-				p=userModel.doRetrieveByEmail(u.getEmail());
+				User p=userModel.doRetrieveByEmail(u.getEmail());
 				if (p.getEmail().equalsIgnoreCase(u.getEmail())){
 					response.sendRedirect(request.getContextPath() + "/login.jsp"); //EMAIL GIA' ESISTENTE
 					return;
 				}
 				else {
-
-					try {
-						userModel.doSave(u);
-						response.sendRedirect(request.getContextPath() + "/login.jsp"); //OPERAZIONE ANDATA A BUON FINE
-						return;
-					} 
-					catch (SQLException e) {
-						System.out.println("Errore:" + e.getMessage());
-					}
+					userModel.doSave(u);
+					response.sendRedirect(request.getContextPath() + "/login.jsp"); //OPERAZIONE ANDATA A BUON FINE
+					return;
 				}
 				
 			} catch (SQLException e) {
-				Login.logger.log(Level.WARNING, "Errore Servlet Login");
+				Login.logger.log(Level.WARNING, "Errore Servlet Login" + e.getMessage());
 			}
 		}
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login.jsp");

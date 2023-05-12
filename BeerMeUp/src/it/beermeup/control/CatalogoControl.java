@@ -2,6 +2,8 @@ package it.beermeup.control;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,8 +16,9 @@ import it.beermeup.model.Cart;
 
 public class CatalogoControl extends HttpServlet {
 
-	private static final long serialVersionUID = 6196656639099922613L;
+	private static final long serialVersionUID = 1L;
 	static BeerDao model = new BeerDao();
+	static Logger logger = Logger.getLogger(CatalogoControl.class.getName());
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		doGet(request, response);
@@ -66,7 +69,7 @@ public class CatalogoControl extends HttpServlet {
 				}
 			}			
 		} catch (SQLException e) {
-			System.out.println("Errore:" + e.getMessage());
+			CatalogoControl.logger.log(Level.WARNING, "Errore Servlet Address Control:" + e.getMessage());
 		}
 		
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/catalogo.jsp");
