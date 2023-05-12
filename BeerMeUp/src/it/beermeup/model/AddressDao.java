@@ -52,6 +52,7 @@ public class AddressDao{
 		return bean;
 	}
 	
+	//Liberare risorse al termine della query
 	private void terminateQuery(PreparedStatement ps, Connection connection) throws SQLException {
 		try {
 			if(ps != null) {

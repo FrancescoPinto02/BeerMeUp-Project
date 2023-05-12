@@ -17,6 +17,7 @@ import javax.sql.DataSource;
 public class UserDao{
 
 	private static final String TABLE_NAME = "site_user";
+	private static final String SELECT_ALL = "SELECT * FROM site_user";
 	
 	private static DataSource ds;
 	static Logger logger = Logger.getLogger(UserDao.class.getName());
@@ -36,11 +37,38 @@ public class UserDao{
 		}
 	}
 	
+	//Liberare risorse al termine della query
+	private void terminateQuery(PreparedStatement ps, Connection connection) throws SQLException {
+		try {
+			if(ps != null) {
+				ps.close();
+			}
+		}
+		finally {
+			if(connection != null) {
+				connection.close();
+			}
+		}
+	}
+	
+	
+	//Funzione per recuperare tutti i dati necessari da una riga del result set
+	private User getUserFromRS(ResultSet rs) throws SQLException {
+		User bean = new User();
+		bean.setId(rs.getInt("id"));
+		bean.setPw(rs.getString("pw"));
+		bean.setEmail(rs.getString("email"));
+		bean.setFirstName(rs.getString("first_name"));
+		bean.setLastName(rs.getString("last_name"));
+		bean.setAdmin(rs.getBoolean("is_admin"));
+		return bean;
+	}
+	
 	public User doRetrieveByKey(int id) throws SQLException {
 		User bean = new User();
 		Connection connection = null;
 		PreparedStatement ps = null;
-		String sql = "SELECT * FROM " + UserDao.TABLE_NAME + " WHERE id = ?";
+		String sql = SELECT_ALL + " WHERE id = ?";
 		ResultSet rs = null;
 		
 		try {
@@ -51,30 +79,13 @@ public class UserDao{
 			
 			rs = ps.executeQuery();
 			while(rs.next()) {
-				bean.setId(rs.getInt("id"));
-				bean.setPw(rs.getString("pw"));
-				bean.setEmail(rs.getString("email"));
-				bean.setFirstName(rs.getString("first_name"));
-				bean.setLastName(rs.getString("last_name"));
-				bean.setAdmin(rs.getBoolean("is_admin"));
-				
+				bean = getUserFromRS(rs);	
 			}		
 		}
 		finally {
-			try {
-				if(ps != null) {
-					ps.close();
-				}
-			}
-			finally {
-				if(connection != null) {
-					connection.close();
-				}
-			}
-		}
-		
+			terminateQuery(ps, connection);
+		}	
 		return bean;
-	
 	}
 	
 	public User doRetrieveByEmail(String email) throws SQLException {
@@ -92,26 +103,12 @@ public class UserDao{
 			
 			rs = ps.executeQuery();
 			while(rs.next()) {
-				bean.setId(rs.getInt("id"));
-				bean.setPw(rs.getString("pw"));
-				bean.setEmail(rs.getString("email"));
-				bean.setFirstName(rs.getString("first_name"));
-				bean.setLastName(rs.getString("last_name"));
-				bean.setAdmin(rs.getBoolean("is_admin"));
+				bean = getUserFromRS(rs);
 				
 			}		
 		}
 		finally {
-			try {
-				if(ps != null) {
-					ps.close();
-				}
-			}
-			finally {
-				if(connection != null) {
-					connection.close();
-				}
-			}
+			terminateQuery(ps, connection);
 		}
 		
 		return bean;
@@ -136,29 +133,12 @@ public class UserDao{
 			
 			rs = ps.executeQuery();
 			while(rs.next()) {
-				User bean = new User();
-				bean.setId(rs.getInt("id"));
-				bean.setPw(rs.getString("pw"));
-				bean.setEmail(rs.getString("email"));
-				bean.setFirstName(rs.getString("first_name"));
-				bean.setLastName(rs.getString("last_name"));
-				bean.setAdmin(rs.getBoolean("is_admin"));
-				
-				
+				User bean = getUserFromRS(rs);
 				collection.add(bean);
 			}		
 		}
 		finally {
-				try {
-					if(ps != null) {
-						ps.close();
-					}
-				}
-				finally {
-					if(connection != null) {
-						connection.close();
-					}
-				}
+			terminateQuery(ps, connection);
 		}
 		
 		return collection;
@@ -185,16 +165,7 @@ public class UserDao{
 			connection.commit();		
 		}
 		finally {
-			try {
-				if(ps != null) {
-					ps.close();
-				}
-			}
-			finally {
-				if(connection != null) {
-					connection.close();
-				}
-			}
+			terminateQuery(ps, connection);
 		}
 		
 		
@@ -217,16 +188,7 @@ public class UserDao{
 			connection.commit();		
 		}
 		finally {
-			try {
-				if(ps != null) {
-					ps.close();
-				}
-			}
-			finally {
-				if(connection != null) {
-					connection.close();
-				}
-			}
+			terminateQuery(ps, connection);
 		}
 		
 		return (result!=0);
