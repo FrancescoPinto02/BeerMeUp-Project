@@ -112,7 +112,7 @@ public class BeerDao{
 		ps.setBigDecimal(9, bean.getIva());
 		ps.setInt(10, bean.getStock());
 		ps.setInt(11, bean.getDiscount());
-		ps.setInt(12, bean.getId());
+		ps.setBinaryStream(12, bean.getInputStreamImage());
 	}
 	
 	public synchronized Beer doRetrieveByKey(int id) throws SQLException {
