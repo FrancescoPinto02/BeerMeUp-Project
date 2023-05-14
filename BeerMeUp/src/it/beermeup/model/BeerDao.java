@@ -171,6 +171,56 @@ public class BeerDao{
 		
 		return collection;
 	}
+	
+	public synchronized Collection<Beer> doRetrievePromo() throws SQLException {
+		Connection connection = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Collection<Beer> collection = new ArrayList<>(); 
+		
+		String sql = SELECT_ALL + " WHERE discount>0";
+		
+		try {
+			connection = ds.getConnection(); 
+			ps = connection.prepareStatement(sql);
+			
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				Beer bean = getBeerFromRS(rs);
+				collection.add(bean);
+			}		
+		}
+		finally {
+			terminateQuery(ps, connection);
+		}
+		
+		return collection;
+	}
+	
+	public synchronized Collection<Beer> doRetrieveNew() throws SQLException {
+		Connection connection = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Collection<Beer> collection = new ArrayList<>(); 
+		
+		String sql = SELECT_ALL + " ORDER BY id DESC LIMIT 5";
+		
+		try {
+			connection = ds.getConnection(); 
+			ps = connection.prepareStatement(sql);
+			
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				Beer bean = getBeerFromRS(rs);
+				collection.add(bean);
+			}		
+		}
+		finally {
+			terminateQuery(ps, connection);
+		}
+		
+		return collection;
+	}
 
 	public synchronized void doSave(Beer bean) throws SQLException {
 		Connection connection = null;

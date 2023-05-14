@@ -1,0 +1,106 @@
+@charset "UTF-8";
+
+.product-card{
+    box-shadow: 3px 5px 5px 0px #adaaaa;
+    position: relative;
+    background-color: white;
+    border-radius: 10%;
+    
+}
+
+.product-card:hover{
+    transform: scale(1.1);
+}
+
+.product-card .top .discount{
+    position: absolute;
+    font-size: 1.3rem;
+    font-weight: bolder;
+    color: red;
+    padding-top: 0.4rem;
+    padding-left: 0.8rem;
+}
+
+.product-card .top .image{
+    border-radius: 10%;
+    width:100%;
+    height: auto;
+    text-align: center;
+    margin: 1.2rem auto;
+}
+
+.product-card .content{
+    text-align: center;
+}
+
+.product-card .content .name{
+    font-size: 1.2rem;
+    margin-bottom: 0.3rem;
+    font-weight: bolder;
+}
+
+.product-card .content .description{
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    font-weight: lighter;
+}
+
+.product-card .bottom{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.product-card .bottom .price{
+    padding-left: 1rem;
+}
+
+.product-card .bottom .price .full-price{
+    font-size: 1.1rem;
+    color: grey;
+    text-decoration: line-through;
+}
+
+.product-card .bottom .price .discount-price{
+    font-size: 1.3rem;
+    margin-left: 0.3rem;
+    color: red;
+    font-weight: bolder;
+}
+
+.product-card .bottom .price .normal-price{
+    font-size: 1.3rem;
+    margin-left: 0.3rem;
+    color: black;
+    font-weight: bolder;
+}
+
+.product-card .bottom .card-button{
+    font-size: 1.6rem;
+    padding-right: 2rem;
+}
+
+.product-card .bottom .card-button .cart{
+    padding:0.5rem;
+    background-color: #ffcf00;
+    border-radius: 50%;
+    color:black;
+}
+
+.product-card .bottom .card-button .cart:hover{
+    background-color: #0030ff;
+    color: white;
+}
+
+.product-card .bottom .out-of-stock{
+    width: 100%;
+}
+
+.product-card .bottom .out-of-stock h3{
+    font-size: 1.3rem;
+    padding: 0.5rem;
+    color: red;
+    text-align: center;
+}

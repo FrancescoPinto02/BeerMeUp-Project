@@ -176,7 +176,7 @@ INSERT INTO beer (brewery_id , style_id, beer_name, beer_description, color, ing
 VALUES ('2', '3', 'Peler', 'La nostra Italian Pilsner punta sull’equilibrio tra la parte maltata, le tipiche note di crosta di pane e miele, e una luppolatura fatta di sole varietà mitteleuropee. Come il vento del Garda dal quale prende il nome, le sue note floreali ed erbacee enfatizzate da un leggero dry hopping, ti trasporteranno in una nuova esperienza da bere. Tu spiega le vele, il resto lo farà lei!.' , 'Bionda' , 'Orzo', '4.8' , '4.50', '22', '20', '0', LOAD_FILE('C:/birre/Beer9.PNG'));
 
 INSERT INTO beer (brewery_id , style_id, beer_name, beer_description, color, ingredients, gradation, price, iva, stock, discount, img)
-VALUES ('2', '6', 'Vivienne', 'Ne evoca il carattere, lo stile ed anche il nome. Il suo colore ambrato carico di note rossastre racchiude un bouquet di profumi che vanno dal caramello alla frutta secca, passando per un’invitante fragranza di biscotti. Un omaggio all’impavida regina della moda punk inglese.' , 'Scura' , 'Orzo', '4.8' , '4.50', '22', '25', '10', LOAD_FILE('C:/birre/Beer10.PNG'));
+VALUES ('2', '6', 'Vivienne', 'Ne evoca il carattere, lo stile ed anche il nome. Il suo colore ambrato carico di note rossastre racchiude un bouquet di profumi che vanno dal caramello alla frutta secca, passando per un’invitante fragranza di biscotti. Un omaggio all’impavida regina della moda punk inglese.' , 'Scura' , 'Orzo', '4.8' , '4.50', '22', '20', '10', LOAD_FILE('C:/birre/Beer10.PNG'));
 
 
 
