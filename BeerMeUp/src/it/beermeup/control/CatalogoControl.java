@@ -21,13 +21,14 @@ import it.beermeup.model.Cart;
 public class CatalogoControl extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
+	private static final String PROD_ATT = "productList";
 	static BeerDao model = new BeerDao();
-	static BreweryDao BreweryModel = new BreweryDao();
+	static BreweryDao breweryModel = new BreweryDao();
 	static Logger logger = Logger.getLogger(CatalogoControl.class.getName());
 	
 	private HashMap<Integer, String> getBreweryMap() throws SQLException {
-		ArrayList<Brewery> breweryList =  (ArrayList<Brewery>) BreweryModel.doRetrieveAll(null); 
-		HashMap<Integer, String> breweryMap = new HashMap<Integer, String>();
+		ArrayList<Brewery> breweryList =  (ArrayList<Brewery>) breweryModel.doRetrieveAll(null); 
+		HashMap<Integer, String> breweryMap = new HashMap<>();
 		for(Brewery x : breweryList) {
 			breweryMap.put(x.getId(), x.getName());
 		}
@@ -56,20 +57,20 @@ public class CatalogoControl extends HttpServlet {
 				//Richiesta di tutti i prodotti
 				if(action.equalsIgnoreCase("catalogo")) {
 					String sort = request.getParameter("sort");
-					request.removeAttribute("productsList");
-					request.setAttribute("productsList", model.doRetrieveAll(sort));
+					request.removeAttribute(PROD_ATT);
+					request.setAttribute(PROD_ATT, model.doRetrieveAll(sort));
 				}
 				
 				//Richiesta Birre in sconto
 				else if(action.equalsIgnoreCase("promo")) {
-					request.removeAttribute("productsList");
-					request.setAttribute("productsList", model.doRetrievePromo());	
+					request.removeAttribute(PROD_ATT);
+					request.setAttribute(PROD_ATT, model.doRetrievePromo());	
 				}
 				
 				//Richiesta Novità
 				else if(action.equalsIgnoreCase("new")) {
-					request.removeAttribute("productsList");
-					request.setAttribute("productsList", model.doRetrieveNew());
+					request.removeAttribute(PROD_ATT);
+					request.setAttribute(PROD_ATT, model.doRetrieveNew());
 				}
 				
 				
