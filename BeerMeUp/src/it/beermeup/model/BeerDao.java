@@ -70,6 +70,7 @@ public class BeerDao{
 		bean.setIva(rs.getBigDecimal("iva"));
 		bean.setStock(rs.getInt("stock"));
 		bean.setDiscount(rs.getInt("discount"));
+		bean.setInputStreamImage(rs.getBinaryStream("img"));
 		
 		try {
 			bean.setBase64Image(imgConvert(rs.getBlob("img")));
@@ -248,13 +249,14 @@ public class BeerDao{
 		Connection connection = null;
 		PreparedStatement ps = null;
 		String sql = "UPDATE "+ BeerDao.TABLE_NAME + " SET brewery_id =?, style_id = ?, beer_name= ? , beer_description= ?, color = ?, ingredients = ?, gradation = ?,"+
-		"price = ? ,iva = ? , stock = ?, discount = ? WHERE id = ?";
+		"price = ? ,iva = ? , stock = ?, discount = ?, img = ? WHERE id = ?";
 		
 		try {
-			connection = ds.getConnection(); 
-			connection.setAutoCommit(false);	
+			connection = ds.getConnection();
+			connection.setAutoCommit(false);
 			ps = connection.prepareStatement(sql);
 			buildBeerPS(bean, ps);	
+			ps.setInt(13, bean.getId());
 			ps.executeUpdate();
 			connection.commit();		
 		}
