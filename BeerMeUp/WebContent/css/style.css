@@ -7,9 +7,9 @@
     outline: none; 
 	border: none;
     text-decoration: none;
-    text-transform: capitalize;
+    text-transform: none;
     list-style: none;
-    /*transition: .2s linear;*/
+    transition: .2s linear;
 }
 
 html{
@@ -23,6 +23,10 @@ body{
 	min-height:100vh;
 	display: flex;
 	flex-direction: column;
+	
+	align-items: flex-start;
+    justify-content: center;
+    background: #f4f7f8;
 }
 
 main{
@@ -30,7 +34,11 @@ main{
 	min-height:100vh;
 	margin-top:5.2rem;
 	flex-direction: column;
+	
+	width:100%;
 }
+
+
 
 main .home{
 	width:100%;
@@ -47,33 +55,7 @@ main form input, textarea, select{
 
 
 
-/*------------------- CATALOGO --------------------------*/
 
-#catalog{
-	width:100%;
-	text-align:center;
-}
-
-#catalog .product-container{
-	margin-top: 5rem;
-}
-
-#catalog .product-container .product-table{
-	margin-left:auto;
-	margin-right:auto;
-	border-collapse: collapse;
-}
-
-#catalog .product-container .product-table th, td{
-	border: 2px solid black;
-	padding: 1rem 2rem;
-}
-
-#catalog .product-container .product-table th{
-	height: 2rem;
-	font-size: 1.5rem;
-}
-/*------------------- CATALOGO --------------------------*/
 
 /*------------------- DETTAGLI PRODOTTO --------------------------*/
 #product-page{
@@ -189,6 +171,7 @@ main form input, textarea, select{
     html{
         font-size: 90%;
     }
+}
 
 @media (max-width: 450px){
     html{
@@ -204,7 +187,7 @@ main form input, textarea, select{
 }
 
 /*Galaxy Fold*/
-@media (max-width: 300px){
+@media (max-width: 350px){
     html{
         font-size: 50%;
     }

@@ -6,17 +6,21 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-public class StyleDao implements Dao<Style> {
+public class StyleDao{
 
 	private static final String TABLE_NAME = "style";
 	
 	private static DataSource ds;
+	static Logger logger = Logger.getLogger(StyleDao.class.getName());
+
 	
 	//Inizializzazione DataSource
 	static {
@@ -29,11 +33,10 @@ public class StyleDao implements Dao<Style> {
 			ds = (DataSource) envCtx.lookup("jdbc/beer_me_up");
 
 		} catch (NamingException e) {
-			System.out.println("Errore: " + e.getMessage());
+			StyleDao.logger.log(Level.WARNING, "Errore DataSource");
 		}
 	}
 
-	@Override
 	public synchronized Style doRetrieveByKey(int id) throws SQLException {
 		Style bean = new Style();
 		Connection connection = null;
@@ -70,12 +73,11 @@ public class StyleDao implements Dao<Style> {
 		return bean;
 	}
 
-	@Override
 	public synchronized Collection<Style> doRetrieveAll(String order) throws SQLException {
 		Connection connection = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		Collection<Style> collection = new ArrayList<Style>(); 
+		Collection<Style> collection = new ArrayList<>(); 
 		
 		String sql = "SELECT * FROM " + StyleDao.TABLE_NAME;
 		if(order!=null && !order.equals("")) {
@@ -113,7 +115,6 @@ public class StyleDao implements Dao<Style> {
 		return collection;
 	}
 
-	@Override
 	public synchronized void doSave(Style bean) throws SQLException {
 		Connection connection = null;
 		PreparedStatement ps = null;
@@ -145,41 +146,6 @@ public class StyleDao implements Dao<Style> {
 		
 	}
 
-	@Override
-	public synchronized void doUpdate(Style bean) throws SQLException {
-		Connection connection = null;
-		PreparedStatement ps = null;
-		String sql = "UPDATE "+ StyleDao.TABLE_NAME + "SET style_name= ?, traits = ? WHERE id = ?";
-		try {
-			connection = ds.getConnection(); 
-			connection.setAutoCommit(false);
-			
-			ps = connection.prepareStatement(sql);
-			ps.setString(1, bean.getName());
-			ps.setString(2, bean.getTraits());
-			ps.setInt(3, bean.getId());
-			
-			ps.executeUpdate();
-			connection.commit();		
-		}
-		finally {
-			try {
-				if(ps != null) {
-					ps.close();
-				}
-			}
-			finally {
-				if(connection != null) {
-					connection.close();
-				}
-			}
-		}
-		
-	
-		return;
-	}
-
-	@Override
 	public synchronized boolean doDelete(int id) throws SQLException {
 		Connection connection = null;
 		PreparedStatement ps = null;

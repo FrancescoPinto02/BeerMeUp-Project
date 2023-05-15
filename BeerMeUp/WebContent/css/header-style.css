@@ -24,6 +24,7 @@ header nav ul li{
 
 header nav ul li a{
     font-size: 1.3rem;
+    font-weight: bold;
     padding: 0 1rem;
     color: black;
 }

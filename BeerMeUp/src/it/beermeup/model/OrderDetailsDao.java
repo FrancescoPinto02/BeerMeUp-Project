@@ -6,16 +6,19 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-public class OrderDetailsDao implements Dao<OrderDetails> {
+public class OrderDetailsDao{
 	private static final String TABLE_NAME = "order_details";
 	
 	private static DataSource ds;
+	static Logger logger = Logger.getLogger(OrderDetailsDao.class.getName());
 	
 	//Inizializzazione DataSource
 	static {
@@ -28,28 +31,24 @@ public class OrderDetailsDao implements Dao<OrderDetails> {
 			ds = (DataSource) envCtx.lookup("jdbc/beer_me_up");
 
 		} catch (NamingException e) {
-			System.out.println("Errore: " + e.getMessage());
+			OrderDetailsDao.logger.log(Level.WARNING, "Errore DataSource");
 		}
 	}
 
-	@Override
-	//Non Utilizzare
-	public synchronized OrderDetails doRetrieveByKey(int id) throws SQLException {
-		return null;
-	}
 
 	public synchronized Collection<OrderDetails> doRetrieveByOrder(int orderId) throws SQLException {
 		Connection connection = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		Collection<OrderDetails> collection = new ArrayList<OrderDetails>(); 
+		Collection<OrderDetails> collection = new ArrayList<>(); 
 		
-		String sql = "SELECT * FROM " + OrderDetailsDao.TABLE_NAME;
+		String sql = "SELECT * FROM " + OrderDetailsDao.TABLE_NAME + " WHERE order_id = ?";
 		
 		
 		try {
 			connection = ds.getConnection(); 
 			ps = connection.prepareStatement(sql);
+			ps.setInt(1, orderId);
 			
 			rs = ps.executeQuery();
 			while(rs.next()) {
@@ -81,13 +80,6 @@ public class OrderDetailsDao implements Dao<OrderDetails> {
 		return collection;
 	}
 	
-	//Non Usare
-	@Override
-	public synchronized Collection<OrderDetails> doRetrieveAll(String order) throws SQLException {
-		return null;
-	}
-
-	@Override
 	public synchronized void doSave(OrderDetails bean) throws SQLException {
 		Connection connection = null;
 		PreparedStatement ps = null;
@@ -123,13 +115,4 @@ public class OrderDetailsDao implements Dao<OrderDetails> {
 		
 	}
 
-	@Override
-	public synchronized void doUpdate(OrderDetails bean) throws SQLException {
-		return;
-	}
-
-	@Override
-	public synchronized boolean doDelete(int id) throws SQLException {
-		return false;
-	}
 }

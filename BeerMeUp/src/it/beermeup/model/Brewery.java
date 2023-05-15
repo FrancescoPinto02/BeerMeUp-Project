@@ -37,18 +37,5 @@ public class Brewery {
 		return "Brewery [id=" + id + ", name=" + name + ", nation=" + nation + "]";
 	}
 	
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Brewery other = (Brewery) obj;
-		if (id != other.id)
-			return false;
-		return true;
-	}
 	
 }

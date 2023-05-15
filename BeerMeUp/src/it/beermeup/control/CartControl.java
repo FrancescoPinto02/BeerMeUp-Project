@@ -1,6 +1,8 @@
 package it.beermeup.control;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,9 +14,10 @@ import it.beermeup.model.BeerDao;
 import it.beermeup.model.Cart;
 
 public class CartControl extends HttpServlet {
-	private static final long serialVersionUID = 341101359352558610L;
+	private static final long serialVersionUID = 1L;
 	
 	static BeerDao model = new BeerDao();
+	static Logger logger = Logger.getLogger(CartControl.class.getName());
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		//Recupero carrello (o creazione)
@@ -63,7 +66,7 @@ public class CartControl extends HttpServlet {
 			
 		}
 		catch(Exception e) {
-			System.out.println("Errore:" + e.getMessage());
+			CartControl.logger.log(Level.WARNING, "Errore Servlet Cart Control:");
 		}
 		
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/cart.jsp");

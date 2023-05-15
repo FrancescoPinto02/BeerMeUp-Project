@@ -6,17 +6,21 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-public class UserDao implements Dao<User> {
+public class UserDao{
 
 	private static final String TABLE_NAME = "site_user";
+	private static final String SELECT_ALL = "SELECT * FROM site_user";
 	
 	private static DataSource ds;
+	static Logger logger = Logger.getLogger(UserDao.class.getName());
 	
 	//Inizializzazione DataSource
 	static {
@@ -29,15 +33,42 @@ public class UserDao implements Dao<User> {
 			ds = (DataSource) envCtx.lookup("jdbc/beer_me_up");
 
 		} catch (NamingException e) {
-			System.out.println("Errore: " + e.getMessage());
+			UserDao.logger.log(Level.WARNING, "Errore DataSource");
 		}
 	}
-	@Override
-	public User doRetrieveByKey(int id) throws SQLException {
+	
+	//Liberare risorse al termine della query
+	private void terminateQuery(PreparedStatement ps, Connection connection) throws SQLException {
+		try {
+			if(ps != null) {
+				ps.close();
+			}
+		}
+		finally {
+			if(connection != null) {
+				connection.close();
+			}
+		}
+	}
+	
+	
+	//Funzione per recuperare tutti i dati necessari da una riga del result set
+	private User getUserFromRS(ResultSet rs) throws SQLException {
+		User bean = new User();
+		bean.setId(rs.getInt("id"));
+		bean.setPw(rs.getString("pw"));
+		bean.setEmail(rs.getString("email"));
+		bean.setFirstName(rs.getString("first_name"));
+		bean.setLastName(rs.getString("last_name"));
+		bean.setAdmin(rs.getBoolean("is_admin"));
+		return bean;
+	}
+	
+	public synchronized User doRetrieveByKey(int id) throws SQLException {
 		User bean = new User();
 		Connection connection = null;
 		PreparedStatement ps = null;
-		String sql = "SELECT * FROM " + UserDao.TABLE_NAME + " WHERE id = ?";
+		String sql = SELECT_ALL + " WHERE id = ?";
 		ResultSet rs = null;
 		
 		try {
@@ -48,37 +79,20 @@ public class UserDao implements Dao<User> {
 			
 			rs = ps.executeQuery();
 			while(rs.next()) {
-				bean.setId(rs.getInt("id"));
-				bean.setPw(rs.getString("pw"));
-				bean.setEmail(rs.getString("email"));
-				bean.setFirst_name(rs.getString("first_name"));
-				bean.setLast_name(rs.getString("last_name"));
-				bean.setAdmin(rs.getBoolean("is_admin"));
-				
+				bean = getUserFromRS(rs);	
 			}		
 		}
 		finally {
-			try {
-				if(ps != null) {
-					ps.close();
-				}
-			}
-			finally {
-				if(connection != null) {
-					connection.close();
-				}
-			}
-		}
-		
+			terminateQuery(ps, connection);
+		}	
 		return bean;
-	
 	}
 	
-	public User doRetrieveByEmail(String email) throws SQLException {
+	public synchronized User doRetrieveByEmail(String email) throws SQLException {
 		User bean = new User();
 		Connection connection = null;
 		PreparedStatement ps = null;
-		String sql = "SELECT * FROM " + UserDao.TABLE_NAME + " WHERE email = ?";
+		String sql = SELECT_ALL + " WHERE email = ?";
 		ResultSet rs = null;
 		
 		try {
@@ -89,40 +103,26 @@ public class UserDao implements Dao<User> {
 			
 			rs = ps.executeQuery();
 			while(rs.next()) {
-				bean.setId(rs.getInt("id"));
-				bean.setPw(rs.getString("pw"));
-				bean.setEmail(rs.getString("email"));
-				bean.setFirst_name(rs.getString("first_name"));
-				bean.setLast_name(rs.getString("last_name"));
-				bean.setAdmin(rs.getBoolean("is_admin"));
+				bean = getUserFromRS(rs);
 				
 			}		
 		}
 		finally {
-			try {
-				if(ps != null) {
-					ps.close();
-				}
-			}
-			finally {
-				if(connection != null) {
-					connection.close();
-				}
-			}
+			terminateQuery(ps, connection);
 		}
 		
 		return bean;
 	
 		
 	}
-	@Override
-	public Collection<User> doRetrieveAll(String order) throws SQLException {
+	
+	public synchronized Collection<User> doRetrieveAll(String order) throws SQLException {
 		Connection connection = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		Collection<User> collection = new ArrayList<User>(); 
+		Collection<User> collection = new ArrayList<>(); 
 		
-		String sql = "SELECT * FROM " + UserDao.TABLE_NAME;
+		String sql = SELECT_ALL;
 		if(order!=null && !order.equals("")) {
 			sql = sql + " ORDER BY " + order;
 		}
@@ -133,36 +133,18 @@ public class UserDao implements Dao<User> {
 			
 			rs = ps.executeQuery();
 			while(rs.next()) {
-				User bean = new User();
-				bean.setId(rs.getInt("id"));
-				bean.setPw(rs.getString("pw"));
-				bean.setEmail(rs.getString("email"));
-				bean.setFirst_name(rs.getString("first_name"));
-				bean.setLast_name(rs.getString("last_name"));
-				bean.setAdmin(rs.getBoolean("is_admin"));
-				
-				
+				User bean = getUserFromRS(rs);
 				collection.add(bean);
 			}		
 		}
 		finally {
-				try {
-					if(ps != null) {
-						ps.close();
-					}
-				}
-				finally {
-					if(connection != null) {
-						connection.close();
-					}
-				}
+			terminateQuery(ps, connection);
 		}
 		
 		return collection;
 	}
 
-	@Override
-	public void doSave(User bean) throws SQLException {
+	public synchronized void doSave(User bean) throws SQLException {
 		Connection connection = null;
 		PreparedStatement ps = null;
 		String sql = "INSERT INTO " + UserDao.TABLE_NAME + " ( email, pw, first_name, last_name, is_admin)"
@@ -175,36 +157,21 @@ public class UserDao implements Dao<User> {
 			ps = connection.prepareStatement(sql);
 			ps.setString(1, bean.getEmail());
 			ps.setString(2, bean.getPw());
-			ps.setString(3, bean.getFirst_name());
-			ps.setString(4, bean.getLast_name());
+			ps.setString(3, bean.getFirstName());
+			ps.setString(4, bean.getLastName());
 			ps.setBoolean(5, bean.isAdmin());
 			
 			ps.executeUpdate();
 			connection.commit();		
 		}
 		finally {
-			try {
-				if(ps != null) {
-					ps.close();
-				}
-			}
-			finally {
-				if(connection != null) {
-					connection.close();
-				}
-			}
+			terminateQuery(ps, connection);
 		}
 		
 		
 	}
 
-	@Override
-	public void doUpdate(User bean) throws SQLException {
-		return;		
-	}
-
-	@Override
-	public boolean doDelete(int id) throws SQLException {
+	public synchronized boolean doDelete(int id) throws SQLException {
 		Connection connection = null;
 		PreparedStatement ps = null;
 		String sql = "DELETE FROM " + UserDao.TABLE_NAME + " WHERE id = ?";
@@ -221,16 +188,7 @@ public class UserDao implements Dao<User> {
 			connection.commit();		
 		}
 		finally {
-			try {
-				if(ps != null) {
-					ps.close();
-				}
-			}
-			finally {
-				if(connection != null) {
-					connection.close();
-				}
-			}
+			terminateQuery(ps, connection);
 		}
 		
 		return (result!=0);

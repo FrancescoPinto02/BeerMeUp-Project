@@ -10,7 +10,7 @@ public class Cart {
 	private List<CartProduct> products;
 	
 	public Cart() {
-		products = new ArrayList<CartProduct>();
+		products = new ArrayList<>();
 	}
 	
 	public void addProduct(Beer product) {
@@ -77,11 +77,6 @@ public class Cart {
 	}
 	
 	public boolean isEmpty() {
-		if(products.size()==0) {
-			return true;
-		}
-		else {
-			return false;
-		}
+		return products.isEmpty();
 	}
 }

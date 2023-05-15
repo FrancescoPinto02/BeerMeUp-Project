@@ -22,8 +22,8 @@
             <ul>
                 <li><a href="home.jsp"><i class="fa fa-fw fa-home"></i>Home</a></li>
                 <li><a href="catalogo.jsp">Catalogo</a></li>
-                <li><a href="#">Link1</a></li>
-                <li><a href="#">Link2</a></li>
+                <li><a href="catalogo_control?action=promo">Promo</a></li>
+                <li><a href="catalogo_control?action=new">Novità</a></li>
             </ul>
         </nav>
 

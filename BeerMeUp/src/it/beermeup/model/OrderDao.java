@@ -7,16 +7,20 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-public class OrderDao implements Dao<Order> {
+public class OrderDao{
 	private static final String TABLE_NAME = "site_order";
 	
 	private static DataSource ds;
+	static Logger logger = Logger.getLogger(OrderDao.class.getName());
+
 	
 	//Inizializzazione DataSource
 	static {
@@ -29,11 +33,10 @@ public class OrderDao implements Dao<Order> {
 			ds = (DataSource) envCtx.lookup("jdbc/beer_me_up");
 
 		} catch (NamingException e) {
-			System.out.println("Errore: " + e.getMessage());
+			OrderDao.logger.log(Level.WARNING, "Errore DataSource");
 		}
 	}
 
-	@Override
 	public synchronized Order doRetrieveByKey(int id) throws SQLException {
 		Order bean = new Order();
 		Connection connection = null;
@@ -74,12 +77,11 @@ public class OrderDao implements Dao<Order> {
 		return bean;
 	}
 
-	@Override
 	public synchronized Collection<Order> doRetrieveAll(String order) throws SQLException {
 		Connection connection = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		Collection<Order> collection = new ArrayList<Order>(); 
+		Collection<Order> collection = new ArrayList<>(); 
 		
 		String sql = "SELECT * FROM " + OrderDao.TABLE_NAME;
 		if(order!=null && !order.equals("")) {
@@ -121,43 +123,6 @@ public class OrderDao implements Dao<Order> {
 		return collection;
 	}
 
-	@Override
-	public synchronized void doSave(Order bean) throws SQLException {
-		Connection connection = null;
-		PreparedStatement ps = null;
-		String sql = "INSERT INTO " + OrderDao.TABLE_NAME + " (user_id, shipping_address, billing_address, payment_info, order_status, total, order_date) VALUES (?, ?, ?, ?, ?, ?, ?) ";
-		
-		try {
-			connection = ds.getConnection();
-			connection.setAutoCommit(false);
-			
-			ps = connection.prepareStatement(sql);
-			ps.setInt(1, bean.getUserId());
-			ps.setString(2, bean.getShippingAddress());
-			ps.setString(3, bean.getBillingAddress());
-			ps.setString(4, bean.getPaymentInfo());
-			ps.setString(5, bean.getStatus());
-			ps.setBigDecimal(6, bean.getTotal());
-			ps.setDate(7, bean.getDate());
-			
-			ps.executeUpdate();
-			connection.commit();		
-		}
-		finally {
-			try {
-				if(ps != null) {
-					ps.close();
-				}
-			}
-			finally {
-				if(connection != null) {
-					connection.close();
-				}
-			}
-		}
-		
-	}
-	
 	public synchronized int doSaveReturnKey(Order bean) throws SQLException{
 		Connection connection = null;
 		PreparedStatement ps = null;
@@ -201,13 +166,4 @@ public class OrderDao implements Dao<Order> {
 		
 	}
 
-	@Override
-	public synchronized void doUpdate(Order bean) throws SQLException {
-		return;
-	}
-
-	@Override
-	public synchronized boolean doDelete(int id) throws SQLException {
-		return false;
-	}
 }

@@ -6,17 +6,21 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-public class BreweryDao implements Dao<Brewery> {
+public class BreweryDao{
 
 	private static final String TABLE_NAME = "brewery";
+	private static final String SELECT_ALL = "SELECT * FROM brewery";
 	
 	private static DataSource ds;
+	static Logger logger = Logger.getLogger(BreweryDao.class.getName());
 	
 	//Inizializzazione DataSource
 	static {
@@ -29,16 +33,39 @@ public class BreweryDao implements Dao<Brewery> {
 			ds = (DataSource) envCtx.lookup("jdbc/beer_me_up");
 
 		} catch (NamingException e) {
-			System.out.println("Errore: " + e.getMessage());
+			BreweryDao.logger.log(Level.WARNING, "Errore DataSource");
 		}
 	}
 
-	@Override
+	//Liberare risorse al termine della query
+	private void terminateQuery(PreparedStatement ps, Connection connection) throws SQLException {
+		try {
+			if(ps != null) {
+				ps.close();
+			}
+		}
+		finally {
+			if(connection != null) {
+				connection.close();
+			}
+		}
+	}
+	
+	//Funzione per recuperare tutti i dati necessari da una riga del result set
+		private Brewery getBreweryFromRS(ResultSet rs) throws SQLException {
+			Brewery bean = new Brewery();
+			bean.setId(rs.getInt("id"));
+			bean.setName(rs.getString("brewery_name"));
+			bean.setStory(rs.getString("story"));
+			bean.setNation(rs.getString("nation"));
+			return bean;
+		}
+	
 	public synchronized Brewery doRetrieveByKey(int id) throws SQLException {
 		Brewery bean = new Brewery();
 		Connection connection = null;
 		PreparedStatement ps = null;
-		String sql = "SELECT * FROM " + BreweryDao.TABLE_NAME + " WHERE id = ?";
+		String sql = SELECT_ALL + " WHERE id = ?";
 		ResultSet rs = null;
 		
 		try {
@@ -49,36 +76,23 @@ public class BreweryDao implements Dao<Brewery> {
 			
 			rs = ps.executeQuery();
 			while(rs.next()) {
-				bean.setId(rs.getInt("id"));
-				bean.setName(rs.getString("brewery_name"));
-				bean.setStory(rs.getString("story"));
-				bean.setNation(rs.getString("nation"));
+				bean = getBreweryFromRS(rs);
 			}		
 		}
 		finally {
-			try {
-				if(ps != null) {
-					ps.close();
-				}
-			}
-			finally {
-				if(connection != null) {
-					connection.close();
-				}
-			}
+			terminateQuery(ps, connection);
 		}
 		
 		return bean;
 	}
 
-	@Override
 	public synchronized Collection<Brewery> doRetrieveAll(String order) throws SQLException {
 		Connection connection = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		Collection<Brewery> collection = new ArrayList<Brewery>(); 
+		Collection<Brewery> collection = new ArrayList<>(); 
 		
-		String sql = "SELECT * FROM " + BreweryDao.TABLE_NAME;
+		String sql = SELECT_ALL;
 		if(order!=null && !order.equals("")) {
 			sql = sql + " ORDER BY " + order;
 		}
@@ -89,33 +103,18 @@ public class BreweryDao implements Dao<Brewery> {
 			
 			rs = ps.executeQuery();
 			while(rs.next()) {
-				Brewery bean = new Brewery();
-				
-				bean.setId(rs.getInt("id"));
-				bean.setName(rs.getString("brewery_name"));
-				bean.setStory(rs.getString("story"));
-				bean.setNation(rs.getString("nation"));
+				Brewery bean = getBreweryFromRS(rs);
 				
 				collection.add(bean);
 			}		
 		}
 		finally {
-				try {
-					if(ps != null) {
-						ps.close();
-					}
-				}
-				finally {
-					if(connection != null) {
-						connection.close();
-					}
-				}
+			terminateQuery(ps, connection);
 		}
 		
 		return collection;
 	}
 
-	@Override
 	public synchronized void doSave(Brewery bean) throws SQLException {
 		Connection connection = null;
 		PreparedStatement ps = null;
@@ -134,54 +133,11 @@ public class BreweryDao implements Dao<Brewery> {
 			connection.commit();		
 		}
 		finally {
-			try {
-				if(ps != null) {
-					ps.close();
-				}
-			}
-			finally {
-				if(connection != null) {
-					connection.close();
-				}
-			}
+			terminateQuery(ps, connection);
 		}
 		
 	}
 
-	@Override
-	public synchronized void doUpdate(Brewery bean) throws SQLException {
-		Connection connection = null;
-		PreparedStatement ps = null;
-		String sql = "UPDATE"+ BreweryDao.TABLE_NAME + "SET brewery_name =?, story = ?, nation= ? WHERE id = ?";
-		try {
-			connection = ds.getConnection();
-			connection.setAutoCommit(false);
-			
-			ps = connection.prepareStatement(sql);
-			ps.setString(1, bean.getName());
-			ps.setString(2, bean.getStory());
-			ps.setString(3, bean.getNation());
-			ps.setInt(4, bean.getId());
-			
-			ps.executeUpdate();
-			connection.commit();		
-		}
-		finally {
-			try {
-				if(ps != null) {
-					ps.close();
-				}
-			}
-			finally {
-				if(connection != null) {
-					connection.close();
-				}
-			}
-		}
-		return;
-	}
-
-	@Override
 	public synchronized boolean doDelete(int id) throws SQLException {
 		Connection connection = null;
 		PreparedStatement ps = null;
@@ -199,16 +155,7 @@ public class BreweryDao implements Dao<Brewery> {
 			connection.commit();		
 		}
 		finally {
-			try {
-				if(ps != null) {
-					ps.close();
-				}
-			}
-			finally {
-				if(connection != null) {
-					connection.close();
-				}
-			}
+			terminateQuery(ps, connection);
 		}
 		
 		return (result!=0);

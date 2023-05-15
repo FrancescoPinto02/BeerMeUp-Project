@@ -3,6 +3,8 @@ package it.beermeup.control;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -29,31 +31,27 @@ public class CheckoutControl extends HttpServlet {
 	static OrderDao orderModel = new OrderDao();
 	static OrderDetailsDao orderDetailsModel = new OrderDetailsDao();
 	static BeerDao beerModel = new BeerDao();
+	static Logger logger = Logger.getLogger(CheckoutControl.class.getName());
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		//Azione richiesta
 		String action = request.getParameter("action");
 		
-		Integer userId = (Integer)((request.getSession().getAttribute("user-id")));
+		Integer userId = (Integer)(request.getSession().getAttribute("user-id"));
 		if(userId == null || userId.intValue()<=0) {
 			response.sendRedirect("./login.jsp");
 			return;
 		}
 		
 		try {
-			if(action!=null) {
+			if(action!=null && action.equalsIgnoreCase("retrieveUserAddress")) {
 				//Recupera tutti gli indirizzi dell`utente
-				if (action.equalsIgnoreCase("retrieveUserAddress")) {
-					request.removeAttribute("address-list");
-					request.setAttribute("address-list", addressModel.doRetrieveByUser(userId.intValue()));
-				}
-				
-			}
-			
-			
+				request.removeAttribute("address-list");
+				request.setAttribute("address-list", addressModel.doRetrieveByUser(userId.intValue()));	
+			}	
 		}
 		catch(Exception e) {
-			System.out.println("Errore:" + e.getMessage());
+			CheckoutControl.logger.log(Level.WARNING, "Errore Servlet Checkout Control");
 		}
 		
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/checkout.jsp");
@@ -64,7 +62,7 @@ public class CheckoutControl extends HttpServlet {
 		//Azione richiesta
 		String action = request.getParameter("action");
 				
-		Integer userId = (Integer)((request.getSession().getAttribute("user-id")));
+		Integer userId = (Integer)(request.getSession().getAttribute("user-id"));
 		if(userId == null || userId.intValue()<=0) {
 			response.sendRedirect("./login.jsp");
 			return;
@@ -74,17 +72,17 @@ public class CheckoutControl extends HttpServlet {
 		if(cart == null || cart.isEmpty()) {
 			response.sendRedirect("./catalogo.jsp");
 		}
-		
-		try {
-			if(action!=null) {
-				//Completa Checkout
-				if (action.equalsIgnoreCase("checkout")) {
+		else {
+			try {
+				if(action!=null && action.equalsIgnoreCase("checkout")) {
+					
+					//Completa Checkout
 					String address = request.getParameter("address");
 					String paymentInfo = request.getParameter("card");
 					String status = "Completato";
 					BigDecimal total = cart.getTotalPrice(true);
 					Date date = new Date(System.currentTimeMillis());
-					
+						
 					Order order = new Order();
 					order.setUserId(userId.intValue());
 					order.setShippingAddress(address);
@@ -93,37 +91,36 @@ public class CheckoutControl extends HttpServlet {
 					order.setStatus(status);
 					order.setTotal(total);
 					order.setDate(date);
-					
+						
 					int orderKey = orderModel.doSaveReturnKey(order);
-					
+						
 					for(CartProduct x : cart.getProducts()) {
 						OrderDetails orderDetails = new OrderDetails();
-						
+							
 						orderDetails.setOrderId(orderKey);
 						orderDetails.setBeerId(x.getProduct().getId());
 						orderDetails.setDesc(x.getProduct().getName());
 						orderDetails.setQta(x.getQta());
 						orderDetails.setIva(x.getProduct().getIva());
 						orderDetails.setPrice(x.getPrice(true));
-						
+							
 						orderDetailsModel.doSave(orderDetails);
-						
+							
 						//Aggiorna quantità
 						Beer beer = x.getProduct();
 						beer.setStock(beer.getStock() - x.getQta());
 						beerModel.doUpdate(beer);
-					}
+					}		
 					
-					request.getSession().removeAttribute("cart");
-							
-				}
+					request.getSession().removeAttribute("cart");					
+				}								
 			}
-					
-					
+			catch(Exception e) {
+				CheckoutControl.logger.log(Level.WARNING, "Errore Servlet Checkout Control");
+			}
 		}
-		catch(Exception e) {
-			System.out.println("Errore:" + e.getMessage());
-		}
+		
+		
 				
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/home.jsp");
 		dispatcher.forward(request, response);

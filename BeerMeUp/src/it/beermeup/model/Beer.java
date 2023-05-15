@@ -9,8 +9,8 @@ import java.math.RoundingMode;
 public class Beer {
 
 	private int id = 0;
-	private int brewery_id = 0;
-	private int style_id = 0;
+	private int breweryId = 0;
+	private int styleId = 0;
 	private String name = "";
 	private String description = "";
 	private String color = "";
@@ -29,17 +29,17 @@ public class Beer {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getBrewery_id() {
-		return brewery_id;
+	public int getBreweryId() {
+		return breweryId;
 	}
-	public void setBrewery_id(int brewery_id) {
-		this.brewery_id = brewery_id;
+	public void setBreweryId(int breweryId) {
+		this.breweryId = breweryId;
 	}
-	public int getStyle_id() {
-		return style_id;
+	public int getStyleId() {
+		return styleId;
 	}
-	public void setStyle_id(int style_id) {
-		this.style_id = style_id;
+	public void setStyleId(int styleId) {
+		this.styleId = styleId;
 	}
 	public String getName() {
 		return name;
@@ -75,7 +75,7 @@ public class Beer {
 		return price;
 	}
 	public BigDecimal getPrice(boolean discount) {
-		if(discount==false) {
+		if(!discount) {
 			return this.getPrice();
 		}
 		else {
@@ -119,6 +119,14 @@ public class Beer {
 	}
 	
 	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id;
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		return result;
+	}
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
@@ -128,6 +136,11 @@ public class Beer {
 			return false;
 		Beer other = (Beer) obj;
 		if (id != other.id)
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
 			return false;
 		return true;
 	}

@@ -6,17 +6,22 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-public class AddressDao implements Dao<Address> {
+public class AddressDao{
 
 	private static final String TABLE_NAME = "address";
+	private static final String SELECT_ALL = "SELECT * FROM address";
 	
 	private static DataSource ds;
+	static Logger logger = Logger.getLogger(AddressDao.class.getName());
+	
 	
 	//Inizializzazione DataSource
 	static {
@@ -29,18 +34,44 @@ public class AddressDao implements Dao<Address> {
 			ds = (DataSource) envCtx.lookup("jdbc/beer_me_up");
 
 		} catch (NamingException e) {
-			System.out.println("Errore: " + e.getMessage());
+			AddressDao.logger.log(Level.WARNING, "Errore DataSource");
 		}
 	}
 
-	@Override
-	public Address doRetrieveByKey(int id) throws SQLException {
-		
+	//Funzione per recuperare tutti i dati necessari da una riga del result set
+	private Address getAddressFromRS(ResultSet rs) throws SQLException {
 		Address bean = new Address();
+		bean.setId(rs.getInt("id"));
+		bean.setUserId(rs.getInt("user_id"));
+		bean.setStreet(rs.getString("street"));
+		bean.setNum(rs.getString("num"));
+		bean.setCap(rs.getString("cap"));
+		bean.setCity(rs.getString("city"));
+		bean.setNation(rs.getString("nation"));
+		bean.setTelephone(rs.getString("telephone"));
+		return bean;
+	}
+	
+	//Liberare risorse al termine della query
+	private void terminateQuery(PreparedStatement ps, Connection connection) throws SQLException {
+		try {
+			if(ps != null) {
+				ps.close();
+			}
+		}
+		finally {
+			if(connection != null) {
+				connection.close();
+			}
+		}
+	}
+	
+	public Address doRetrieveByKey(int id) throws SQLException {
 		Connection connection = null;
 		PreparedStatement ps = null;
-		String sql = "SELECT * FROM " + AddressDao.TABLE_NAME + " WHERE id = ?";
+		String sql = SELECT_ALL + " WHERE id = ?";
 		ResultSet rs = null;
+		Address bean = new Address();
 		
 		try {
 			connection = ds.getConnection(); 
@@ -50,42 +81,24 @@ public class AddressDao implements Dao<Address> {
 			
 			rs = ps.executeQuery();
 			while(rs.next()) {
-				bean.setId(rs.getInt("id"));
-				bean.setUserId(rs.getInt("user_id"));
-				bean.setStreet(rs.getString("street"));
-				bean.setNum(rs.getString("num"));
-				bean.setCap(rs.getString("cap"));
-				bean.setCity(rs.getString("city"));
-				bean.setNation(rs.getString("nation"));
-				bean.setTelephone(rs.getString("telephone"));
-				
+				bean = getAddressFromRS(rs);	
 			}		
 		}
 		finally {
-			try {
-				if(ps != null) {
-					ps.close();
-				}
-			}
-			finally {
-				if(connection != null) {
-					connection.close();
-				}
-			}
+			terminateQuery(ps, connection);
 		}
 		
 		return bean;
 	}
 
-	@Override
 	public Collection<Address> doRetrieveAll(String order) throws SQLException {
 		
 		Connection connection = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		Collection<Address> collection = new ArrayList<Address>(); 
+		Collection<Address> collection = new ArrayList<>(); 
 		
-		String sql = "SELECT * FROM " + AddressDao.TABLE_NAME;
+		String sql = SELECT_ALL;
 		if(order!=null && !order.equals("")) {
 			sql = sql + " ORDER BY " + order;
 		}
@@ -96,30 +109,13 @@ public class AddressDao implements Dao<Address> {
 			
 			rs = ps.executeQuery();
 			while(rs.next()) {
-				Address bean = new Address();
-				bean.setId(rs.getInt("id"));
-				bean.setUserId(rs.getInt("user_id"));
-				bean.setStreet(rs.getString("street"));
-				bean.setNum(rs.getString("num"));
-				bean.setCap(rs.getString("cap"));
-				bean.setCity(rs.getString("city"));
-				bean.setNation(rs.getString("nation"));
-				bean.setTelephone(rs.getString("telephone"));
+				Address bean = getAddressFromRS(rs);
 				
 				collection.add(bean);
 			}		
 		}
 		finally {
-				try {
-					if(ps != null) {
-						ps.close();
-					}
-				}
-				finally {
-					if(connection != null) {
-						connection.close();
-					}
-				}
+			terminateQuery(ps, connection);
 		}
 		
 		return collection;
@@ -130,9 +126,9 @@ public class AddressDao implements Dao<Address> {
 		Connection connection = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		Collection<Address> collection = new ArrayList<Address>(); 
+		Collection<Address> collection = new ArrayList<>(); 
 		
-		String sql = "SELECT * FROM " + AddressDao.TABLE_NAME + " WHERE (user_id=?)";
+		String sql = SELECT_ALL + " WHERE (user_id=?)";
 		
 		try {
 			connection = ds.getConnection(); 
@@ -141,36 +137,18 @@ public class AddressDao implements Dao<Address> {
 			
 			rs = ps.executeQuery();
 			while(rs.next()) {
-				Address bean = new Address();
-				bean.setId(rs.getInt("id"));
-				bean.setUserId(rs.getInt("user_id"));
-				bean.setStreet(rs.getString("street"));
-				bean.setNum(rs.getString("num"));
-				bean.setCap(rs.getString("cap"));
-				bean.setCity(rs.getString("city"));
-				bean.setNation(rs.getString("nation"));
-				bean.setTelephone(rs.getString("telephone"));
+				Address bean = getAddressFromRS(rs);
 				
 				collection.add(bean);
 			}		
 		}
 		finally {
-				try {
-					if(ps != null) {
-						ps.close();
-					}
-				}
-				finally {
-					if(connection != null) {
-						connection.close();
-					}
-				}
+			terminateQuery(ps, connection);
 		}
 		
 		return collection;
 	}
 
-	@Override
 	public void doSave(Address bean) throws SQLException {
 		Connection connection = null;
 		PreparedStatement ps = null;
@@ -195,25 +173,10 @@ public class AddressDao implements Dao<Address> {
 			connection.commit();		
 		}
 		finally {
-			try {
-				if(ps != null) {
-					ps.close();
-				}
-			}
-			finally {
-				if(connection != null) {
-					connection.close();
-				}
-			}
+			terminateQuery(ps, connection);
 		}
 	}
 
-	@Override
-	public void doUpdate(Address bean) throws SQLException {
-		return;
-	}
-
-	@Override
 	public boolean doDelete(int id) throws SQLException {
 		Connection connection = null;
 		PreparedStatement ps = null;
@@ -231,16 +194,7 @@ public class AddressDao implements Dao<Address> {
 			connection.commit();		
 		}
 		finally {
-			try {
-				if(ps != null) {
-					ps.close();
-				}
-			}
-			finally {
-				if(connection != null) {
-					connection.close();
-				}
-			}
+			terminateQuery(ps, connection);
 		}
 		
 		return (result!=0);

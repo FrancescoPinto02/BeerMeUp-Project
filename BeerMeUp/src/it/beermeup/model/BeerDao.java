@@ -11,17 +11,21 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Collection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-public class BeerDao implements Dao<Beer> {
+public class BeerDao{
 	
 	private static final String TABLE_NAME = "beer";
+	private static final String  SELECT_ALL = "SELECT * FROM beer";
 	
 	private static DataSource ds;
+	static Logger logger = Logger.getLogger(BeerDao.class.getName());
 	
 	//Inizializzazione DataSource
 	static {
@@ -34,8 +38,47 @@ public class BeerDao implements Dao<Beer> {
 			ds = (DataSource) envCtx.lookup("jdbc/beer_me_up");
 
 		} catch (NamingException e) {
-			System.out.println("Errore: " + e.getMessage());
+			BeerDao.logger.log(Level.WARNING, "Errore DataSource");
 		}
+	}
+	
+	//Per chiudere tutte le risorse dopo una query
+	private void terminateQuery(PreparedStatement ps, Connection connection) throws SQLException {
+		try {
+			if(ps != null) {
+				ps.close();
+			}
+		}
+		finally {
+			if(connection != null) {
+				connection.close();
+			}
+		}
+	}
+	
+	private Beer getBeerFromRS(ResultSet rs) throws SQLException {
+		Beer bean = new Beer();
+		bean.setId(rs.getInt("id"));
+		bean.setBreweryId(rs.getInt("brewery_id"));
+		bean.setStyleId(rs.getInt("style_id"));
+		bean.setName(rs.getString("beer_name"));
+		bean.setDescription(rs.getString("beer_description"));
+		bean.setColor(rs.getString("color"));
+		bean.setIngredients(rs.getString("ingredients"));
+		bean.setGradation(rs.getBigDecimal("gradation"));
+		bean.setPrice(rs.getBigDecimal("price"));
+		bean.setIva(rs.getBigDecimal("iva"));
+		bean.setStock(rs.getInt("stock"));
+		bean.setDiscount(rs.getInt("discount"));
+		
+		try {
+			bean.setBase64Image(imgConvert(rs.getBlob("img")));
+		} 
+		catch (IOException e) {
+			BeerDao.logger.log(Level.WARNING, "Errore Lettura Immagine");
+		}
+		
+		return bean;
 	}
 	
 	private String imgConvert(Blob blob) throws IOException, SQLException {
@@ -57,9 +100,21 @@ public class BeerDao implements Dao<Beer> {
         return base64Image;
 	}
 	
+	private void buildBeerPS(Beer bean, PreparedStatement ps) throws SQLException {
+		ps.setInt(1, bean.getBreweryId());
+		ps.setInt(2, bean.getStyleId());
+		ps.setString(3, bean.getName());
+		ps.setString(4, bean.getDescription());
+		ps.setString(5, bean.getColor());
+		ps.setString(6, bean.getIngredients());
+		ps.setBigDecimal(7, bean.getGradation());
+		ps.setBigDecimal(8, bean.getPrice());
+		ps.setBigDecimal(9, bean.getIva());
+		ps.setInt(10, bean.getStock());
+		ps.setInt(11, bean.getDiscount());
+		ps.setBinaryStream(12, bean.getInputStreamImage());
+	}
 	
-
-	@Override
 	public synchronized Beer doRetrieveByKey(int id) throws SQLException {
 		Beer bean = new Beer();
 		Connection connection = null;
@@ -72,54 +127,26 @@ public class BeerDao implements Dao<Beer> {
 			
 			ps = connection.prepareStatement(sql);
 			ps.setInt(1, id);
-			
 			rs = ps.executeQuery();
-			while(rs.next()) {
-				bean.setId(rs.getInt("id"));
-				bean.setBrewery_id(rs.getInt("brewery_id"));
-				bean.setStyle_id(rs.getInt("style_id"));
-				bean.setName(rs.getString("beer_name"));
-				bean.setDescription(rs.getString("beer_description"));
-				bean.setColor(rs.getString("color"));
-				bean.setIngredients(rs.getString("ingredients"));
-				bean.setGradation(rs.getBigDecimal("gradation"));
-				bean.setPrice(rs.getBigDecimal("price"));
-				bean.setIva(rs.getBigDecimal("iva"));
-				bean.setStock(rs.getInt("stock"));
-				bean.setDiscount(rs.getInt("discount"));
-				
-				try {
-					bean.setBase64Image(imgConvert(rs.getBlob("img")));
-				} 
-				catch (IOException e) {
-					System.out.println("Errore Lettura immagine");
-				}
+			
+			while(rs.next()) {		
+				bean = getBeerFromRS(rs);
 			}		
 		}
 		finally {
-			try {
-				if(ps != null) {
-					ps.close();
-				}
-			}
-			finally {
-				if(connection != null) {
-					connection.close();
-				}
-			}
+			terminateQuery(ps, connection);
 		}
 		
 		return bean;
 	}
 
-	@Override
-	public Collection<Beer> doRetrieveAll(String order) throws SQLException {
+	public synchronized Collection<Beer> doRetrieveAll(String order) throws SQLException {
 		Connection connection = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		Collection<Beer> collection = new ArrayList<Beer>(); 
+		Collection<Beer> collection = new ArrayList<>(); 
 		
-		String sql = "SELECT * FROM " + BeerDao.TABLE_NAME;
+		String sql = SELECT_ALL;
 		if(order!=null && !order.equals("")) {
 			if(order.equalsIgnoreCase("price")) {
 				order = "(price - ((price/100)*discount))";
@@ -134,48 +161,67 @@ public class BeerDao implements Dao<Beer> {
 			
 			rs = ps.executeQuery();
 			while(rs.next()) {
-				Beer bean = new Beer();
-				
-				bean.setId(rs.getInt("id"));
-				bean.setBrewery_id(rs.getInt("brewery_id"));
-				bean.setStyle_id(rs.getInt("style_id"));
-				bean.setName(rs.getString("beer_name"));
-				bean.setDescription(rs.getString("beer_description"));
-				bean.setColor(rs.getString("color"));
-				bean.setIngredients(rs.getString("ingredients"));
-				bean.setGradation(rs.getBigDecimal("gradation"));
-				bean.setPrice(rs.getBigDecimal("price"));
-				bean.setIva(rs.getBigDecimal("iva"));
-				bean.setStock(rs.getInt("stock"));
-				bean.setDiscount(rs.getInt("discount"));
-				
-				try {
-					bean.setBase64Image(imgConvert(rs.getBlob("img")));
-				} 
-				catch (IOException e) {
-					System.out.println("Errore Lettura immagine");
-				}
-				
+				Beer bean = getBeerFromRS(rs);
 				collection.add(bean);
 			}		
 		}
 		finally {
-				try {
-					if(ps != null) {
-						ps.close();
-					}
-				}
-				finally {
-					if(connection != null) {
-						connection.close();
-					}
-				}
+			terminateQuery(ps, connection);
+		}
+		
+		return collection;
+	}
+	
+	public synchronized Collection<Beer> doRetrievePromo() throws SQLException {
+		Connection connection = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Collection<Beer> collection = new ArrayList<>(); 
+		
+		String sql = SELECT_ALL + " WHERE discount>0";
+		
+		try {
+			connection = ds.getConnection(); 
+			ps = connection.prepareStatement(sql);
+			
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				Beer bean = getBeerFromRS(rs);
+				collection.add(bean);
+			}		
+		}
+		finally {
+			terminateQuery(ps, connection);
+		}
+		
+		return collection;
+	}
+	
+	public synchronized Collection<Beer> doRetrieveNew() throws SQLException {
+		Connection connection = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Collection<Beer> collection = new ArrayList<>(); 
+		
+		String sql = SELECT_ALL + " ORDER BY id DESC LIMIT 5";
+		
+		try {
+			connection = ds.getConnection(); 
+			ps = connection.prepareStatement(sql);
+			
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				Beer bean = getBeerFromRS(rs);
+				collection.add(bean);
+			}		
+		}
+		finally {
+			terminateQuery(ps, connection);
 		}
 		
 		return collection;
 	}
 
-	@Override
 	public synchronized void doSave(Beer bean) throws SQLException {
 		Connection connection = null;
 		PreparedStatement ps = null;
@@ -187,38 +233,17 @@ public class BeerDao implements Dao<Beer> {
 			connection.setAutoCommit(false);
 			
 			ps = connection.prepareStatement(sql);
-			ps.setInt(1, bean.getBrewery_id());
-			ps.setInt(2, bean.getStyle_id());
-			ps.setString(3, bean.getName());
-			ps.setString(4, bean.getDescription());
-			ps.setString(5, bean.getColor());
-			ps.setString(6, bean.getIngredients());
-			ps.setBigDecimal(7, bean.getGradation());
-			ps.setBigDecimal(8, bean.getPrice());
-			ps.setBigDecimal(9, bean.getIva());
-			ps.setInt(10, bean.getStock());
-			ps.setInt(11, bean.getDiscount());
-			ps.setBinaryStream(12, bean.getInputStreamImage());
+			buildBeerPS(bean, ps);
 			
 			ps.executeUpdate();
 			connection.commit();		
 		}
 		finally {
-			try {
-				if(ps != null) {
-					ps.close();
-				}
-			}
-			finally {
-				if(connection != null) {
-					connection.close();
-				}
-			}
+			terminateQuery(ps, connection);
 		}
 		
 	}
 
-	@Override
 	public synchronized void doUpdate(Beer bean) throws SQLException {
 		Connection connection = null;
 		PreparedStatement ps = null;
@@ -227,41 +252,17 @@ public class BeerDao implements Dao<Beer> {
 		
 		try {
 			connection = ds.getConnection(); 
-			connection.setAutoCommit(false);
-			
+			connection.setAutoCommit(false);	
 			ps = connection.prepareStatement(sql);
-			ps.setInt(1, bean.getBrewery_id());
-			ps.setInt(2, bean.getStyle_id());
-			ps.setString(3, bean.getName());
-			ps.setString(4, bean.getDescription());
-			ps.setString(5, bean.getColor());
-			ps.setString(6, bean.getIngredients());
-			ps.setBigDecimal(7, bean.getGradation());
-			ps.setBigDecimal(8, bean.getPrice());
-			ps.setBigDecimal(9, bean.getIva());
-			ps.setInt(10, bean.getStock());
-			ps.setInt(11, bean.getDiscount());
-			ps.setInt(12, bean.getId());
-			
+			buildBeerPS(bean, ps);	
 			ps.executeUpdate();
 			connection.commit();		
 		}
 		finally {
-			try {
-				if(ps != null) {
-					ps.close();
-				}
-			}
-			finally {
-				if(connection != null) {
-					connection.close();
-				}
-			}
+			terminateQuery(ps, connection);
 		}
-		return;
 	}
 
-	@Override
 	public synchronized boolean doDelete(int id) throws SQLException {
 		Connection connection = null;
 		PreparedStatement ps = null;
@@ -279,16 +280,7 @@ public class BeerDao implements Dao<Beer> {
 			connection.commit();		
 		}
 		finally {
-			try {
-				if(ps != null) {
-					ps.close();
-				}
-			}
-			finally {
-				if(connection != null) {
-					connection.close();
-				}
-			}
+			terminateQuery(ps, connection);
 		}
 		
 		return (result!=0);

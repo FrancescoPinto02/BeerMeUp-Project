@@ -29,20 +29,5 @@ public class Style {
 		return "Style [id=" + id + ", name=" + name + "]";
 	}
 	
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Style other = (Style) obj;
-		if (id != other.id)
-			return false;
-		return true;
-	}
-	
-	
 	
 }

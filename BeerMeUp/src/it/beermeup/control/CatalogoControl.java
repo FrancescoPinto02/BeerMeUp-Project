@@ -2,6 +2,10 @@ package it.beermeup.control;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,12 +14,27 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import it.beermeup.model.BeerDao;
+import it.beermeup.model.Brewery;
+import it.beermeup.model.BreweryDao;
 import it.beermeup.model.Cart;
 
 public class CatalogoControl extends HttpServlet {
 
-	private static final long serialVersionUID = 6196656639099922613L;
+	private static final long serialVersionUID = 1L;
+	private static final String PROD_ATT = "productList";
 	static BeerDao model = new BeerDao();
+	static BreweryDao breweryModel = new BreweryDao();
+	static Logger logger = Logger.getLogger(CatalogoControl.class.getName());
+	
+	private HashMap<Integer, String> getBreweryMap() throws SQLException {
+		ArrayList<Brewery> breweryList =  (ArrayList<Brewery>) breweryModel.doRetrieveAll(null); 
+		HashMap<Integer, String> breweryMap = new HashMap<>();
+		for(Brewery x : breweryList) {
+			breweryMap.put(x.getId(), x.getName());
+		}
+		
+		return breweryMap;
+	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		doGet(request, response);
@@ -35,19 +54,25 @@ public class CatalogoControl extends HttpServlet {
 		try {
 			if (action != null) {
 				
-				//Richiesta prodotto
-				if (action.equalsIgnoreCase("retrieveBeer")) {
-					int id = Integer.parseInt(request.getParameter("id"));
-					request.removeAttribute("product");
-					request.setAttribute("product", model.doRetrieveByKey(id));
+				//Richiesta di tutti i prodotti
+				if(action.equalsIgnoreCase("catalogo")) {
+					String sort = request.getParameter("sort");
+					request.removeAttribute(PROD_ATT);
+					request.setAttribute(PROD_ATT, model.doRetrieveAll(sort));
 				}
 				
-				//Richiesta di tutti i prodotti
-				else if(action.equalsIgnoreCase("retrieveAllBeers")) {
-					String sort = request.getParameter("sort");
-					request.removeAttribute("productsList");
-					request.setAttribute("productsList", model.doRetrieveAll(sort));
+				//Richiesta Birre in sconto
+				else if(action.equalsIgnoreCase("promo")) {
+					request.removeAttribute(PROD_ATT);
+					request.setAttribute(PROD_ATT, model.doRetrievePromo());	
 				}
+				
+				//Richiesta Novità
+				else if(action.equalsIgnoreCase("new")) {
+					request.removeAttribute(PROD_ATT);
+					request.setAttribute(PROD_ATT, model.doRetrieveNew());
+				}
+				
 				
 				//Aggiungi prodotto al carrello
 				else if (action.equalsIgnoreCase("addToCart")) {	
@@ -55,18 +80,16 @@ public class CatalogoControl extends HttpServlet {
 					cart.addProduct(model.doRetrieveByKey(id));
 					request.getSession().setAttribute("cart", cart);
 					request.setAttribute("cart", cart);
+					response.sendRedirect("./cart.jsp");
+					return;
 				}
 				
-				//Rimozione prodotto dal carrello
-				else if (action.equalsIgnoreCase("deleteFromCart")) {
-					int id = Integer.parseInt(request.getParameter("id"));
-					cart.deleteProduct(model.doRetrieveByKey(id));
-					request.getSession().setAttribute("cart", cart);
-					request.setAttribute("cart", cart);
-				}
+				request.removeAttribute("breweryMap");
+				request.setAttribute("breweryMap", getBreweryMap());
+				
 			}			
 		} catch (SQLException e) {
-			System.out.println("Errore:" + e.getMessage());
+			CatalogoControl.logger.log(Level.WARNING, "Errore Servlet Address Control:");
 		}
 		
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/catalogo.jsp");
