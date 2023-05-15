@@ -104,3 +104,32 @@
     color: red;
     text-align: center;
 }
+
+
+@media (max-width: 600px){
+    
+    .product-card .top .discount{
+    	font-size: 2rem;
+	}
+	
+	.product-card .content .name{
+    	font-size: 1.9rem;
+	}
+	
+	.product-card .content .description{
+    	font-size: 1.5rem;
+	}
+	
+	.product-card .bottom .price .full-price{
+   		font-size: 1.6rem;
+	}
+
+	.product-card .bottom .price .discount-price{
+    	font-size: 1.8rem;
+	}
+
+	.product-card .bottom .price .normal-price{
+    	font-size: 1.8rem;
+	}
+	
+}
