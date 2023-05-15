@@ -35,6 +35,7 @@
 			<h2><%=user.getFirstName()%>  <%=user.getLastName()%></h2>
 			<br><br>
 			<a href="user-address.jsp">I miei Indirizzi</a>
+			<a href="user-orders.jsp">I miei ordini</a>
 		</div>				
 	</main>
 	<%@ include file="footer.jsp" %>

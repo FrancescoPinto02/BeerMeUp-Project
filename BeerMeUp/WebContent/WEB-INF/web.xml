@@ -105,4 +105,12 @@
     <url-pattern>/checkout_control</url-pattern>
   </servlet-mapping>
   
+   <servlet>
+    <servlet-name>UserOrdersControl</servlet-name>
+    <servlet-class>it.beermeup.control.UserOrdersControl</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UserOrdersControl</servlet-name>
+    <url-pattern>/user_orders_control</url-pattern>
+  </servlet-mapping>
 </web-app>

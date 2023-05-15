@@ -122,7 +122,49 @@ public class OrderDao{
 		
 		return collection;
 	}
-
+	public synchronized Collection<Order> doRetrieveByUser(int id) throws SQLException {
+		Connection connection = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Collection<Order> collection = new ArrayList<>(); 
+		
+		String sql = "SELECT * FROM " + OrderDao.TABLE_NAME + " WHERE user_id = ? ";
+		
+		
+		try {
+			connection = ds.getConnection(); 
+			ps = connection.prepareStatement(sql);
+			ps.setInt(1, id);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				Order bean = new Order();
+				
+				bean.setId(rs.getInt("id"));
+				bean.setUserId(rs.getInt("user_id"));
+				bean.setShippingAddress(rs.getString("shipping_address"));
+				bean.setPaymentInfo(rs.getString("payment_info"));
+				bean.setStatus(rs.getString("order_status"));
+				bean.setTotal(rs.getBigDecimal("total"));
+				bean.setDate(rs.getDate("order_date"));
+				
+				collection.add(bean);
+			}		
+		}
+		finally {
+				try {
+					if(ps != null) {
+						ps.close();
+					}
+				}
+				finally {
+					if(connection != null) {
+						connection.close();
+					}
+				}
+		}
+		
+		return collection;
+	}
 	public synchronized int doSaveReturnKey(Order bean) throws SQLException{
 		Connection connection = null;
 		PreparedStatement ps = null;
