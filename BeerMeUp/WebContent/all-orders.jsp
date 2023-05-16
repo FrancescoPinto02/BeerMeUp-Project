@@ -12,7 +12,7 @@
     
     Collection<?> ordersList = (Collection<?>) request.getAttribute("orders-list");
 	if(ordersList==null){
-		response.sendRedirect("./user_orders_control?action=retrieveUserOrders");
+		response.sendRedirect("./user_orders_control?action=retrieveAllOrders");
 		return;
 	}
     
@@ -36,11 +36,11 @@
 		<table>
 				<caption></caption>
 				<tr>
+					<th>User ID</th>
 					<th>ID</th>
 					<th>Total</th>
 					<th>Status</th>
 					<th>Date</th>
-					<th>User ID</th>
 				</tr>
 				<%
 				if (ordersList != null && ordersList.size() != 0) {
@@ -49,18 +49,19 @@
 						Order order = (Order) it.next();
 				%>
 					<tr>
+						<td><%=order.getUserId()%></td>
 						<td><%=order.getId()%></td>
 						<td><%=order.getTotal()%>€</td>
 						<td><%=order.getStatus()%></td>
 						<td><%=order.getDate()%></td>
-						<td><%=order.getUserId()%></td>
+						
 			<%
 					}
 				} 
 				else {
 					%>
 					<tr>
-						<td colspan="7">Nessun ordine effettuato</td>
+						<td colspan="7">Nessun ordine presente</td>
 					</tr>
 				<%}%>
 			</table><br><br>
