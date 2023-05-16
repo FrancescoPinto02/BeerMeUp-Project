@@ -11,12 +11,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import it.beermeup.model.OrderDao;
+import it.beermeup.model.UserDao;
 
 public class UserOrdersControl extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
 	static OrderDao model = new OrderDao();
+	static UserDao modelUser = new UserDao();
 	static Logger logger = Logger.getLogger(UserOrdersControl.class.getName());
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
@@ -35,9 +37,25 @@ public class UserOrdersControl extends HttpServlet {
 				if (action.equalsIgnoreCase("retrieveUserOrders")) {
 					request.removeAttribute("orders-list");
 					request.setAttribute("orders-list", model.doRetrieveByUser(userId.intValue()));
+					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/user-orders.jsp");
+					dispatcher.forward(request, response);
 				}
 				
-			
+				if (action.equalsIgnoreCase("retrieveAllOrders"))
+				{
+					request.removeAttribute("orders-list");
+					request.setAttribute("orders-list", model.doRetrieveAll("user_id"));
+					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/all-orders.jsp");
+					dispatcher.forward(request, response);
+				}
+
+				if (action.equalsIgnoreCase("retrieveAllUsers"))
+				{
+					request.removeAttribute("users-list");
+					request.setAttribute("users-list", modelUser.doRetrieveAll("id"));
+					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/all-users.jsp");
+					dispatcher.forward(request, response);
+				}
 				}
 			
 		}
@@ -45,8 +63,7 @@ public class UserOrdersControl extends HttpServlet {
 			AddressControl.logger.log(Level.WARNING, "Errore Servlet Address Control");
 		}
 		
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/user-orders.jsp");
-		dispatcher.forward(request, response);
+		
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{

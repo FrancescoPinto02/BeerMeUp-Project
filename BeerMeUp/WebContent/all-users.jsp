@@ -8,6 +8,12 @@
 		response.sendRedirect("./home.jsp");
 		return;
 	}
+	
+	Collection<?> usersList = (Collection<?>) request.getAttribute("users-list");
+	if(usersList==null){
+		response.sendRedirect("./user_orders_control?action=retrieveAllUsers");
+		return;
+	}
     %>
     
  
@@ -35,13 +41,12 @@
 					<th>Last Name</th>
 				</tr>
 				<%
-				UserDao userModel = new UserDao();
-				Collection<User> utenti = userModel.doRetrieveAll("user-id");
-				if (utenti != null && utenti.size() != 0) {
-					Iterator<?> it = utenti.iterator();
+				
+				if (usersList != null && usersList.size() != 0) {
+					Iterator<?> it = usersList.iterator();
 					while (it.hasNext()) {
 						User user = (User) it.next(); %>
-				
+			
 					<tr>
 						<td><%=user.getId()%></td>
 						<td><%=user.getEmail()%></td>
