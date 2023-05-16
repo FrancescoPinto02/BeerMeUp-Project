@@ -36,6 +36,13 @@
 			<br><br>
 			<a href="user-address.jsp">I miei Indirizzi</a>
 			<a href="user-orders.jsp">I miei ordini</a>
+			
+			<%	Boolean isAdmin = (Boolean)request.getSession().getAttribute("admin-roles");
+        		if(adminRoles != null && adminRoles == Boolean.TRUE){ %>
+            		<a href="all-orders.jsp">Tutti gli Ordini</a>
+            		<a href="all-users.jsp">Tutti gli Utenti</a>
+            <%	}%>
+			
 		</div>				
 	</main>
 	<%@ include file="footer.jsp" %>

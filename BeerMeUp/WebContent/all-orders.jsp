@@ -1,20 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
+    
     <%
-    Integer userId = (Integer)((request.getSession().getAttribute("user-id")));
-	if(userId == null || userId.intValue()<=0) {
-		response.sendRedirect("./login.jsp");
+    
+    Boolean isAdmin = (Boolean)request.getSession().getAttribute("admin-roles");
+	if(isAdmin == null || isAdmin == Boolean.FALSE){
+		response.sendRedirect("./home.jsp");
 		return;
 	}
-	
-	Collection<?> ordersList = (Collection<?>) request.getAttribute("orders-list");
+    
+    Collection<?> ordersList = (Collection<?>) request.getAttribute("orders-list");
 	if(ordersList==null){
 		response.sendRedirect("./user_orders_control?action=retrieveUserOrders");
 		return;
 	}
     
     %>
+    
 <!DOCTYPE html>
 <html lang="it">
 <%@ page contentType="text/html; charset=UTF-8" import="java.util.*,it.beermeup.model.*"%>
@@ -28,15 +31,16 @@
 <body>
 	<%@ include file="header.jsp" %>
 	<main>
-	<div id="user-orders-page">
-			<h1>Ordini</h1>
-			<table>
+	<div id="admin-orders-pages">
+		<h1>Tutti Gli Ordini</h1>
+		<table>
 				<caption></caption>
 				<tr>
 					<th>ID</th>
 					<th>Total</th>
 					<th>Status</th>
 					<th>Date</th>
+					<th>User ID</th>
 				</tr>
 				<%
 				if (ordersList != null && ordersList.size() != 0) {
@@ -49,9 +53,8 @@
 						<td><%=order.getTotal()%>€</td>
 						<td><%=order.getStatus()%></td>
 						<td><%=order.getDate()%></td>
-				<!--	<td><a href="address_control?action=deleteAddress&address-id=<%//=address.getId()%>">Visualizza ordine</a></td>
-				  -->		</tr>
-				<%
+						<td><%=order.getUserId()%></td>
+			<%
 					}
 				} 
 				else {
@@ -61,9 +64,8 @@
 					</tr>
 				<%}%>
 			</table><br><br>
-	</div>
+</div>
 </main>
 <%@ include file="footer.jsp" %>
 </body>
-
 </html>
