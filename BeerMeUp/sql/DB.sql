@@ -182,3 +182,6 @@ VALUES ('2', '6', 'Vivienne', 'Ne evoca il carattere, lo stile ed anche il nome.
 
 INSERT INTO site_user (email, pw, first_name, last_name, is_admin) 
 VALUES ('beermeup@gmail.com' , '1234', 'admin', 'admin', TRUE);
+    
+INSERT INTO address (user_id, street, num, cap, city, nation, telephone)
+VALUES ('1' , 'Via Indirizzo Admin' , '1', '81081' , 'Roma' , 'Italia', '1234567890');

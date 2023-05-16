@@ -21,7 +21,7 @@ import it.beermeup.model.Cart;
 public class CatalogoControl extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	private static final String PROD_ATT = "productList";
+	private static final String PROD_ATT = "productsList";
 	static BeerDao model = new BeerDao();
 	static BreweryDao breweryModel = new BreweryDao();
 	static Logger logger = Logger.getLogger(CatalogoControl.class.getName());

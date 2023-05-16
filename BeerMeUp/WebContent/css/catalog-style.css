@@ -76,7 +76,7 @@
 
 @media (max-width: 1350px){
     #catalog-page .catalog-container{
-    	grid-template-columns: 18rem 18rem 18rem;
+    	grid-template-columns: 15rem 15rem 15rem;
 	}
 	
 	#catalog-page .catalog-container .title{
