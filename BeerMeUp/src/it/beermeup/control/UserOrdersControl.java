@@ -15,7 +15,9 @@ import it.beermeup.model.OrderDao;
 public class UserOrdersControl extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-
+	
+	private static final String PROD_ATT = "ordersList";
+	
 	static OrderDao model = new OrderDao();
 	static Logger logger = Logger.getLogger(UserOrdersControl.class.getName());
 	
@@ -36,9 +38,8 @@ public class UserOrdersControl extends HttpServlet {
 					request.removeAttribute("orders-list");
 					request.setAttribute("orders-list", model.doRetrieveByUser(userId.intValue()));
 				}
-				
-			
-				}
+		
+			}
 			
 		}
 		catch(Exception e) {
