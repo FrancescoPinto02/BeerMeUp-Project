@@ -6,7 +6,7 @@
     
     Boolean isAdmin = (Boolean)request.getSession().getAttribute("admin-roles");
 	if(isAdmin == null || isAdmin == Boolean.FALSE){
-		response.sendRedirect("./home.jsp");
+		response.sendRedirect("./login.jsp");
 		return;
 	}
     
