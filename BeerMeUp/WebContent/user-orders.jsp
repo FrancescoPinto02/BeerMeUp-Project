@@ -29,7 +29,7 @@
 	<%@ include file="header.jsp" %>
 	<main>
 	<div id="user-orders-page">
-			<h1>Ordini</h1>
+			<h1>Ordini</h1>		
 			<table>
 				<caption></caption>
 				<tr>
