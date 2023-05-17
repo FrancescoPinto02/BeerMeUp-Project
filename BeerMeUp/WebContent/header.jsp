@@ -30,7 +30,7 @@
         <div class="icons">
         	<%	Boolean adminRoles = (Boolean)request.getSession().getAttribute("admin-roles");
         		if(adminRoles != null && adminRoles == Boolean.TRUE){ %>
-            		<a href="product-manager.jsp" class="fa fa-wrench"></a>
+            		<a href="manager-profile.jsp" class="fa fa-wrench"></a>
             <%	}%>
             <a href="login.jsp" class="fa fa-user"></a>
             <a href="cart.jsp" class="fa fa-shopping-cart"></a>

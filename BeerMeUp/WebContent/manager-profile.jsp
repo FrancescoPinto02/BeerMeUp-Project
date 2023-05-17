@@ -2,15 +2,10 @@
     pageEncoding="UTF-8"%>
     
 <%
-	Integer userId = (Integer)((request.getSession().getAttribute("user-id")));
-	if(userId == null || userId.intValue()<=0) {
-		response.sendRedirect("./login.jsp");
-		return;
-	}
 	
-	User user = (User) request.getAttribute("user-info");
-	if(user == null) {
-		response.sendRedirect("./user_control?action=retrieveUserInfo");
+	Boolean isAdmin = (Boolean)request.getSession().getAttribute("admin-roles");
+	if(isAdmin == null || isAdmin == Boolean.FALSE){ 
+		response.sendRedirect("./login.jsp");
 		return;
 	}
 %>    
@@ -30,15 +25,15 @@
 <body>
 	<%@ include file="header.jsp" %>
 	<main>
-		<div id="profile-page">
-			<h1>Profilo Utente: <span><a href="./logout"> Logout</a></span></h1>
-			<h2><%=user.getFirstName()%>  <%=user.getLastName()%></h2>
+		<div id="profile-admin">
+			<h1>Gestione Admin: </h1>
 			<br><br>
-			<a href="user-address.jsp">I miei Indirizzi</a>
-			<a href="user-orders.jsp">I miei ordini</a>
+
 			
-			
-			
+		
+            		<a href="all-orders.jsp">Tutti gli Ordini</a>
+            		<a href="all-users.jsp">Tutti gli Utenti</a>
+            		<a href="product-manager.jsp">Modifica catalogo</a>
 		</div>				
 	</main>
 	<%@ include file="footer.jsp" %>
