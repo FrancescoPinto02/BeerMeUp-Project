@@ -19,6 +19,7 @@
 		response.sendRedirect("./checkout_control?action=retrieveUserAddress");
 		return;
 	}
+	
 %>    
     
 
@@ -57,9 +58,9 @@
 				} 
 				%>
 				</select>
-				<h3>Metodo Di Pagamento</h3>
-				<label for="card">Numero Carta: </label><br>
-				<input type="text" name="card" id="card" required>
+				
+				<!-- Aggiungere lista metodi di pagamento -->
+				
 				<input type = "submit" value="Confirm"/>
    				<input type ="reset" value ="Reset"/>
 			</form>
