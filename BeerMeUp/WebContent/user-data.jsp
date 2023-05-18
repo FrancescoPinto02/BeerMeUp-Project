@@ -13,8 +13,7 @@
 		response.sendRedirect("./user_control?action=retrieveUserInfo");
 		return;
 	}
-%>    
-    
+%>
 
 <!DOCTYPE html>
 <html lang="it">
@@ -29,19 +28,29 @@
 </head>
 <body>
 	<%@ include file="header.jsp" %>
+	
 	<main>
-		<div id="profile-page">
-			<h1>Profilo Utente: <span><a href="./logout"> Logout</a></span></h1>
-			<h2><%=user.getFirstName()%>  <%=user.getLastName()%></h2>
-			<br><br>
-			<a href="user-address.jsp">I miei Indirizzi</a>
-			<a href="user-paymentmethod.jsp">I miei Metodi di Pagamento</a>
-			<a href="user-orders.jsp">I miei Ordini</a>
-			<a href="user-data.jsp">I miei Dati</a>
-			
-			
-		</div>				
+		<div id="user-data-change-page">
+			<h1>Modifica Dati</h1>
+	
+				<form action="change-data">
+					<label for="fname">Nome</label>
+					<input type="text" id="fname" name="fname" value="<%=user.getFirstName()%>"><br>
+					<label for="lname">Cognome</label>
+					<input type="text" id="lname" name="lname" value="<%=user.getLastName()%>"><br>
+					<label for="email">E-Mail</label>
+					<input type="text" id="email" name="email" value="<%=user.getEmail()%>"><br>
+					<label for="pw">Password</label>
+					<input type="text" id="pw" name="pw" value="<%=user.getPw()%>"><br><br>
+					<input type="submit" value="Change">
+				</form>
+		</div>
+	
 	</main>
+	
+	
+	
+	
 	<%@ include file="footer.jsp" %>
 </body>
 </html>

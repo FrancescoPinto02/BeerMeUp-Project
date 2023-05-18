@@ -122,6 +122,20 @@ CREATE TABLE order_details(
         ON UPDATE CASCADE
 );
 
+CREATE TABLE payment_method(
+	id INT NOT NULL AUTO_INCREMENT,
+    user_id INT NOT NULL,
+	card_owner VARCHAR(255) NOT NULL,
+	card_number VARCHAR(20)NOT NULL CHECK(card_number>15),
+	cvv VARCHAR(4) NOT NULL CHECK(cvc>0),
+	expiration_date DATE NOT NULL,
+    
+	PRIMARY KEY(id),
+    FOREIGN KEY(user_id) REFERENCES site_user(id)
+		ON DELETE CASCADE
+        ON UPDATE CASCADE
+);
+
 GRANT ALL PRIVILEGES ON beer_me_up.* TO 'root'@'localhost';
 
 INSERT INTO brewery (brewery_name, story, nation)
