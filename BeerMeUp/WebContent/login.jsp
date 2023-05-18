@@ -52,16 +52,16 @@
 				<br>
 				<form action="./login" method ="post">
 					<input type ="hidden" name="action" value="sign-in">
+					<label for="first_name">Nome</label>
+   					<input id="first_name" type="text" name="first_name" required><br>
+   					<label for="last_name">Cognome</label>
+   					<input id="last_name" type="text" name="last_name" required><br>
 					<label for="email">Email</label>
    					<input id="email" type="email" name="email"required><br>
    					<label for="password">Password</label>
    					<input id="password" type="password" name="password" required><br>
    					<label for="cpassword">Conferma Password</label>
    					<input id="cpassword" type="password" name="cpassword" required><br> <!-- FARE VERIFICA PASSWORD UGUALI? !-->
-   					<label for="first_name">Nome</label>
-   					<input id="first_name" type="text" name="first_name" required><br>
-   					<label for="last_name">Cognome</label>
-   					<input id="last_name" type="text" name="last_name" required><br>
    					<input type = "submit" value="Sign-in"/>
    					<input type ="reset" value ="Reset"/>
    				</form>

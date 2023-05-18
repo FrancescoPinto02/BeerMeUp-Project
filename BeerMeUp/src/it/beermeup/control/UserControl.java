@@ -39,6 +39,11 @@ public class UserControl extends HttpServlet {
 					request.removeAttribute("user-info");
 					request.setAttribute("user-info", userInfo);
 			}
+			if(action.equalsIgnoreCase("change-data"))
+			{
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/user-data.jsp");
+				dispatcher.forward(request, response);
+			}
 		}
 		catch(Exception e) {
 			ProductManagerControl.logger.log(Level.WARNING, "Errore Servlet User Control");

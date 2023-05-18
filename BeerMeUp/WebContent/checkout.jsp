@@ -14,17 +14,21 @@
 		return;
 	}
 	
+
 	Collection<?> addressList = (Collection<?>) request.getAttribute("address-list");
 	if(addressList==null){
 		response.sendRedirect("./checkout_control?action=retrieveUserAddress");
 		return;
 	}
 	
-	Collection<?> Paymentlist = (Collection<?>) request.getAttribute("payment-method-list");
-	if(Paymentlist==null){
+	Collection<?> paymentmethodList = (Collection<?>) request.getAttribute("payment-list");
+	if(paymentmethodList==null){
 		response.sendRedirect("./checkout_control?action=retrieveUserPayment");
 		return;
 	}
+	
+	
+
 	
 %>    
     
@@ -66,8 +70,9 @@
 				</select>
 				<select name="PaymentMethod" id="payment" required>
 				<%	
-				if (Paymentlist != null && Paymentlist.size() != 0) {
-					Iterator<?> it = Paymentlist.iterator();
+			
+				if (paymentmethodList != null && paymentmethodList.size() != 0) {
+					Iterator<?> it = paymentmethodList.iterator();
 					while (it.hasNext()) {
 						PaymentMethod paymentmethod = (PaymentMethod) it.next();
 				%>

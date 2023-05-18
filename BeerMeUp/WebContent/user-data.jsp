@@ -10,9 +10,11 @@
 	
 	User user = (User) request.getAttribute("user-info");
 	if(user == null) {
-		response.sendRedirect("./user_control?action=retrieveUserInfo");
+		response.sendRedirect("./user_control?action=change-data");
 		return;
 	}
+	
+	
 %>
 
 <!DOCTYPE html>
@@ -34,6 +36,7 @@
 			<h1>Modifica Dati</h1>
 	
 				<form action="change-data">
+				<input type ="hidden" name="action" value="change-data">
 					<label for="fname">Nome</label>
 					<input type="text" id="fname" name="fname" value="<%=user.getFirstName()%>"><br>
 					<label for="lname">Cognome</label>

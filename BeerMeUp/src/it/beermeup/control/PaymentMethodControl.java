@@ -34,9 +34,10 @@ public class PaymentMethodControl extends HttpServlet {
 		try {
 			if(action!=null) {
 				//Recupera tutti i metodi di pagamento dell`utente
-				if (action.equalsIgnoreCase("retrieveUserPaymentMethod")) {
-					request.removeAttribute("payment-method-list");
-					request.setAttribute("payment-method-list", model.doRetrieveByUser(userId.intValue()));
+				if (action.equalsIgnoreCase("retrieveUserPayment")) {
+					request.removeAttribute("payment-list");
+					request.setAttribute("payment-list", model.doRetrieveByUser(userId.intValue()));
+					
 				}
 				
 				//Rimuovi Metodo Di Pagamento
@@ -47,9 +48,11 @@ public class PaymentMethodControl extends HttpServlet {
 					if((model.doRetrieveByKey(paymentmethodId)).getUserId() == userId.intValue()) {
 						model.doDelete(paymentmethodId);
 					}
-				}
+					
+					
 			}	
-		}
+			}}
+		
 		catch(Exception e) {
 			AddressControl.logger.log(Level.WARNING, "Errore Servlet Address Control");
 		}

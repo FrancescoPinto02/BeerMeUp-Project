@@ -8,9 +8,9 @@
 		return;
 	}
 	
-	Collection<?> paymentmethodList = (Collection<?>) request.getAttribute("payment-method-list");
+	Collection<?> paymentmethodList = (Collection<?>) request.getAttribute("payment-list");
 	if(paymentmethodList==null){
-		response.sendRedirect("./paymentmethod_control?action=retrieveUserPaymentMethod");
+		response.sendRedirect("./paymentmethod_control?action=retrieveUserPayment");
 		return;
 	}
 	
