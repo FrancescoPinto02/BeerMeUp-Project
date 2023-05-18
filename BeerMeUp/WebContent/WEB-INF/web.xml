@@ -114,6 +114,10 @@
     <url-pattern>/user_orders_control</url-pattern>
   </servlet-mapping>
   
+   <servlet>
+    <servlet-name>PaymentMethodControl</servlet-name>
+    <servlet-class>it.beermeup.control.PaymentMethodControl</servlet-class>
+  </servlet>
   <servlet-mapping>
     <servlet-name>PaymentMethodControl</servlet-name>
     <url-pattern>/paymentmethod_control</url-pattern>

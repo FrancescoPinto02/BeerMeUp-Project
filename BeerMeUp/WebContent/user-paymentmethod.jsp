@@ -65,7 +65,7 @@
 				<%}%>
 			</table><br><br>
 			
-			<h2>Aggiungi Indirizzo</h2>
+			<h2>Aggiungi Metodo di Pagamento</h2>
 			<form action="./paymentmethod_control" method ="post">
 				<input type ="hidden" name="action" value="addAddress">
    				<label for="card_owner">Proprietario</label>
