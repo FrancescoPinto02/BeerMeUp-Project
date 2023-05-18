@@ -22,6 +22,7 @@ import it.beermeup.model.Order;
 import it.beermeup.model.OrderDao;
 import it.beermeup.model.OrderDetails;
 import it.beermeup.model.OrderDetailsDao;
+import it.beermeup.model.PaymentMethodDao;
 
 public class CheckoutControl extends HttpServlet {
 
@@ -29,6 +30,7 @@ public class CheckoutControl extends HttpServlet {
 	
 	static AddressDao addressModel = new AddressDao();
 	static OrderDao orderModel = new OrderDao();
+	static PaymentMethodDao paymentModel = new PaymentMethodDao();
 	static OrderDetailsDao orderDetailsModel = new OrderDetailsDao();
 	static BeerDao beerModel = new BeerDao();
 	static Logger logger = Logger.getLogger(CheckoutControl.class.getName());
@@ -48,6 +50,11 @@ public class CheckoutControl extends HttpServlet {
 				//Recupera tutti gli indirizzi dell`utente
 				request.removeAttribute("address-list");
 				request.setAttribute("address-list", addressModel.doRetrieveByUser(userId.intValue()));	
+			}	
+			if(action!=null && action.equalsIgnoreCase("retrieveUserPayment")) {
+				//Recupera tutti i metodi di pagamento dell`utente
+				request.removeAttribute("payment-method-list");
+				request.setAttribute("payment-method-list", paymentModel.doRetrieveByUser(userId.intValue()));	
 			}	
 		}
 		catch(Exception e) {
@@ -113,7 +120,8 @@ public class CheckoutControl extends HttpServlet {
 					}		
 					
 					request.getSession().removeAttribute("cart");					
-				}								
+				}			
+				
 			}
 			catch(Exception e) {
 				CheckoutControl.logger.log(Level.WARNING, "Errore Servlet Checkout Control");

@@ -20,6 +20,14 @@
 		return;
 	}
 	
+	Collection<?> Paymentlist = (Collection<?>) request.getAttribute("payment-method-list");
+	if(Paymentlist==null){
+		response.sendRedirect("./checkout_control?action=retrieveUserPayment");
+		return;
+	}
+	
+	
+	
 %>    
     
 
@@ -58,8 +66,19 @@
 				} 
 				%>
 				</select>
-				
-				<!-- Aggiungere lista metodi di pagamento -->
+				<select name="PaymentMethod" id="payment" required>
+				<%
+				if (Paymentlist != null && Paymentlist.size() != 0) {
+					Iterator<?> it = Paymentlist.iterator();
+					while (it.hasNext()) {
+						PaymentMethod paymentmethod = (PaymentMethod) it.next();
+				%>
+						<option value="<%=paymentmethod.toString()%>"><%=paymentmethod.toString()%></option>
+				<%
+					}
+				} 
+				%>
+				</select>
 				
 				<input type = "submit" value="Confirm"/>
    				<input type ="reset" value ="Reset"/>

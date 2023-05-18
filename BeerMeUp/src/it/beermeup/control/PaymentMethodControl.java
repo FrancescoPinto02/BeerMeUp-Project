@@ -2,6 +2,7 @@ package it.beermeup.control;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -74,7 +75,7 @@ public class PaymentMethodControl extends HttpServlet {
 				String card_owner = request.getParameter("card_owner");
 				String card_number = request.getParameter("card_number");
 				String cvv = request.getParameter("cvv");
-				Date expiration_date = new Date(request.getDateHeader("expiration_date"));
+				Date expiration_date = new Date(request.getDateHeader("expiration"));
 
 					
 				PaymentMethod paymentmethod = new PaymentMethod();
@@ -88,9 +89,10 @@ public class PaymentMethodControl extends HttpServlet {
 				model.doSave(paymentmethod);
 			}	
 		}
-		catch(Exception e) {
+	catch(Exception e) {
 			AddressControl.logger.log(Level.WARNING, "Errore Servlet Payment Method Control:");
 		}
+		 
 		
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/user-paymentmethod.jsp");
 		dispatcher.forward(request, response);
