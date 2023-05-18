@@ -114,5 +114,10 @@
     <url-pattern>/user_orders_control</url-pattern>
   </servlet-mapping>
   
+  <servlet-mapping>
+    <servlet-name>PaymentMethodControl</servlet-name>
+    <url-pattern>/paymentmethod_control</url-pattern>
+  </servlet-mapping>
+  
   
 </web-app>
