@@ -67,7 +67,7 @@
 			
 			<h2>Aggiungi Metodo di Pagamento</h2>
 			<form action="./paymentmethod_control" method ="post">
-				<input type ="hidden" name="action" value="addAddress">
+				<input type ="hidden" name="action" value="addPaymentMethod">
    				<label for="card_owner">Proprietario</label>
    				<input id="card_owner" type="text" name="card_owner" required><br>
    				<label for="card_number">Numero Della Carta</label>
