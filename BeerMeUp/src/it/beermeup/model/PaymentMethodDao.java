@@ -18,7 +18,7 @@ import javax.sql.DataSource;
 
 public class PaymentMethodDao{
 
-	private static final String TABLE_NAME = "paymentmethod";
+	private static final String TABLE_NAME = "payment_method";
 	private static final String SELECT_ALL = "SELECT * FROM payment_method";
 	
 	private static DataSource ds;
@@ -152,7 +152,7 @@ public class PaymentMethodDao{
 	public void doSave(PaymentMethod bean) throws SQLException {
 		Connection connection = null;
 		PreparedStatement ps = null;
-		String sql = "INSERT INTO " + PaymentMethodDao.TABLE_NAME + " ( user_id, card_owner, card_number, cvv, expiration_date)"
+		String sql = "INSERT INTO " + PaymentMethodDao.TABLE_NAME + " (user_id, card_owner, card_number, cvv, expiration_date)"
 				+ " VALUES (?, ?, ?, ?, ?) ";
 		
 		try {

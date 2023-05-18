@@ -2,7 +2,6 @@ package it.beermeup.control;
 
 import java.io.IOException;
 import java.sql.Date;
-import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -36,8 +35,8 @@ public class PaymentMethodControl extends HttpServlet {
 			if(action!=null) {
 				//Recupera tutti i metodi di pagamento dell`utente
 				if (action.equalsIgnoreCase("retrieveUserPaymentMethod")) {
-					request.removeAttribute("paymentmethod-list");
-					request.setAttribute("paymentmethod-list", model.doRetrieveByUser(userId.intValue()));
+					request.removeAttribute("payment-method-list");
+					request.setAttribute("payment-method-list", model.doRetrieveByUser(userId.intValue()));
 				}
 				
 				//Rimuovi Metodo Di Pagamento

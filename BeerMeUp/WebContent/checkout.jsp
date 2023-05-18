@@ -26,8 +26,6 @@
 		return;
 	}
 	
-	
-	
 %>    
     
 
@@ -67,7 +65,7 @@
 				%>
 				</select>
 				<select name="PaymentMethod" id="payment" required>
-				<%
+				<%	
 				if (Paymentlist != null && Paymentlist.size() != 0) {
 					Iterator<?> it = Paymentlist.iterator();
 					while (it.hasNext()) {

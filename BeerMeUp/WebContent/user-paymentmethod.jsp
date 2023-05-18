@@ -8,7 +8,7 @@
 		return;
 	}
 	
-	Collection<?> paymentmethodList = (Collection<?>) request.getAttribute("paymentmethod-list");
+	Collection<?> paymentmethodList = (Collection<?>) request.getAttribute("payment-method-list");
 	if(paymentmethodList==null){
 		response.sendRedirect("./paymentmethod_control?action=retrieveUserPaymentMethod");
 		return;
@@ -74,7 +74,7 @@
   				<input id="card_number" type="text" name="card_number" required><br>
    				<label for="cvv">CVV</label>
    				<input id="cvv" type="text" name="cvv" required><br>
-   				<label for="expiration">Data Di Scadenza</label>
+   				<label for="expiration">Data di Scadenza</label>
    				<input id="expiration" type="date" name="expiration" required><br>
    				<input type = "submit" value="Add"/>
    				<input type ="reset" value ="Reset"/>
