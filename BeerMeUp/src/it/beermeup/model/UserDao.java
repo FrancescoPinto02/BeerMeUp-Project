@@ -196,7 +196,7 @@ public class UserDao{
 	public synchronized void doUpdate(User bean) throws SQLException {
 		Connection connection = null;
 		PreparedStatement ps = null;
-		String sql = "UPDATE"+ UserDao.TABLE_NAME + "SET first_name =?, last_name = ?, email= ? , pw = ? WHERE id = ?";
+		String sql = "UPDATE "+ UserDao.TABLE_NAME + " SET first_name =?, last_name = ?, email= ? , pw = ? WHERE id = ?";
 		try {
 			connection = ds.getConnection(); 
 			

@@ -83,9 +83,10 @@ public class UserDataControl extends HttpServlet {
 		  }
 
 		}
-		catch(Exception e) {
-			ProductManagerControl.logger.log(Level.WARNING, "Errore Servlet Data Control");
-		}
+		 catch (SQLException e) {
+			 ProductManagerControl.logger.log(Level.WARNING, "Errore Servlet Data Control");
+			 e.printStackTrace();
+			 }
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/user-profile.jsp");
 		dispatcher.forward(request, response);
 	}
