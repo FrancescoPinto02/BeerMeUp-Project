@@ -30,10 +30,10 @@
 <body>
 	<%@ include file="header.jsp" %>
 	<main>
-	<div id="admin-users-pages">
+	<div id="admin-users-pages">		
 		<h1>Tutti Gli Utenti</h1>
 		<table>
-				<caption></caption>
+		<caption></caption>
 				<tr>
 					<th>ID</th>
 					<th>E-Mail</th>
@@ -62,6 +62,22 @@
 					</tr>
 				<%}%>
 			</table><br><br>
+		
+		<select name="users" id="users" required>
+					<%
+					if (usersList != null && usersList.size() != 0) {
+						Iterator<?> userIt = usersList.iterator();
+						while (userIt.hasNext()) {
+							User user = (User) userIt.next();
+						%>
+						<option value="<%=user.getId()%>"><%=user.getFirstName()+" "+user.getLastName()%></option>
+						<%
+						}
+					} 
+					%>
+		</select>
+		<input type="submit" value="Submit">
+
 </div>
 </main>
 
