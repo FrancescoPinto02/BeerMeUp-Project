@@ -193,6 +193,37 @@ public class UserDao{
 		
 		return (result!=0);
 	}
+	public synchronized void doUpdate(User bean) throws SQLException {
+		Connection connection = null;
+		PreparedStatement ps = null;
+		String sql = "UPDATE"+ UserDao.TABLE_NAME + "SET first_name =?, last_name = ?, email= ? , pw = ? WHERE id = ?";
+		try {
+			connection = ds.getConnection(); 
+			
+			ps = connection.prepareStatement(sql);
+			ps.setString(1, bean.getFirstName());
+			ps.setString(2, bean.getLastName());
+			ps.setString(3, bean.getEmail());
+			ps.setString(4, bean.getPw());
+			ps.setInt(5, bean.getId());
+			
+			ps.executeUpdate();
+			connection.commit();		
+		}
+		finally {
+			try {
+				if(ps != null) {
+					ps.close();
+				}
+			}
+			finally {
+				if(connection != null) {
+					connection.close();
+				}
+			}
+		}
+		return;
+	}
 	
 }
 

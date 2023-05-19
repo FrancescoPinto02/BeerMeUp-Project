@@ -123,5 +123,14 @@
     <url-pattern>/paymentmethod_control</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+    <servlet-name>UserDataControl</servlet-name>
+    <servlet-class>it.beermeup.control.UserDataControl</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UserDataControl</servlet-name>
+    <url-pattern>/userdata_control</url-pattern>
+  </servlet-mapping>
+  
   
 </web-app>

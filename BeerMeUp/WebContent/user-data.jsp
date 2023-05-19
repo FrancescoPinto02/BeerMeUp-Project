@@ -10,9 +10,11 @@
 	
 	User user = (User) request.getAttribute("user-info");
 	if(user == null) {
-		response.sendRedirect("./user_control?action=change-data");
+		response.sendRedirect("./userdata_control?action=recupera-utente");
 		return;
 	}
+	
+	
 	
 	
 %>
@@ -35,7 +37,7 @@
 		<div id="user-data-change-page">
 			<h1>Modifica Dati</h1>
 	
-				<form action="change-data">
+				<form action="./userdata_control" method="post">
 				<input type ="hidden" name="action" value="change-data">
 					<label for="fname">Nome</label>
 					<input type="text" id="fname" name="fname" value="<%=user.getFirstName()%>"><br>
@@ -45,7 +47,7 @@
 					<input type="text" id="email" name="email" value="<%=user.getEmail()%>"><br>
 					<label for="pw">Password</label>
 					<input type="text" id="pw" name="pw" value="<%=user.getPw()%>"><br><br>
-					<input type="submit" value="Change">
+					<input type="submit"/>
 				</form>
 		</div>
 	

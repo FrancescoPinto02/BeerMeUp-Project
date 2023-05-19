@@ -39,11 +39,8 @@ public class UserControl extends HttpServlet {
 					request.removeAttribute("user-info");
 					request.setAttribute("user-info", userInfo);
 			}
-			if(action.equalsIgnoreCase("change-data"))
-			{
-				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/user-data.jsp");
-				dispatcher.forward(request, response);
-			}
+		
+			
 		}
 		catch(Exception e) {
 			ProductManagerControl.logger.log(Level.WARNING, "Errore Servlet User Control");
@@ -51,10 +48,12 @@ public class UserControl extends HttpServlet {
 		
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/user-profile.jsp");
 		dispatcher.forward(request, response);
-	}
 	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-		doGet(request, response);
-	}
-
 }
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		doGet(request,response);
+}
+}
+				
+
+
