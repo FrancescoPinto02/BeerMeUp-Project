@@ -43,7 +43,7 @@ public class UserDataControl extends HttpServlet {
 			request.removeAttribute("user-info");
 			request.setAttribute("user-info", userInfo);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
+				
 				e.printStackTrace();
 	}
 		}
