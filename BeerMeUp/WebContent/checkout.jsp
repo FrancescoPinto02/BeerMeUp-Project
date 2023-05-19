@@ -14,18 +14,17 @@
 		return;
 	}
 	
+	
 
 	Collection<?> addressList = (Collection<?>) request.getAttribute("address-list");
-	if(addressList==null){
-		response.sendRedirect("./checkout_control?action=retrieveUserAddress");
+	Collection<?> paymentmethodList = (Collection<?>) request.getAttribute("payment-list");
+	if(addressList==null || paymentmethodList==null){
+		response.sendRedirect("./checkout_control?action=recupera-dati-checkout");
 		return;
 	}
 	
-	Collection<?> paymentmethodList = (Collection<?>) request.getAttribute("payment-list");
-	if(paymentmethodList==null){
-		response.sendRedirect("./checkout_control?action=retrieveUserPayment");
-		return;
-	}
+	
+
 	
 	
 
@@ -68,7 +67,7 @@
 				} 
 				%>
 				</select>
-				<select name="PaymentMethod" id="payment" required>
+				<select name="paymentmethod" id="paymentmethod" required>
 				<%	
 			
 				if (paymentmethodList != null && paymentmethodList.size() != 0) {

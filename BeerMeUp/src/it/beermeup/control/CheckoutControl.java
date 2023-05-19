@@ -24,6 +24,7 @@ import it.beermeup.model.OrderDetails;
 import it.beermeup.model.OrderDetailsDao;
 import it.beermeup.model.PaymentMethodDao;
 
+
 public class CheckoutControl extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -46,21 +47,19 @@ public class CheckoutControl extends HttpServlet {
 		}
 		
 		try {
-			if(action!=null && action.equalsIgnoreCase("retrieveUserAddress")) {
-				//Recupera tutti gli indirizzi dell`utente
+			if(action!=null) {
+				
 				request.removeAttribute("address-list");
 				request.setAttribute("address-list", addressModel.doRetrieveByUser(userId.intValue()));	
-			}	
-			if(action!=null && action.equalsIgnoreCase("retrieveUserPayment")) {
-				//Recupera tutti i metodi di pagamento dell`utente
-				request.removeAttribute("payment-method-list");
-				request.setAttribute("payment-method-list", paymentModel.doRetrieveByUser(userId.intValue()));	
-			}	
+				request.removeAttribute("payment-list");
+				request.setAttribute("payment-list", paymentModel.doRetrieveByUser(userId.intValue()));	
+			}		
+			
+			
 		}
 		catch(Exception e) {
-			CheckoutControl.logger.log(Level.WARNING, "Errore Servlet Checkout Control");
+			System.out.println("Errore:" + e.getMessage());
 		}
-		
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/checkout.jsp");
 		dispatcher.forward(request, response);
 	}
@@ -85,7 +84,7 @@ public class CheckoutControl extends HttpServlet {
 					
 					//Completa Checkout
 					String address = request.getParameter("address");
-					String paymentInfo = request.getParameter("card");
+					String paymentmethod = request.getParameter("paymentmethod");
 					String status = "Completato";
 					BigDecimal total = cart.getTotalPrice(true);
 					Date date = new Date(System.currentTimeMillis());
@@ -94,7 +93,7 @@ public class CheckoutControl extends HttpServlet {
 					order.setUserId(userId.intValue());
 					order.setShippingAddress(address);
 					order.setBillingAddress(address);
-					order.setPaymentInfo(paymentInfo);
+					order.setPaymentInfo(paymentmethod);
 					order.setStatus(status);
 					order.setTotal(total);
 					order.setDate(date);
