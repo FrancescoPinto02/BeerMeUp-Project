@@ -1,11 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<% 	Collection<?> ordersList = (Collection<?>) request.getAttribute("orders-list");
-	if(ordersList==null){
-	response.sendRedirect("./user_orders_control?action=retrieveUserOrders");
+<% 	
+	Integer userId = (Integer)((request.getSession().getAttribute("user-id")));
+	if(userId == null || userId.intValue()<=0) {
+	response.sendRedirect("./login.jsp");
+	return;
+	}	
+
+	Collection<?> productList = (Collection<?>) request.getAttribute("product-list");
+	if(productList==null){
+	response.sendRedirect("./orderdetail_control?action=retrieveProducts");
 	return;
 }
+	
+	
 %>
 
 
@@ -31,24 +40,26 @@
 			<table>
 				<caption></caption>
 				<tr>
-					<th>ID</th>
-					<th>Total</th>
-					<th>Status</th>
-					<th>Date</th>
-					<th>Birra</th>
-					<th>Action</th>
+					<th>ID Birra</th>
+					<th>Descrizione</th>
+					<th>Quantita'</th>
+					<th>Iva</th>
+					<th>Prezzo</th>
+				
 				</tr>
 				<%
-				if (ordersList != null && ordersList.size() != 0) {
-					Iterator<?> it = ordersList.iterator();
+				if (productList != null && productList.size() != 0) {
+					Iterator<?> it = productList.iterator();
 					while (it.hasNext()) {
-						Order order = (Order) it.next();
+						OrderDetails orderdetails = (OrderDetails) it.next();
 				%>
 					<tr>
-						<td><%=order.getId()%></td>
-						<td><%=order.getTotal()%>€</td>
-						<td><%=order.getStatus()%></td>
-						<td><%=order.getDate()%></td>
+						<td><%=orderdetails.getBeerId()%></td>
+						<td><%=orderdetails.getDesc()%></td>
+						<td><%=orderdetails.getQta()%></td>
+						<td><%=orderdetails.getIva()%>%</td>
+						<td><%=orderdetails.getPrice() %></td>
+						
 					</tr>
 			<%
 					}
@@ -56,7 +67,7 @@
 				else {
 					%>
 					<tr>
-						<td colspan="7">Nessun ordine effettuato</td>
+						<td colspan="7">errore</td>
 					</tr>
 				<%}%>
 			</table><br><br>

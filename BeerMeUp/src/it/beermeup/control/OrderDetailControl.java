@@ -11,14 +11,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import it.beermeup.model.Order;
-import it.beermeup.model.OrderDao;
+
+import it.beermeup.model.OrderDetailsDao;
 
 
 
 public class OrderDetailControl extends HttpServlet {
 	private static final long serialVersionUID = 4604094836457987059L;
-	static OrderDao orderModel = new OrderDao();
+	static OrderDetailsDao model = new OrderDetailsDao();
 	
 	static Logger logger = Logger.getLogger(ProductDetailControl.class.getName());
 	
@@ -29,26 +29,32 @@ public class OrderDetailControl extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		//Azione richiesta
 		String action = request.getParameter("action");
+
+		Integer userId = (Integer)(request.getSession().getAttribute("user-id"));
+		if(userId == null || userId.intValue()<=0) {
+			response.sendRedirect("./login.jsp");
+			return;
+		}
+			
 		
 		try {
-			if (action != null) {
+			if (action != null && action.equalsIgnoreCase("detailOrder")) {
+				int id = Integer.parseInt(request.getParameter("order-id"));
+				request.removeAttribute("order-id");
+				request.getSession().setAttribute("order-id", id);
+				request.setAttribute("order-id", id);
+			}
 				
-				//Dettagli Ordine
-				int id = Integer.parseInt(request.getParameter("id"));
-				if(id<=0) {
-					response.sendRedirect("./user-orders.jsp");
-					return;
+			if (action != null && action.equalsIgnoreCase("retrieveProducts")) {
+						
+				Integer orderId = (Integer) request.getSession().getAttribute("order-id")	;
+				request.removeAttribute("product-list");
+				request.setAttribute("product-list",model.doRetrieveByOrder(orderId));
 				}
-					
-				Order order = orderModel.doRetrieveByKey(id);
-				
-					
-				request.removeAttribute("order");
-				request.setAttribute("order", order);
 		
-			}			
+			
 		} catch (SQLException e) {
-			ProductDetailControl.logger.log(Level.WARNING, "Errore Servlet Product Detail Control");
+			ProductDetailControl.logger.log(Level.WARNING, "Errore Servlet order Detail Control");
 		}
 		
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/order-detail.jsp");

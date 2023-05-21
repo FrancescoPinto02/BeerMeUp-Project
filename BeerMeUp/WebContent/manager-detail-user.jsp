@@ -9,8 +9,8 @@
 		return;
 	}
 	
-	Collection<?> usersList = (Collection<?>) request.getAttribute("users-list");
-	if(usersList==null){
+	User users = (User) request.getAttribute("users");
+	if(users==null){
 		response.sendRedirect("./user_orders_control?action=retrieveAllUsers");
 		return;
 	}
@@ -40,45 +40,17 @@
 					<th>First Name</th>
 					<th>Last Name</th>
 				</tr>
-				<%
 				
-				if (usersList != null && usersList.size() != 0) {
-					Iterator<?> it = usersList.iterator();
-					while (it.hasNext()) {
-						User user = (User) it.next(); %>
+				
 			
 					<tr>
-						<td><%=user.getId()%></td>
-						<td><%=user.getEmail()%></td>
-						<td><%=user.getFirstName()%></td>
-						<td><%=user.getLastName()%></td>
-			<%
-					}
-				} 
-				else {
-					%>
-					<tr>
-						<td colspan="7">Nessun utente registrato</td>
-					</tr>
-				<%}%>
+						<td><%=users.getId()%></td>
+						<td><%=users.getEmail()%></td>
+						<td><%=users.getFirstName()%></td>
+						<td><%=users.getLastName()%></td>
+		
 			</table><br><br>
-		<form action="./user_orders_control" method="post">
-		<input type ="hidden" name="action" value="retrieveUser">
-		<select name="users" id="users" required>
-					<%
-					if (usersList != null && usersList.size() != 0) {
-						Iterator<?> userIt = usersList.iterator();
-						while (userIt.hasNext()) {
-							User user = (User) userIt.next();
-						%>
-						<option value="<%=user.getId()%>"><%=user.getEmail()%></option>
-						<%
-						}
-					} 
-					%>
-		</select>
-		<input type="submit" value="Submit">
-		</form>
+		<a href="all-users.jsp">Tutti gli utenti</a>
 </div>
 </main>
 

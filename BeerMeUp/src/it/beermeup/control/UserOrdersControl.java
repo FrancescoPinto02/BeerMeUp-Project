@@ -1,6 +1,7 @@
 package it.beermeup.control;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -67,6 +68,20 @@ public class UserOrdersControl extends HttpServlet {
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-		doGet(request, response);
+		
+		String action = request.getParameter("action");
+		if (action!=null && action.equalsIgnoreCase("retrieveUser")) {
+			
+			int users = Integer.parseInt(request.getParameter("users"));
+		request.removeAttribute("users");
+		try {
+			request.setAttribute("users", modelUser.doRetrieveByKey(users));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		}
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/manager-detail-user.jsp");
+		dispatcher.forward(request, response);
 	}
 }
