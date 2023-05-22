@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
+import it.beermeup.model.OrderDao;
 import it.beermeup.model.OrderDetailsDao;
 
 
@@ -19,7 +19,7 @@ import it.beermeup.model.OrderDetailsDao;
 public class OrderDetailControl extends HttpServlet {
 	private static final long serialVersionUID = 4604094836457987059L;
 	static OrderDetailsDao model = new OrderDetailsDao();
-	
+	static OrderDao Ordermodel = new OrderDao();
 	static Logger logger = Logger.getLogger(ProductDetailControl.class.getName());
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
@@ -50,11 +50,14 @@ public class OrderDetailControl extends HttpServlet {
 				Integer orderId = (Integer) request.getSession().getAttribute("order-id")	;
 				request.removeAttribute("product-list");
 				request.setAttribute("product-list",model.doRetrieveByOrder(orderId));
+				request.removeAttribute("order");
+				request.setAttribute("order", Ordermodel.doRetrieveByKey(orderId));
 				}
 		
-			
+		
 		} catch (SQLException e) {
 			ProductDetailControl.logger.log(Level.WARNING, "Errore Servlet order Detail Control");
+			e.printStackTrace();
 		}
 		
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/order-detail.jsp");

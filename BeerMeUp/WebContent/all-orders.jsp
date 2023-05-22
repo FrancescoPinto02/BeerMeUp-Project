@@ -54,7 +54,7 @@
 						<td><%=order.getTotal()%>€</td>
 						<td><%=order.getStatus()%></td>
 						<td><%=order.getDate()%></td>
-						
+						<td><a href="orderdetail_control?action=detailOrder&order-id=<%=order.getId()%>">Visualizza ordine</a></td>
 			<%
 					}
 				} 

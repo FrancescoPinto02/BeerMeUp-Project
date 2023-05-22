@@ -9,7 +9,8 @@
 	}	
 
 	Collection<?> productList = (Collection<?>) request.getAttribute("product-list");
-	if(productList==null){
+	Order order = (Order) request.getAttribute("order");
+	if(productList==null ||order==null ){
 	response.sendRedirect("./orderdetail_control?action=retrieveProducts");
 	return;
 }
@@ -58,8 +59,8 @@
 						<td><%=orderdetails.getDesc()%></td>
 						<td><%=orderdetails.getQta()%></td>
 						<td><%=orderdetails.getIva()%>%</td>
-						<td><%=orderdetails.getPrice() %></td>
-						
+						<td><%=orderdetails.getPrice()%></td>
+						<td><a href="productDetail_control?action=showProductDetails&id=<%=orderdetails.getBeerId()%>">Visualizza prodotto</a></td>
 					</tr>
 			<%
 					}
@@ -71,6 +72,18 @@
 					</tr>
 				<%}%>
 			</table><br><br>
+			
+			<table>
+			<caption></caption>
+			<tr>
+				<th>Indirizzo di spedizione</th>
+				<th>Metodo di pagamento</th>
+			</tr>
+			<tr>
+				<td><%=order.getShippingAddress()%></td>
+				<td><%=order.getPaymentInfo()%></td>
+			</tr>
+			</table>
 		</div>
 	</main>
 	
