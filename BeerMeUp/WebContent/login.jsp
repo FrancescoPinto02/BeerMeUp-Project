@@ -17,8 +17,7 @@
 	<meta http-equiv="Content-Type" content="text/html">
 	<title>Beer Me Up</title>
 	<meta name="viewport" content="widht=device-width, initial-scale=1">
-	<link rel="stylesheet" href="css/style.css">
-	<link rel="stylesheet" href="css/login.css">
+	<link rel="stylesheet" href="css/style.css?ts=<?=time()?>&quot">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">			
 </head>
 	
@@ -26,7 +25,7 @@
 	<%@ include file="header.jsp" %>
 	
 	<main>
-		<div class ="login" id="login-page">
+		<div id="login-page">
 			<h1></h1>
 			<%if(request.getSession().getAttribute("invalid-login")!=null){ %>
 			<h2 style="color:red;">Credenziali Errate</h2>
@@ -67,7 +66,7 @@
    				</form>
 			</div>
 			</div>
-			<div class="homer-bender"><img class="homer-bender-photo" alt="homer-bender" src="img/homer-bender.png"></div>
+			  <div class="homer-bender"><img class="homer-bender-photo" alt="homer-bender" src="img/homer-bender.png"></div>
 		</div>
    	</main>
    	
