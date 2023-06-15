@@ -35,13 +35,13 @@
 			<div class="login-page-form" id="form1">
 				<h2>Login</h2>
 				<br>
-				<form action="./login" method ="post">
+				<form action="./login" method ="post" onsubmit="event.preventDefault(); validate(this)">
 					<input type ="hidden" name="action" value="login">
    					<label for="email">E-mail </label>
    					<input id="email" type="text" name="email" required ><br>
    					<label for="password">Password</label>
    					<input id="password" type="password" name="password" required><br>
-					<input type = "submit" value="Login"/>
+					<input type = "submit" value="Login" />
    					<input type ="reset" value ="Reset"/>
    				</form>
 			</div>
@@ -49,7 +49,7 @@
 			<div class="login-page-form" id="form2">
 				<h2>Registrazione</h2>
 				<br>
-				<form action="./login" method ="post">
+				<form action="./login" method ="post" onsubmit="event.preventDefault(); validate1(this)">
 					<input type ="hidden" name="action" value="sign-in">
 					<label for="first_name">Nome</label>
    					<input id="first_name" type="text" name="first_name" required><br>
@@ -61,7 +61,7 @@
    					<input id="password" type="password" name="password" required><br>
    					<label for="cpassword">Conferma Password</label>
    					<input id="cpassword" type="password" name="cpassword" required><br> <!-- FARE VERIFICA PASSWORD UGUALI? !-->
-   					<input type = "submit" value="Sign-in"/>
+   					<input type = "submit" value="Sign-in" />
    					<input type ="reset" value ="Reset"/>
    				</form>
 			</div>
@@ -71,5 +71,53 @@
    	</main>
    	
 	<%@ include file="footer.jsp" %>
+	
+	<script type="text/javascript">
+	
+	function validateEmail(uemail)
+	{
+		let mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+		if(uemail.value.match(mailformat))
+			{
+			return true;
+			}
+		else
+			{
+			alert("You have entered an invalid email address!");
+			uemail.focus();
+		return false;
+		}
+	}
+	
+	function validate(obj)  //VALIDATION LOGIN
+	{
+	let valid = true;
+	
+	let email=document.getElementsByName("email")[0];
+	if(!validateEmail(email))
+		{
+		valid = false;
+		email.classList.add("error");
+		}
+	else email.classList.remove("error");
+	
+	if(valid) obj.submit();
+	}
+	
+	function validate1(obj)  //VALIDATION REGISTRAZIONE
+	{
+	let valid = true;
+	
+	let email=document.getElementsByName("email")[1];
+	if(!validateEmail(email))
+		{
+		valid = false;
+		email.classList.add("error");
+		}
+	else email.classList.remove("error");
+	
+	if(valid) obj.submit();
+	}
+	</script>
 </body>
 </html>
