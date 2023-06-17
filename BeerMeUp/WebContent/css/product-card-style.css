@@ -8,9 +8,10 @@
     
 }
 
+/*
 .product-card:hover{
     transform: scale(1.1);
-}
+}  !!!! IMPLEMENTATO CON JQuery*/
 
 .product-card .top .discount{
     position: absolute;

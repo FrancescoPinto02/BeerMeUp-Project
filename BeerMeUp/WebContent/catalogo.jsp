@@ -22,9 +22,10 @@
 	<meta http-equiv="Content-Type" content="text/html">
 	<title>Beer Me Up</title>
 	<meta name="viewport" content="widht=device-width, initial-scale=1">
-	<link rel="stylesheet" href="css/style.css">
-	<link rel="stylesheet" href="css/catalog-style.css">
-	<link rel="stylesheet" href="css/product-card-style.css">
+	<link rel="stylesheet" href="css/style.css?ts=<?=time()?>&quot">
+	<link rel="stylesheet" href="css/catalog-style.css?ts=<?=time()?>&quot">
+	<link rel="stylesheet" href="css/product-card-style.css?ts=<?=time()?>&quot">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
@@ -106,5 +107,18 @@
 	</main>
 	
 	<%@ include file="footer.jsp" %>
+	
+	<!--  IMPLEMENTAZIONE EVIDENZIA IMMAGINI AL PASSAGGIO DEL MOUSE CON JQUERY -->
+	<script>
+$(document).ready(function(){
+  $(".product-card").hover(function(){
+	  $(this).css("transform","scale(1.1)");
+ 	 }, function(){
+  	$(this).css("transform", "scale(1.0)");
+	});
+});
+
+</script>
+	
 </body>
 </html>
