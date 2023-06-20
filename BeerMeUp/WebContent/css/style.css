@@ -237,14 +237,14 @@ main form input, textarea, select{
 
 @media (max-width: 450px){
     html{
-        font-size: 70%;
+        font-size: 65%;
     }
 }
 
 /*Galaxy A51/71*/
 @media (max-width: 400px){
     html{
-        font-size: 65%;
+        font-size: 60%;
     }
 }
 

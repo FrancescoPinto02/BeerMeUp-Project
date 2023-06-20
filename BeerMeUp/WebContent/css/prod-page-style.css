@@ -1,0 +1,117 @@
+@charset "UTF-8";
+
+#prod-page{
+    width: 100%;
+    
+}
+
+#prod-page .prod-page-container{
+    margin-top: 5rem;
+    display: grid;
+    width: 100%;
+    justify-items: center;
+    
+}
+
+#prod-page .prod-page-container .prod-name{
+    font-size:3rem;   
+}
+
+#prod-page .prod-page-container .disp{
+    color: green;   
+}
+
+#prod-page .prod-page-container .not-disp{
+    color: red;   
+}
+
+#prod-page .prod-page-container .prod-info{
+    margin-top: 2rem;
+    display: grid;
+    width: 100%;
+    justify-items: center;
+    align-items: center;
+    justify-content: space-around;
+    grid-template-columns: 35rem 20rem;
+}
+
+#prod-page .prod-page-container .prod-info .img {
+    display: grid;
+}
+
+#prod-page .prod-page-container .prod-info .img img{
+    width: 100%;
+    height: auto;
+    border-radius: 20%;
+    box-shadow: 3px 5px 5px 0px #adaaaa;
+    margin:auto;
+}
+
+
+#prod-page .prod-page-container .prod-info .info {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 15rem;
+    grid-template-rows: 2.5rem 2.5rem 2.5rem 2.5rem 2.5rem 4rem;
+    font-size: 1rem;
+}
+
+#prod-page .prod-page-container .prod-info .info h3{
+    font-size: 1.2rem;
+}
+
+#prod-page .prod-page-container .prod-info .info h3 span{
+    font-weight: lighter;
+}
+
+#prod-page .prod-page-container .prod-info .info .button a{
+    text-transform: none;
+    color: black;
+    background-color:  #ffcf00;
+    padding: 1rem 1rem;
+    font-size: 1.2rem;
+    border-radius: 12px;
+    box-shadow: 0 .5rem 1rem black;
+}
+
+#prod-page .prod-page-container .bonus-info{
+    margin-top: 3rem;
+    margin-bottom: 5rem;
+}
+
+#prod-page .prod-page-container .bonus-info h2{
+    font-size: 2rem;
+}
+
+#prod-page .prod-page-container .bonus-info h3{
+    font-size: 1.1rem;
+    font-weight: lighter;
+}
+
+
+@media (max-width: 1200px){
+    #prod-page .prod-page-container .prod-info{
+    	grid-template-columns: 35rem 15rem;
+	}
+	
+	
+}
+
+@media (max-width: 900px){
+    #prod-page .prod-page-container .prod-info{
+    	grid-template-columns: 25rem 10rem;
+	}
+}
+
+@media (max-width: 700px){
+    #prod-page .prod-page-container .prod-info{
+    	grid-template-columns: 30rem;
+	}
+	
+	#prod-page .prod-page-container .prod-info .info {
+   	 	grid-template-columns: 15rem 15rem;
+   	 	grid-template-rows: 4rem 4rem 4rem;
+    	font-size: 1rem;
+    	justify-items: center;
+	}
+}

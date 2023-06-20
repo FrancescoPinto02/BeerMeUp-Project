@@ -64,7 +64,7 @@ header .fa-bars{
     }
 }
 
-@media (max-width: 770px){
+@media (max-width: 835px){
     header .fa-bars{
         display: block;
     }
