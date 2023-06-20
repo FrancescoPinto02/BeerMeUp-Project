@@ -61,7 +61,7 @@ public class UserOrdersControl extends HttpServlet {
 			
 		}
 		catch(Exception e) {
-			AddressControl.logger.log(Level.WARNING, "Errore Servlet Address Control");
+			UserOrdersControl.logger.log(Level.WARNING, "Errore Servlet User Orders Control");
 		}
 		
 		
@@ -77,8 +77,7 @@ public class UserOrdersControl extends HttpServlet {
 		try {
 			request.setAttribute("users", modelUser.doRetrieveByKey(users));
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			UserOrdersControl.logger.log(Level.WARNING, "Errore Servlet User Orders Control");
 		}
 		}
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/manager-detail-user.jsp");

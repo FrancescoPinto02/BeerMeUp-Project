@@ -97,7 +97,6 @@ public class PaymentMethodControl extends HttpServlet {
 		}
 	catch(Exception e) {
 			AddressControl.logger.log(Level.WARNING, "Errore Servlet Payment Method Control:");
-			e.printStackTrace();
 		}
 		 
 		

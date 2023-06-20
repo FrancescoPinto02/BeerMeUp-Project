@@ -57,7 +57,6 @@ public class OrderDetailControl extends HttpServlet {
 		
 		} catch (SQLException e) {
 			ProductDetailControl.logger.log(Level.WARNING, "Errore Servlet order Detail Control");
-			e.printStackTrace();
 		}
 		
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/order-detail.jsp");
