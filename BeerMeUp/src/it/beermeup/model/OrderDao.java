@@ -20,7 +20,13 @@ public class OrderDao{
 	
 	private static DataSource ds;
 	static Logger logger = Logger.getLogger(OrderDao.class.getName());
-
+	static final String SELECT_ALL = "SELECT * FROM ";
+	static final String USER_ID = "user_id";
+	static final String SHIPPING_ADDRESS = "shipping_address";
+	static final String PAYMENT_INFO = "payment_info";
+	static final String ORDER_STATUS = "order_status";
+	static final String TOTAL = "total";
+	static final String ORDER_DATE = "order_date";
 	
 	//Inizializzazione DataSource
 	static {
@@ -41,7 +47,7 @@ public class OrderDao{
 		Order bean = new Order();
 		Connection connection = null;
 		PreparedStatement ps = null;
-		String sql = "SELECT * FROM " + OrderDao.TABLE_NAME + " WHERE id = ?";
+		String sql = SELECT_ALL + OrderDao.TABLE_NAME + " WHERE id = ?";
 		ResultSet rs = null;
 		
 		try {
@@ -53,12 +59,12 @@ public class OrderDao{
 			rs = ps.executeQuery();
 			while(rs.next()) {
 				bean.setId(rs.getInt("id"));
-				bean.setUserId(rs.getInt("user_id"));
-				bean.setShippingAddress(rs.getString("shipping_address"));
-				bean.setPaymentInfo(rs.getString("payment_info"));
-				bean.setStatus(rs.getString("order_status"));
-				bean.setTotal(rs.getBigDecimal("total"));
-				bean.setDate(rs.getDate("order_date"));
+				bean.setUserId(rs.getInt(USER_ID));
+				bean.setShippingAddress(rs.getString(SHIPPING_ADDRESS));
+				bean.setPaymentInfo(rs.getString(PAYMENT_INFO));
+				bean.setStatus(rs.getString(ORDER_STATUS));
+				bean.setTotal(rs.getBigDecimal(TOTAL));
+				bean.setDate(rs.getDate(ORDER_DATE));
 			}		
 		}
 		finally {
@@ -83,7 +89,7 @@ public class OrderDao{
 		ResultSet rs = null;
 		Collection<Order> collection = new ArrayList<>(); 
 		
-		String sql = "SELECT * FROM " + OrderDao.TABLE_NAME;
+		String sql = SELECT_ALL + OrderDao.TABLE_NAME;
 		if(order!=null && !order.equals("")) {
 			sql = sql + " ORDER BY " + order;
 		}
@@ -97,12 +103,12 @@ public class OrderDao{
 				Order bean = new Order();
 				
 				bean.setId(rs.getInt("id"));
-				bean.setUserId(rs.getInt("user_id"));
-				bean.setShippingAddress(rs.getString("shipping_address"));
-				bean.setPaymentInfo(rs.getString("payment_info"));
-				bean.setStatus(rs.getString("order_status"));
-				bean.setTotal(rs.getBigDecimal("total"));
-				bean.setDate(rs.getDate("order_date"));
+				bean.setUserId(rs.getInt(USER_ID));
+				bean.setShippingAddress(rs.getString(SHIPPING_ADDRESS));
+				bean.setPaymentInfo(rs.getString(PAYMENT_INFO));
+				bean.setStatus(rs.getString(ORDER_STATUS));
+				bean.setTotal(rs.getBigDecimal(TOTAL));
+				bean.setDate(rs.getDate(ORDER_DATE));
 				
 				collection.add(bean);
 			}		
@@ -128,7 +134,7 @@ public class OrderDao{
 		ResultSet rs = null;
 		Collection<Order> collection = new ArrayList<>(); 
 		
-		String sql = "SELECT * FROM " + OrderDao.TABLE_NAME + " WHERE user_id = ? ";
+		String sql = SELECT_ALL + OrderDao.TABLE_NAME + " WHERE user_id = ? ";
 		
 		
 		try {
@@ -140,12 +146,12 @@ public class OrderDao{
 				Order bean = new Order();
 				
 				bean.setId(rs.getInt("id"));
-				bean.setUserId(rs.getInt("user_id"));
-				bean.setShippingAddress(rs.getString("shipping_address"));
-				bean.setPaymentInfo(rs.getString("payment_info"));
-				bean.setStatus(rs.getString("order_status"));
-				bean.setTotal(rs.getBigDecimal("total"));
-				bean.setDate(rs.getDate("order_date"));
+				bean.setUserId(rs.getInt(USER_ID));
+				bean.setShippingAddress(rs.getString(SHIPPING_ADDRESS));
+				bean.setPaymentInfo(rs.getString(PAYMENT_INFO));
+				bean.setStatus(rs.getString(ORDER_STATUS));
+				bean.setTotal(rs.getBigDecimal(TOTAL));
+				bean.setDate(rs.getDate(ORDER_DATE));
 				
 				collection.add(bean);
 			}		
