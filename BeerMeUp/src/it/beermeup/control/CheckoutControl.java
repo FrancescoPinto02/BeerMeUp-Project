@@ -58,7 +58,7 @@ public class CheckoutControl extends HttpServlet {
 			
 		}
 		catch(Exception e) {
-			System.out.println("Errore:" + e.getMessage());
+			CheckoutControl.logger.log(Level.WARNING, "Errore Servlet Checkout Control");
 		}
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/checkout.jsp");
 		dispatcher.forward(request, response);
