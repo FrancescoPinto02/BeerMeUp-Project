@@ -31,16 +31,16 @@ public class PaymentMethod {
 		return cardOwner;
 	}
 	
-	public void setOwner(String card_owner){
-		this.cardOwner = card_owner;
+	public void setOwner(String cardOwner){
+		this.cardOwner = cardOwner;
 	}
 	
 	public String getNumber() {
 		return cardNumber;
 	}
 	
-	public void setNumber(String card_number){
-		this.cardNumber = card_number;
+	public void setNumber(String cardNumber){
+		this.cardNumber = cardNumber;
 	}
 	
 	public String getCvv(){
@@ -55,8 +55,8 @@ public class PaymentMethod {
 		return expirationDate;
 	}
 	
-	public void setExpirationDate(Date expiration_date2){
-		this.expirationDate = expiration_date2;
+	public void setExpirationDate(Date expirationDate2){
+		this.expirationDate = expirationDate2;
 	}
 	
 	public String toString() {
