@@ -25,7 +25,10 @@
 	<link rel="stylesheet" href="css/style.css?ts=<?=time()?>&quot">
 	<link rel="stylesheet" href="css/catalog-style.css?ts=<?=time()?>&quot">
 	<link rel="stylesheet" href="css/product-card-style.css?ts=<?=time()?>&quot">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js" 
+	integrity="sha384-UG8ao2jwOWB7/oDdObZc6ItJmwUkR/PfMyt9Qs5AwX7PsnYn1CRKCTWyncPTWvaS" 
+	crossorigin="anonymous">
+	</script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
