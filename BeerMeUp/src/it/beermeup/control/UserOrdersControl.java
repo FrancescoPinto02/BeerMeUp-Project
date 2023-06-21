@@ -21,6 +21,8 @@ public class UserOrdersControl extends HttpServlet {
 	static OrderDao model = new OrderDao();
 	static UserDao modelUser = new UserDao();
 	static Logger logger = Logger.getLogger(UserOrdersControl.class.getName());
+	static final String ORDERS_LIST = "orders-list";
+	static final String USERS = "users";
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		//Azione richiesta
@@ -36,16 +38,16 @@ public class UserOrdersControl extends HttpServlet {
 			if(action!=null) {
 				//Recupera tutti gli ordini dell'utente
 				if (action.equalsIgnoreCase("retrieveUserOrders")) {
-					request.removeAttribute("orders-list");
-					request.setAttribute("orders-list", model.doRetrieveByUser(userId.intValue()));
+					request.removeAttribute(ORDERS_LIST);
+					request.setAttribute(ORDERS_LIST, model.doRetrieveByUser(userId.intValue()));
 					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/user-orders.jsp");
 					dispatcher.forward(request, response);
 				}
 				
 				if (action.equalsIgnoreCase("retrieveAllOrders"))
 				{
-					request.removeAttribute("orders-list");
-					request.setAttribute("orders-list", model.doRetrieveAll("user_id"));
+					request.removeAttribute(ORDERS_LIST);
+					request.setAttribute(ORDERS_LIST, model.doRetrieveAll("user_id"));
 					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/all-orders.jsp");
 					dispatcher.forward(request, response);
 				}
@@ -72,10 +74,10 @@ public class UserOrdersControl extends HttpServlet {
 		String action = request.getParameter("action");
 		if (action!=null && action.equalsIgnoreCase("retrieveUser")) {
 			
-			int users = Integer.parseInt(request.getParameter("users"));
-		request.removeAttribute("users");
+			int users = Integer.parseInt(request.getParameter("USERS"));
+		request.removeAttribute("USERS");
 		try {
-			request.setAttribute("users", modelUser.doRetrieveByKey(users));
+			request.setAttribute("USERS", modelUser.doRetrieveByKey(users));
 		} catch (SQLException e) {
 			UserOrdersControl.logger.log(Level.WARNING, "Errore Servlet User Orders Control");
 		}

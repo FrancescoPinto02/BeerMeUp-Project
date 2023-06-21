@@ -19,10 +19,10 @@ import it.beermeup.model.OrderDetailsDao;
 public class OrderDetailControl extends HttpServlet {
 	private static final long serialVersionUID = 4604094836457987059L;
 	static OrderDetailsDao model = new OrderDetailsDao();
-	static OrderDao OrderModel = new OrderDao();
+	static OrderDao orderModel = new OrderDao();
 	static Logger logger = Logger.getLogger(OrderDetailControl.class.getName());
 	
-	final static String ORDER_ID = "order-id";
+	static final String ORDER_ID = "order-id";
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		doGet(request, response);
@@ -49,11 +49,11 @@ public class OrderDetailControl extends HttpServlet {
 				
 			if (action != null && action.equalsIgnoreCase("retrieveProducts")) {
 						
-				Integer orderId = (Integer) request.getSession().getAttribute("order-id")	;
+				Integer orderId = (Integer) request.getSession().getAttribute(ORDER_ID)	;
 				request.removeAttribute("product-list");
 				request.setAttribute("product-list",model.doRetrieveByOrder(orderId));
 				request.removeAttribute("order");
-				request.setAttribute("order", OrderModel.doRetrieveByKey(orderId));
+				request.setAttribute("order", orderModel.doRetrieveByKey(orderId));
 				}
 		
 		
