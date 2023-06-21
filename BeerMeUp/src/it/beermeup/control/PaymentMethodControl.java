@@ -75,8 +75,8 @@ public class PaymentMethodControl extends HttpServlet {
 		try {
 			if(action!=null && action.equalsIgnoreCase("addPaymentMethod")) {
 				//Aggiungi Metodo Di Pagamento
-				String card_owner = request.getParameter("card_owner");
-				String card_number = request.getParameter("card_number");
+				String cardOwner = request.getParameter("card_owner");
+				String cardNumber = request.getParameter("card_number");
 				String cvv = request.getParameter("cvv");
 				String expiration=(request.getParameter("expiration"));
 				Date date=Date.valueOf(expiration);
@@ -86,8 +86,8 @@ public class PaymentMethodControl extends HttpServlet {
 					
 				PaymentMethod paymentmethod = new PaymentMethod();
 				paymentmethod.setUserId(userId.intValue());
-				paymentmethod.setOwner(card_owner);
-				paymentmethod.setNumber(card_number);
+				paymentmethod.setOwner(cardOwner);
+				paymentmethod.setNumber(cardNumber);
 				paymentmethod.setCvv(cvv);
 				paymentmethod.setExpirationDate(date);
 					

@@ -6,10 +6,10 @@ public class PaymentMethod {
 	
 	private int id = 0;
 	private int userId = 0;
-	private String card_owner = "";
-	private String card_number = "";
+	private String cardOwner = "";
+	private String cardNumber = "";
 	private String cvv = "";
-	private Date expiration_date = new Date(0);
+	private Date expirationDate = new Date(0);
 	
 	public int getId() {
 		return id;
@@ -28,19 +28,19 @@ public class PaymentMethod {
 	}
 	
 	public String getOwner(){
-		return card_owner;
+		return cardOwner;
 	}
 	
 	public void setOwner(String card_owner){
-		this.card_owner = card_owner;
+		this.cardOwner = card_owner;
 	}
 	
 	public String getNumber() {
-		return card_number;
+		return cardNumber;
 	}
 	
 	public void setNumber(String card_number){
-		this.card_number = card_number;
+		this.cardNumber = card_number;
 	}
 	
 	public String getCvv(){
@@ -52,15 +52,15 @@ public class PaymentMethod {
 	}
 	
 	public Date getExpirationDate(){
-		return expiration_date;
+		return expirationDate;
 	}
 	
 	public void setExpirationDate(Date expiration_date2){
-		this.expiration_date = expiration_date2;
+		this.expirationDate = expiration_date2;
 	}
 	
 	public String toString() {
-		return "Payment Method [Owner=" + card_owner + ", Card Number=" + card_number + ", CVV=" + cvv + ", Expiration Date=" + expiration_date
+		return "Payment Method [Owner=" + cardOwner + ", Card Number=" + cardNumber + ", CVV=" + cvv + ", Expiration Date=" + expirationDate
 				+ "]";
 	}
 }
