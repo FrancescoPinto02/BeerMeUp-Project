@@ -74,10 +74,10 @@ public class UserOrdersControl extends HttpServlet {
 		String action = request.getParameter("action");
 		if (action!=null && action.equalsIgnoreCase("retrieveUser")) {
 			
-			int users = Integer.parseInt(request.getParameter("USERS"));
-		request.removeAttribute("USERS");
+			int users = Integer.parseInt(request.getParameter(USERS));
+		request.removeAttribute(USERS);
 		try {
-			request.setAttribute("USERS", modelUser.doRetrieveByKey(users));
+			request.setAttribute(USERS, modelUser.doRetrieveByKey(users));
 		} catch (SQLException e) {
 			UserOrdersControl.logger.log(Level.WARNING, "Errore Servlet User Orders Control");
 		}
