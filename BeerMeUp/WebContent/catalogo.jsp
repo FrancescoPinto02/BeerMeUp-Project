@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 
 <%
+
 	Collection<?> productsList = (Collection<?>) request.getAttribute("productsList");
 	Map<?, ?> breweryMap = (Map<?, ?>) request.getAttribute("breweryMap");
 	

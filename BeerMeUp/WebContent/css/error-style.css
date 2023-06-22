@@ -1,0 +1,48 @@
+@charset "UTF-8";
+
+#err-page{
+    margin-top: 10rem;
+    width: 100%;
+    display: grid;
+    justify-content: center;
+    justify-items: center;
+}
+
+#err-page .logo h1{
+    font-size: 3rem;
+    text-align: center;
+}
+
+#err-page .err-info{
+    display: grid;
+    margin-top: 2rem;
+    padding: 2rem 0;
+    border-radius: 25px;
+    justify-content: center;
+    justify-items: center;
+}
+
+#err-page .err-info h2{
+    font-size: 1.5rem;
+}
+
+#err-page .err-page-button{
+	margin-top: 2rem;
+}
+
+#err-page .err-page-button a{
+    text-transform: none;
+ 	color: black;
+ 	background-color:  #ffcf00;
+ 	padding: 1rem 2rem;
+ 	font-size: 1.2rem;
+ 	border-radius: 12px;
+ 	box-shadow: 0 .5rem 1rem black;
+}
+
+
+#err-page .err-page-button a:hover{
+	background-color: #0030ff;
+ 	color: white;
+ 	font-size: 1.3rem;
+}
