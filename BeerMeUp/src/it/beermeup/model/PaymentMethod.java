@@ -36,7 +36,22 @@ public class PaymentMethod {
 	}
 	
 	public String getNumber() {
-		return cardNumber;
+		return getNumber(false);
+	}
+	
+	public String getNumber(boolean visible) {
+		if(visible) {
+			return cardNumber;
+		}
+		else {
+			String lastFourChars = "";  
+			if (cardNumber.length() > 4) {
+				lastFourChars = cardNumber.substring(cardNumber.length() - 4);
+			} else {
+				lastFourChars = cardNumber;
+			}
+			return "xxxx xxxx xxxx " + lastFourChars;
+		}
 	}
 	
 	public void setNumber(String cardNumber){
@@ -60,7 +75,9 @@ public class PaymentMethod {
 	}
 	
 	public String toString() {
-		return "Payment Method [Owner=" + cardOwner + ", Card Number=" + cardNumber + ", CVV=" + cvv + ", Expiration Date=" + expirationDate
+		
+		return "Payment Method [Owner=" + cardOwner + ", Card Number=" + getNumber(false) + ", CVV=" + cvv + ", Expiration Date=" + expirationDate
 				+ "]";
+		
 	}
 }

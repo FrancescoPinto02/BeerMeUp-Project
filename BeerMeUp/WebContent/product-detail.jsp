@@ -4,7 +4,7 @@
 <% 	Beer beer = (Beer) request.getAttribute("product");
 	Brewery brewery = (Brewery) request.getAttribute("productBrewery");
 	Style style = (Style) request.getAttribute("productStyle");
-	if(beer==null || brewery==null || style==null){
+	if(beer.getId()<=0 || brewery.getId()<=0 || style.getId()<=0){
 		response.sendRedirect("catalogo.jsp");
 	}%>
 <!DOCTYPE html>
