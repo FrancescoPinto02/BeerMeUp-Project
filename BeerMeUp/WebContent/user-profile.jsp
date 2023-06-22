@@ -25,6 +25,7 @@
 	<title>Beer Me Up</title>
 	<meta name="viewport" content="widht=device-width, initial-scale=1">
 	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/card.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">	
 </head>
 <body>
@@ -34,12 +35,57 @@
 			<h1>Profilo Utente: <span><a href="./logout"> Logout</a></span></h1>
 			<h2><%=user.getFirstName()%>  <%=user.getLastName()%></h2>
 			<br><br>
-			<a href="user-address.jsp">I miei Indirizzi</a>
-			<a href="user-paymentmethod.jsp">I miei Metodi di Pagamento</a>
-			<a href="user-orders.jsp">I miei Ordini</a>
-			<a href="user-data.jsp">I miei Dati</a>
 			
-			
+			<div class="card-container">
+        		<div class="card">
+            		<a href="user-address.jsp">
+                		<div class="card-content">
+                    		<div class="image">
+                        		<img src="img/address.png" alt="address">
+                    		</div>
+                   		 	<div class="title">
+                        		<h3>I miei Indirizzi</h3>
+                    		</div>
+                		</div>
+            		</a>
+        		</div>
+        		<div class="card">
+            		<a href="user-paymentmethod.jsp">
+                		<div class="card-content">
+                    		<div class="image">
+                        		<img src="img/card.png" alt="card">
+                    		</div>
+                   		 	<div class="title">
+                        		<h3>I miei Metodi<br>di Pagamento</h3>
+                    		</div>
+                		</div>
+            		</a>
+        		</div>
+        		<div class="card">
+            		<a href="user-orders.jsp">
+                		<div class="card-content">
+                    		<div class="image">
+                        		<img src="img/order.png" alt="order">
+                    		</div>
+                   		 	<div class="title">
+                        		<h3>I miei ordini</h3>
+                    		</div>
+                		</div>
+            		</a>
+        		</div>
+        		<div class="card">
+            		<a href="user-data.jsp" target="_blank">
+                		<div class="card-content">
+                    		<div class="image">
+                        		<img src="img/user.png" alt="user">
+                    		</div>
+                   		 	<div class="title">
+                        		<h3>I miei Dati</h3>
+                    		</div>
+                		</div>
+            		</a>
+        		</div>    
+    		</div>
 		</div>				
 	</main>
 	<%@ include file="footer.jsp" %>

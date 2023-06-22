@@ -45,6 +45,7 @@ public class UserDataControl extends HttpServlet {
 			} catch (SQLException e) {
 				
 				UserDataControl.logger.log(Level.WARNING, "Errore Servlet User Data Control:");
+				
 	}
 		}
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/user-data.jsp");
