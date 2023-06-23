@@ -44,6 +44,7 @@
     		</div>
     		<div class="invoice-body">
       			<table class="invoice-table">
+      			<caption></caption>
         			<thead>
           				<tr>
             				<th>Descrizione</th>
