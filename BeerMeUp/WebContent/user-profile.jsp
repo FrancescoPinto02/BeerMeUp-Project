@@ -74,7 +74,7 @@
             		</a>
         		</div>
         		<div class="card">
-            		<a href="user-data.jsp" target="_blank">
+            		<a href="user-data.jsp">
                 		<div class="card-content">
                     		<div class="image">
                         		<img src="img/user.png" alt="user">

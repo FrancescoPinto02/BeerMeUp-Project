@@ -1,6 +1,7 @@
 package it.beermeup.model;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -82,6 +83,7 @@ public class OrderDao{
 		
 		return bean;
 	}
+	
 
 	public synchronized Collection<Order> doRetrieveAll(String order) throws SQLException {
 		Connection connection = null;
@@ -128,6 +130,7 @@ public class OrderDao{
 		
 		return collection;
 	}
+	
 	public synchronized Collection<Order> doRetrieveByUser(int id) throws SQLException {
 		Connection connection = null;
 		PreparedStatement ps = null;
@@ -171,6 +174,52 @@ public class OrderDao{
 		
 		return collection;
 	}
+	
+	public synchronized Collection<Order> doRetrieveByDates(Date fromDate, Date toDate) throws SQLException {
+		Connection connection = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Collection<Order> collection = new ArrayList<>(); 
+		
+		String sql = SELECT_ALL + OrderDao.TABLE_NAME + " WHERE order_date>=? AND order_date<=?";
+		
+		
+		try {
+			connection = ds.getConnection(); 
+			ps = connection.prepareStatement(sql);
+			ps.setDate(1, fromDate);
+			ps.setDate(2, toDate);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				Order bean = new Order();
+				
+				bean.setId(rs.getInt("id"));
+				bean.setUserId(rs.getInt(USER_ID));
+				bean.setShippingAddress(rs.getString(SHIPPING_ADDRESS));
+				bean.setPaymentInfo(rs.getString(PAYMENT_INFO));
+				bean.setStatus(rs.getString(ORDER_STATUS));
+				bean.setTotal(rs.getBigDecimal(TOTAL));
+				bean.setDate(rs.getDate(ORDER_DATE));
+				
+				collection.add(bean);
+			}		
+		}
+		finally {
+				try {
+					if(ps != null) {
+						ps.close();
+					}
+				}
+				finally {
+					if(connection != null) {
+						connection.close();
+					}
+				}
+		}
+		
+		return collection;
+	}
+	
 	public synchronized int doSaveReturnKey(Order bean) throws SQLException{
 		Connection connection = null;
 		PreparedStatement ps = null;

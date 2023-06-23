@@ -11,7 +11,8 @@
 	}
     
     Collection<?> ordersList = (Collection<?>) request.getAttribute("orders-list");
-	if(ordersList==null){
+    Collection<?> usersList = (Collection<?>) request.getAttribute("users-list");
+	if(ordersList==null || usersList==null){
 		response.sendRedirect("./user_orders_control?action=retrieveAllOrders");
 		return;
 	}
@@ -32,7 +33,38 @@
 	<%@ include file="header.jsp" %>
 	<main>
 	<div id="admin-orders-pages">
-		<h1>Tutti Gli Ordini</h1>
+		<h1>Tutti Gli Ordini: <span><a href="./user_orders_control?action=retrieveAllOrders">all</a></span></h1><br><br>
+		
+		<form action="./user_orders_control" method ="post">
+				<h3>Ricerca per Data</h3>
+				<input type="hidden" id="action" name="action" value="searchByDate">
+				<label for="fromDate">Da:</label>
+				<input type="date" id="fromDate" name="fromDate" required>
+				<label for="toDate">A:</label>
+				<input type="date" id="toDate" name="toDate" required>
+				<input type="submit">
+		</form><br><br>
+		
+		<form action="./user_orders_control" method ="post">
+				<h3>Ricerca per Utente</h3>
+				<input type="hidden" id="action" name="action" value="searchByUser">
+				<label for="user">Utente:</label>
+				<select name="user" id="user" required>
+					<%
+					if (usersList != null && usersList.size() != 0) {
+						Iterator<?> usersIt = usersList.iterator();
+						while (usersIt.hasNext()) {
+							User user = (User) usersIt.next();
+						%>
+						<option value="<%=user.getId()%>"><%=user.getEmail()%></option>
+						<%
+						}
+					} 
+					%>
+				</select>
+				<input type="submit">
+		</form><br><br>
+			
 		<table>
 				<caption></caption>
 				<tr>
@@ -65,6 +97,8 @@
 					</tr>
 				<%}%>
 			</table><br><br>
+			
+			
 </div>
 </main>
 <%@ include file="footer.jsp" %>

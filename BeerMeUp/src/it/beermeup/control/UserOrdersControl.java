@@ -1,7 +1,7 @@
 package it.beermeup.control;
 
 import java.io.IOException;
-import java.sql.SQLException;
+import java.sql.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -19,6 +19,7 @@ public class UserOrdersControl extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	static OrderDao model = new OrderDao();
+	static UserDao userModel = new UserDao();
 	static UserDao modelUser = new UserDao();
 	static Logger logger = Logger.getLogger(UserOrdersControl.class.getName());
 	static final String ORDERS_LIST = "orders-list";
@@ -48,6 +49,8 @@ public class UserOrdersControl extends HttpServlet {
 				{
 					request.removeAttribute(ORDERS_LIST);
 					request.setAttribute(ORDERS_LIST, model.doRetrieveAll("user_id"));
+					request.removeAttribute("users-list");
+					request.setAttribute("users-list", userModel.doRetrieveAll(""));
 					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/all-orders.jsp");
 					dispatcher.forward(request, response);
 				}
@@ -70,19 +73,40 @@ public class UserOrdersControl extends HttpServlet {
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-		
 		String action = request.getParameter("action");
-		if (action!=null && action.equalsIgnoreCase("retrieveUser")) {
-			
-			int users = Integer.parseInt(request.getParameter(USERS));
-		request.removeAttribute(USERS);
 		try {
-			request.setAttribute(USERS, modelUser.doRetrieveByKey(users));
-		} catch (SQLException e) {
+			if(action!=null) {
+				if(action.equalsIgnoreCase("retrieveUser")){
+					int users = Integer.parseInt(request.getParameter(USERS));
+					request.removeAttribute(USERS);
+					request.setAttribute(USERS, modelUser.doRetrieveByKey(users));
+					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/manager-detail-user.jsp");
+					dispatcher.forward(request, response);
+				}
+				else if(action.equalsIgnoreCase("searchByDate")) {
+					Date fromDate = Date.valueOf(request.getParameter("fromDate"));
+					Date toDate = Date.valueOf(request.getParameter("toDate"));
+					request.removeAttribute(ORDERS_LIST);
+					request.setAttribute(ORDERS_LIST, model.doRetrieveByDates(fromDate, toDate));
+					request.removeAttribute("users-list");
+					request.setAttribute("users-list", userModel.doRetrieveAll(""));
+					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/all-orders.jsp");
+					dispatcher.forward(request, response);
+				}
+				else if(action.equalsIgnoreCase("searchByUser")) {
+					int userId = Integer.parseInt(request.getParameter("user"));
+					request.removeAttribute(ORDERS_LIST);
+					request.setAttribute(ORDERS_LIST, model.doRetrieveByUser(userId));
+					request.removeAttribute("users-list");
+					request.setAttribute("users-list", userModel.doRetrieveAll(""));
+					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/all-orders.jsp");
+					dispatcher.forward(request, response);
+				}
+			}
+		}
+		catch(Exception e) {
 			UserOrdersControl.logger.log(Level.WARNING, "Errore Servlet User Orders Control");
 		}
-		}
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/manager-detail-user.jsp");
-		dispatcher.forward(request, response);
 	}
+	
 }
