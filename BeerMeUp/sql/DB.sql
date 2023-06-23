@@ -190,9 +190,11 @@ INSERT INTO beer (brewery_id , style_id, beer_name, beer_description, color, ing
 VALUES ('2', '6', 'Vivienne', 'Prodotta da Birra Impavida di Arco (TN), Vivienne è una birra dal tenore alcolico medio. Prende a modello la categoria delle Vienna, antico stile creato per la prima volta nel 1841 da Anton Dreher e legato alla città di Vienna, costituito da birre ambrate tendenzialmente maltate, relativamente secche e mediamente alcoliche. Nel profilo aromatico si ritrovano note di miele di castagno, cereali e crosta di pane e a un analisi più approfondita tendenze assimilabili a caramello, fiori e tostato.' , 'Scura' , 'Orzo', '4.8' , '4.50', '22', '20', '10', LOAD_FILE('C:/birre/Beer10.PNG'));
 
 
-
 INSERT INTO site_user (email, pw, first_name, last_name, is_admin) 
 VALUES ('beermeup@gmail.com' , '1234', 'admin', 'admin', TRUE);
     
 INSERT INTO address (user_id, street, num, cap, city, nation, telephone)
 VALUES ('1' , 'Via Indirizzo Admin' , '1', '81081' , 'Roma' , 'Italia', '1234567890');
+
+INSERT INTO payment_method (user_id, card_owner, card_number, cvv, expiration_date)
+VALUES ('1', 'admin admin', '1111222233334444', '123', '2030-06-10')

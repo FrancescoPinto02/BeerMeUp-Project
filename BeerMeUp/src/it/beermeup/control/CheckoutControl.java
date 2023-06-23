@@ -23,6 +23,7 @@ import it.beermeup.model.OrderDao;
 import it.beermeup.model.OrderDetails;
 import it.beermeup.model.OrderDetailsDao;
 import it.beermeup.model.PaymentMethodDao;
+import it.beermeup.model.UserDao;
 
 
 public class CheckoutControl extends HttpServlet {
@@ -34,6 +35,7 @@ public class CheckoutControl extends HttpServlet {
 	static PaymentMethodDao paymentModel = new PaymentMethodDao();
 	static OrderDetailsDao orderDetailsModel = new OrderDetailsDao();
 	static BeerDao beerModel = new BeerDao();
+	static UserDao userModel = new UserDao();
 	static Logger logger = Logger.getLogger(CheckoutControl.class.getName());
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
@@ -49,6 +51,8 @@ public class CheckoutControl extends HttpServlet {
 		try {
 			if(action!=null) {
 				
+				request.removeAttribute("user-info");
+				request.setAttribute("user-info", userModel.doRetrieveByKey(userId));
 				request.removeAttribute("address-list");
 				request.setAttribute("address-list", addressModel.doRetrieveByUser(userId.intValue()));	
 				request.removeAttribute("payment-list");

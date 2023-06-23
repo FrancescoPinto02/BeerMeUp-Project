@@ -58,10 +58,11 @@
 				<%
 				if (addressList != null && addressList.size() != 0) {
 					Iterator<?> it = addressList.iterator();
+					User user = (User) request.getAttribute("user-info");
 					while (it.hasNext()) {
 						Address address = (Address) it.next();
 				%>
-						<option value="<%=address.toString()%>"><%=address.toString()%></option>
+						<option value="<%=user.getFirstName() + " " + user.getLastName() + ", " + address.toString()%>"><%=address.toString()%></option>
 				<%
 					}
 				} 

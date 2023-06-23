@@ -76,8 +76,7 @@ public class PaymentMethod {
 	
 	public String toString() {
 		
-		return "Payment Method [Owner=" + cardOwner + ", Card Number=" + getNumber(false) + ", CVV=" + cvv + ", Expiration Date=" + expirationDate
-				+ "]";
+		return "Numero Carta: " + this.getNumber(false) + ", Proprietario: " + this.getOwner();
 		
 	}
 }

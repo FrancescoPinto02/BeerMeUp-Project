@@ -24,6 +24,7 @@ public class OrderDao{
 	static final String SELECT_ALL = "SELECT * FROM ";
 	static final String USER_ID = "user_id";
 	static final String SHIPPING_ADDRESS = "shipping_address";
+	static final String BILLING_ADDRESS = "billing_address";
 	static final String PAYMENT_INFO = "payment_info";
 	static final String ORDER_STATUS = "order_status";
 	static final String TOTAL = "total";
@@ -62,6 +63,7 @@ public class OrderDao{
 				bean.setId(rs.getInt("id"));
 				bean.setUserId(rs.getInt(USER_ID));
 				bean.setShippingAddress(rs.getString(SHIPPING_ADDRESS));
+				bean.setBillingAddress(rs.getString(BILLING_ADDRESS));
 				bean.setPaymentInfo(rs.getString(PAYMENT_INFO));
 				bean.setStatus(rs.getString(ORDER_STATUS));
 				bean.setTotal(rs.getBigDecimal(TOTAL));
@@ -107,6 +109,7 @@ public class OrderDao{
 				bean.setId(rs.getInt("id"));
 				bean.setUserId(rs.getInt(USER_ID));
 				bean.setShippingAddress(rs.getString(SHIPPING_ADDRESS));
+				bean.setBillingAddress(rs.getString(BILLING_ADDRESS));
 				bean.setPaymentInfo(rs.getString(PAYMENT_INFO));
 				bean.setStatus(rs.getString(ORDER_STATUS));
 				bean.setTotal(rs.getBigDecimal(TOTAL));
@@ -151,6 +154,7 @@ public class OrderDao{
 				bean.setId(rs.getInt("id"));
 				bean.setUserId(rs.getInt(USER_ID));
 				bean.setShippingAddress(rs.getString(SHIPPING_ADDRESS));
+				bean.setBillingAddress(rs.getString(BILLING_ADDRESS));
 				bean.setPaymentInfo(rs.getString(PAYMENT_INFO));
 				bean.setStatus(rs.getString(ORDER_STATUS));
 				bean.setTotal(rs.getBigDecimal(TOTAL));
@@ -196,6 +200,7 @@ public class OrderDao{
 				bean.setId(rs.getInt("id"));
 				bean.setUserId(rs.getInt(USER_ID));
 				bean.setShippingAddress(rs.getString(SHIPPING_ADDRESS));
+				bean.setBillingAddress(rs.getString(BILLING_ADDRESS));
 				bean.setPaymentInfo(rs.getString(PAYMENT_INFO));
 				bean.setStatus(rs.getString(ORDER_STATUS));
 				bean.setTotal(rs.getBigDecimal(TOTAL));
