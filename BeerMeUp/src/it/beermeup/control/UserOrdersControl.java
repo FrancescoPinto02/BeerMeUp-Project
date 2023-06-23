@@ -23,6 +23,8 @@ public class UserOrdersControl extends HttpServlet {
 	static UserDao modelUser = new UserDao();
 	static Logger logger = Logger.getLogger(UserOrdersControl.class.getName());
 	static final String ORDERS_LIST = "orders-list";
+	static final String USERS_LIST = "users-list";
+	static final String ALL_ORDERS = "/all-orders.jsp";
 	static final String USERS = "users";
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
@@ -49,16 +51,16 @@ public class UserOrdersControl extends HttpServlet {
 				{
 					request.removeAttribute(ORDERS_LIST);
 					request.setAttribute(ORDERS_LIST, model.doRetrieveAll("user_id"));
-					request.removeAttribute("users-list");
-					request.setAttribute("users-list", userModel.doRetrieveAll(""));
-					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/all-orders.jsp");
+					request.removeAttribute(USERS_LIST);
+					request.setAttribute(USERS_LIST, userModel.doRetrieveAll(""));
+					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(ALL_ORDERS);
 					dispatcher.forward(request, response);
 				}
 
 				if (action.equalsIgnoreCase("retrieveAllUsers"))
 				{
-					request.removeAttribute("users-list");
-					request.setAttribute("users-list", modelUser.doRetrieveAll("id"));
+					request.removeAttribute(USERS_LIST);
+					request.setAttribute(USERS_LIST, modelUser.doRetrieveAll("id"));
 					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/all-users.jsp");
 					dispatcher.forward(request, response);
 				}
@@ -88,18 +90,18 @@ public class UserOrdersControl extends HttpServlet {
 					Date toDate = Date.valueOf(request.getParameter("toDate"));
 					request.removeAttribute(ORDERS_LIST);
 					request.setAttribute(ORDERS_LIST, model.doRetrieveByDates(fromDate, toDate));
-					request.removeAttribute("users-list");
-					request.setAttribute("users-list", userModel.doRetrieveAll(""));
-					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/all-orders.jsp");
+					request.removeAttribute(USERS_LIST);
+					request.setAttribute(USERS_LIST, userModel.doRetrieveAll(""));
+					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(ALL_ORDERS);
 					dispatcher.forward(request, response);
 				}
 				else if(action.equalsIgnoreCase("searchByUser")) {
 					int userId = Integer.parseInt(request.getParameter("user"));
 					request.removeAttribute(ORDERS_LIST);
 					request.setAttribute(ORDERS_LIST, model.doRetrieveByUser(userId));
-					request.removeAttribute("users-list");
-					request.setAttribute("users-list", userModel.doRetrieveAll(""));
-					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/all-orders.jsp");
+					request.removeAttribute(USERS_LIST);
+					request.setAttribute(USERS_LIST, userModel.doRetrieveAll(""));
+					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(ALL_ORDERS);
 					dispatcher.forward(request, response);
 				}
 			}
