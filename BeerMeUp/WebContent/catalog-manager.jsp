@@ -47,7 +47,7 @@
             	<div class="card">
                 	<div class="card-header">
                        	<a href="productDetail_control?action=showProductDetails&id=<%=beer.getId()%>"><i class="fa fa-eye"></i></a>
-                       	<a href="#"><i class="fa fa-pencil"></i></a>
+                       	<a href="catalogManager?action=edit&beerId=<%=beer.getId()%>"><i class="fa fa-pencil"></i></a>
                         <a href="catalogManager?action=delete&beerId=<%=beer.getId()%>"><i class="fa fa-close"></i></a>
                 	</div>
                 	<div class="card-body">

@@ -249,14 +249,26 @@ public class BeerDao{
 		Connection connection = null;
 		PreparedStatement ps = null;
 		String sql = "UPDATE "+ BeerDao.TABLE_NAME + " SET brewery_id =?, style_id = ?, beer_name= ? , beer_description= ?, color = ?, ingredients = ?, gradation = ?,"+
-		"price = ? ,iva = ? , stock = ?, discount = ?, img = ? WHERE id = ?";
+		"price = ? ,iva = ? , stock = ?, discount = ? WHERE id = ?";
 		
 		try {
 			connection = ds.getConnection();
 			connection.setAutoCommit(false);
 			ps = connection.prepareStatement(sql);
-			buildBeerPS(bean, ps);	
-			ps.setInt(13, bean.getId());
+			
+			ps.setInt(1, bean.getBreweryId());
+			ps.setInt(2, bean.getStyleId());
+			ps.setString(3, bean.getName());
+			ps.setString(4, bean.getDescription());
+			ps.setString(5, bean.getColor());
+			ps.setString(6, bean.getIngredients());
+			ps.setBigDecimal(7, bean.getGradation());
+			ps.setBigDecimal(8, bean.getPrice());
+			ps.setBigDecimal(9, bean.getIva());
+			ps.setInt(10, bean.getStock());
+			ps.setInt(11, bean.getDiscount());
+			
+			ps.setInt(12, bean.getId());
 			ps.executeUpdate();
 			connection.commit();		
 		}
