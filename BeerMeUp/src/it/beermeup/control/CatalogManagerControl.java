@@ -24,6 +24,8 @@ public class CatalogManagerControl extends HttpServlet {
 	static StyleDao styleModel = new StyleDao();
 	static final String BEER_LIST = "beerList";
 	static Logger logger = Logger.getLogger(CatalogManagerControl.class.getName());
+	static final String BEER_ID = "beerId";
+	static final String CATALOG_MANAGER = "/catalog-manager.jsp";
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		//Azione richiesta
@@ -32,7 +34,7 @@ public class CatalogManagerControl extends HttpServlet {
 		try {
 			if(action!=null) {
 				Beer beer = new Beer();
-				beer.setId(Integer.parseInt(request.getParameter("beerId")));
+				beer.setId(Integer.parseInt(request.getParameter(BEER_ID)));
 				beer.setName(request.getParameter("beerName"));
 				beer.setColor(request.getParameter("beerColor"));
 				beer.setGradation(new BigDecimal(request.getParameter("beerGradation")));
@@ -45,7 +47,7 @@ public class CatalogManagerControl extends HttpServlet {
 				beer.setStyleId(Integer.parseInt(request.getParameter("beerStyle")));
 				beer.setBreweryId(Integer.parseInt(request.getParameter("beerBrewery")));
 				model.doUpdate(beer);
-				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/catalog-manager.jsp");
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(CATALOG_MANAGER);
 				dispatcher.forward(request, response);	
 			}
 		}
@@ -65,19 +67,19 @@ public class CatalogManagerControl extends HttpServlet {
 				if(action.equalsIgnoreCase("initialize")) {
 					request.removeAttribute(BEER_LIST);
 					request.setAttribute(BEER_LIST, model.doRetrieveAll(""));
-					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/catalog-manager.jsp");
+					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(CATALOG_MANAGER);
 					dispatcher.forward(request, response);	
 				}
 				//Rimozione Birra	
 				else if(action.equalsIgnoreCase("delete")) {
-					int beerId = Integer.parseInt(request.getParameter("beerId"));
+					int beerId = Integer.parseInt(request.getParameter(BEER_ID));
 					model.doDelete(beerId);
-					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/catalog-manager.jsp");
+					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(CATALOG_MANAGER);
 					dispatcher.forward(request, response);	
 				}
 				//Rimozione Birra	
 				else if(action.equalsIgnoreCase("edit")) {
-					int beerId = Integer.parseInt(request.getParameter("beerId"));
+					int beerId = Integer.parseInt(request.getParameter(BEER_ID));
 					request.removeAttribute("beer");
 					request.setAttribute("beer", model.doRetrieveByKey(beerId));
 					request.removeAttribute("breweryList");
