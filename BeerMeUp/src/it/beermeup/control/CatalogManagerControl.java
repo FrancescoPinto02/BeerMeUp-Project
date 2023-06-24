@@ -31,24 +31,22 @@ public class CatalogManagerControl extends HttpServlet {
 		
 		try {
 			if(action!=null) {
-				if(action.equalsIgnoreCase("editBeer")) {
-					Beer beer = new Beer();
-					beer.setId(Integer.parseInt(request.getParameter("beerId")));
-					beer.setName(request.getParameter("beerName"));
-					beer.setColor(request.getParameter("beerColor"));
-					beer.setGradation(new BigDecimal(request.getParameter("beerGradation")));
-					beer.setPrice(new BigDecimal(request.getParameter("beerPrice")));
-					beer.setIva(new BigDecimal(request.getParameter("beerIva")));
-					beer.setStock(Integer.parseInt(request.getParameter("beerStock")));
-					beer.setDiscount(Integer.parseInt(request.getParameter("beerDiscount")));
-					beer.setDescription(request.getParameter("beerDescription"));
-					beer.setIngredients(request.getParameter("beerIngredients"));
-					beer.setStyleId(Integer.parseInt(request.getParameter("beerStyle")));
-					beer.setBreweryId(Integer.parseInt(request.getParameter("beerBrewery")));
-					model.doUpdate(beer);
-					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/catalog-manager.jsp");
-					dispatcher.forward(request, response);	
-				}
+				Beer beer = new Beer();
+				beer.setId(Integer.parseInt(request.getParameter("beerId")));
+				beer.setName(request.getParameter("beerName"));
+				beer.setColor(request.getParameter("beerColor"));
+				beer.setGradation(new BigDecimal(request.getParameter("beerGradation")));
+				beer.setPrice(new BigDecimal(request.getParameter("beerPrice")));
+				beer.setIva(new BigDecimal(request.getParameter("beerIva")));
+				beer.setStock(Integer.parseInt(request.getParameter("beerStock")));
+				beer.setDiscount(Integer.parseInt(request.getParameter("beerDiscount")));
+				beer.setDescription(request.getParameter("beerDescription"));
+				beer.setIngredients(request.getParameter("beerIngredients"));
+				beer.setStyleId(Integer.parseInt(request.getParameter("beerStyle")));
+				beer.setBreweryId(Integer.parseInt(request.getParameter("beerBrewery")));
+				model.doUpdate(beer);
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/catalog-manager.jsp");
+				dispatcher.forward(request, response);	
 			}
 		}
 		catch (SQLException e) {
