@@ -55,7 +55,7 @@
             		</a>
         		</div>
         		<div class="card">
-            		<a href="product-manager.jsp">
+            		<a href="catalog-manager.jsp">
                 		<div class="card-content">
                     		<div class="image">
                         		<img src="img/beer.png" alt="beer">

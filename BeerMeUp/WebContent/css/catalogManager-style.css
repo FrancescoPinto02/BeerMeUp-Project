@@ -1,0 +1,66 @@
+@charset "UTF-8";
+
+#catalog-manager{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+#catalog-manager a{
+    color: black;
+}
+
+#catalog-manager a:hover{
+    color: blue;
+    font-weight: bolder;
+}
+
+#catalog-manager .card-container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#catalog-manager .card-container .card{
+    border: solid black 2px;
+    margin: 2rem 2rem;
+}
+
+#catalog-manager .card-container .card .card-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    background-color: #ffcf00;
+    border-bottom: solid black 2px;
+}
+
+#catalog-manager .card-container .card .card-header a{
+    font-size: 1.8rem;
+    padding: 0.5rem 0;
+    width: 33.3%;
+    text-align: center;
+    background-color: #ffcf00;
+    color: black;
+    border-right: solid black 1px;
+    border-left: solid black 1px;
+}
+
+#catalog-manager .card-container .card .card-header a:hover{
+    color:white;
+    background-color: #0030ff;
+}
+
+#catalog-manager .card-container .card .card-body .img img{ 
+    height: 15rem;
+    width: auto;
+}
+
+#catalog-manager .card-container .card .card-footer{ 
+    text-align: center;
+    background-color: #ffcf00;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border-top: solid black 2px;
+}

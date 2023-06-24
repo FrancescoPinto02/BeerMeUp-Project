@@ -91,27 +91,6 @@
 					<input type="submit" value="Submit">
 				</form>
 			</div>
-			<div class="admin-page-form">
-				<h2>Rimuovi Birra</h2>
-				<form action="./productManager_control" method="post">
-					<input type="hidden" name="action" id="action" value="deleteBeer">
-					<label for="beerId">Birra: </label><br>
-					<select name="beerId" id="beerId" required>
-					<%
-					if (beerList != null && beerList.size() != 0) {
-						Iterator<?> beerIt = beerList.iterator();
-						while (beerIt.hasNext()) {
-							Beer beer = (Beer) beerIt.next();
-						%>
-							<option value="<%=beer.getId()%>"><%=beer.getName()%></option>
-						<%
-						}
-					} 
-					%>
-					</select><br><br>
-					<input type="submit" />
-				</form>
-			</div>
 		</div>
 	</main>
 	

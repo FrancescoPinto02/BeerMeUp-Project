@@ -91,7 +91,7 @@ public class AddProduct extends HttpServlet {
 			AddProduct.logger.log(Level.WARNING, "Errore Servlet AddProduct");
 		}
 		
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/product-manager.jsp");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/catalog-manager.jsp");
 		dispatcher.forward(request, response);
 	}
 }

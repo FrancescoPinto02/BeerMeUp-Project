@@ -12,6 +12,15 @@
     <res-auth>Container</res-auth>
   </resource-ref>
   
+  
+  <servlet>
+    <servlet-name>CatalogManagerControl</servlet-name>
+    <servlet-class>it.beermeup.control.CatalogManagerControl</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CatalogManagerControl</servlet-name>
+    <url-pattern>/catalogManager</url-pattern>
+  </servlet-mapping>
   <servlet>
     <servlet-name>ProductDetailControl</servlet-name>
     <servlet-class>it.beermeup.control.ProductDetailControl</servlet-class>
