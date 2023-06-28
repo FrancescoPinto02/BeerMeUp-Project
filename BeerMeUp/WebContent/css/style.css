@@ -133,18 +133,6 @@ main form input, textarea, select{
 	background-color:#ffffff;
 }
 
-#login-page .login-page-form-container .login-page-form .input#submit{
-	text-transform: none;
-    color: black;
-    background-color:  #ffcf00;
-    padding: 1rem 1rem;
-    font-size: 1.2rem;
-    border-radius: 12px;
-    box-shadow: 0 .5rem 1rem black;
-}
-
-
-
 #login-page .homer-bender .homer-bender-photo
     	{
    	display: block;
