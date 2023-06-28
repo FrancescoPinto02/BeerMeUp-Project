@@ -18,6 +18,7 @@
 	<title>Beer Me Up</title>
 	<meta name="viewport" content="widht=device-width, initial-scale=1">
 	<link rel="stylesheet" href="css/style.css?ts=<?=time()?>&quot">
+	<link rel="stylesheet" href="css/login-page-style.css?ts=<?=time()?>&quot">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">			
 </head>
 	
@@ -28,7 +29,7 @@
 		<div id="login-page">
 			<h1></h1>
 			<%if(request.getSession().getAttribute("invalid-login")!=null){ %>
-			<h2 style="color:red;">Credenziali Errate</h2>
+			<h2 style="color:red; margin-top: 1rem">Credenziali Errate</h2>
 			<%	request.getSession().removeAttribute("invalid-login");
 			}%>
 			<div class="login-page-form-container">

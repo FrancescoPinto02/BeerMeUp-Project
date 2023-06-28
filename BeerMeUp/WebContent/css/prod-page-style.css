@@ -6,7 +6,7 @@
 }
 
 #prod-page .prod-page-container{
-    margin-top: 5rem;
+    margin-top: 3rem;
     display: grid;
     width: 100%;
     justify-items: center;
@@ -14,7 +14,7 @@
 }
 
 #prod-page .prod-page-container .prod-name{
-    font-size:3rem;   
+    font-size:3rem;
 }
 
 #prod-page .prod-page-container .disp{
@@ -31,7 +31,7 @@
     width: 100%;
     justify-items: center;
     align-items: center;
-    justify-content: space-around;
+    justify-content: center;
     grid-template-columns: 35rem 20rem;
 }
 
@@ -40,7 +40,7 @@
 }
 
 #prod-page .prod-page-container .prod-info .img img{
-    width: 100%;
+    width: 60%;
     height: auto;
     border-radius: 20%;
     box-shadow: 3px 5px 5px 0px #adaaaa;
@@ -87,11 +87,13 @@
 
 #prod-page .prod-page-container .bonus-info h2{
     font-size: 2rem;
+    text-align: center;
 }
 
 #prod-page .prod-page-container .bonus-info h3{
     font-size: 1.1rem;
     font-weight: lighter;
+    text-align: center;
 }
 
 
