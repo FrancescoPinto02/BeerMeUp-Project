@@ -147,6 +147,15 @@
     <url-pattern>/orderdetail_control</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+    <servlet-name>CheckEmail</servlet-name>
+    <servlet-class>it.beermeup.control.CheckEmail</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CheckEmail</servlet-name>
+    <url-pattern>/check_email</url-pattern>
+  </servlet-mapping>
+  
   <error-page>
   	<location>/error.jsp</location>
   </error-page>

@@ -50,6 +50,7 @@ public class Login extends HttpServlet {
 				
 		}
 		catch (Exception e){
+			e.printStackTrace();
 			Login.logger.log(Level.WARNING, "Errore Servlet Login");
 		}
 
@@ -61,7 +62,7 @@ public class Login extends HttpServlet {
 	private void doLogin(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException{
 		boolean found = false;
 		Collection<User> utenti = userModel.doRetrieveAll(null);
-		String email = request.getParameter("email");
+		String email = request.getParameter("email1");
 		String password = request.getParameter("password");
 		
 		for (User x: utenti){	
@@ -95,7 +96,7 @@ public class Login extends HttpServlet {
 	
 	private void doSignIn(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
 		String password = request.getParameter("password");
-		String email = request.getParameter("email");
+		String email = request.getParameter("email2");
 		String firstName = request.getParameter("first_name");
 		String lastName = request.getParameter("last_name");
 		
