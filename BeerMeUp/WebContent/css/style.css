@@ -48,7 +48,7 @@ main .home h1{
 	text-align: center;
 }
 
-main form input, textarea, select{
+main form textarea, select{
 	border: 1px solid black;
 }
 
@@ -108,8 +108,7 @@ main form input, textarea, select{
 
 #login-page .login-page-form h2
 {
-    color: #ffda33;
-    text-shadow: 1px 1px 2px black;
+    color: #000000;
 }
 
 #login-page .login-page-form-container
@@ -117,20 +116,21 @@ main form input, textarea, select{
 	
  	display: grid;
 	grid-template-columns: auto auto ;
-	 padding: 3%;
-	 row-gap: 50px;
-	
+	padding: 3%;
+	row-gap: 50px;
+	align-items:start;
 }
 
 #login-page .login-page-form-container .login-page-form 
 {
 	width:80%;
-	border:2px solid #ffda33;
-	 border-radius: 20px;
+	border:2px solid;
+	border-radius: 20px;
 	margin-left:auto;
 	margin-right:auto;
 	text-align: center;
 	background-color:#ffffff;
+	box-shadow: 3px 5px 5px 0px #adaaaa;
 }
 
 #login-page .homer-bender .homer-bender-photo
@@ -140,11 +140,80 @@ main form input, textarea, select{
     height: auto;
     margin-left:auto;
     margin-right:auto;
-	margin-top:5%;
+	margin-top:auto;
 	width: 50%;
 		}
 
+#login-page label{
+	font-weight:bolder;
+}
+
+#login-page input{
+	box-shadow: 3px 5px 5px 0px #adaaaa;
+	font-size: 1rem;
+	height: 0.1rem;
+	border-radius: 2rem;
+	padding: 1rem;
+	border:2px solid #ffcf00;
+}
+
+#login-page input[type="submit"]{
+	box-shadow: 3px 5px 5px 0px #adaaaa;
+	background-color: #ffcf00;
+	height: 2.5rem;
+	border-radius: 2rem;
+	padding:0.6rem;
+	margin-top: 0.8rem;
+	margin-bottom: 1rem;
+	color: black;
+}
+
+#login-page input[type="reset"]{
+	box-shadow: 3px 5px 5px 0px #adaaaa;
+	background-color: #ffcf00;
+	height: 2.5rem;
+	border-radius: 2rem;
+	padding:0.6rem;
+	color: black;
+}
+
+#login-page input[type="submit"]:hover{
+	background-color: #0030ff;
+	border-color: #0030ff;
+	color: white;
+	font-size: 1.3rem;
+}
+
+#login-page input[type="reset"]:hover{
+	background-color: #0030ff;
+	border-color: #0030ff;
+	color: white;
+	font-size: 1.3rem;
+}
+
 @media (max-width: 900px){
+	#login-page input{
+		display: grid;
+		margin-left: 0.5rem;
+	}
+
+	#login-page input[type = "submit"]{
+		display: inline;
+	}
+	
+	#login-page input[type = "reset"]{
+		display: inline;
+		margin-bottom: 1rem;
+	}
+
+	#login-page label{
+		float: left;
+		margin-right: 6rem;
+		margin-left: 0.8rem;
+	}
+
+	
+	
 	#login-page .homer-bender .homer-bender-photo
     	{
    			width: 70%;
@@ -157,15 +226,8 @@ main form input, textarea, select{
     	}
     	#login-page .homer-bender .homer-bender-photo
     	{
-   			width: 70%;
+   			width: 0%;
 	}
-@media (max-width: 420px){
-	#login-page .homer-bender .homer-bender-photo
-    	{
-   			width: 100%;
-   			margin-top:7%;
-	}
-
 /*------------------- LOGIN PAGE --------------------------*/
 
 
