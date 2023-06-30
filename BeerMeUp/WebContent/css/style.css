@@ -112,18 +112,6 @@ main form input, textarea, select{
     text-shadow: 1px 1px 2px black;
 }
 
-#login-page .login-page-form-container input,p
-{
-	 display: inline; 
-}
-
-#login-page p
-{
-	color:red;
-	font-size: 0.7rem;
-}
-
-
 #login-page .login-page-form-container
 {
 	
@@ -143,10 +131,7 @@ main form input, textarea, select{
 	margin-right:auto;
 	text-align: center;
 	background-color:#ffffff;
-
 }
-
-
 
 #login-page .homer-bender .homer-bender-photo
     	{

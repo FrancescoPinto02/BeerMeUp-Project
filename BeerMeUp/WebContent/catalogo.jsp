@@ -43,6 +43,10 @@
 					<h1>Catalogo</h1>
 					<h2><%=productsList.size() %> risultati</h2>	
 				</div>
+				<div class="search-box">
+					<input type="text" class="search" placeholder="Cerca un prodotto...">
+					<button type="button" class="search-button"><i class="fa fa-search" aria-hidden="true"></i></button>
+				</div>
 				<div class="sort">
 					<h1>Ordina per: </h1>
 					<h2>
