@@ -83,12 +83,10 @@
 			{
 			return true;
 			}
-		else
-			{
-			uemail.focus();
-		return false;
+		else{
+		return false;}
 		}
-	}
+	
 	
 	function validate(obj)  //VALIDATION LOGIN
 	{
@@ -98,10 +96,11 @@
 	if(!validateEmail(email))
 		{
 		valid = false;
-		email.classList.add("error");
+		
 		document.getElementById("p_email1").innerHTML ="Errore formato";
+		email.focus();
 		}
-	else {email.classList.remove("error");}
+	
 	
 	if(valid) obj.submit();
 	}
@@ -110,25 +109,26 @@
 	{
 		
 	let valid = true;
-	
-	let email=document.getElementsByName("email2")[0];
-	if(!validateEmail(email))
-		{
-		valid = false;
-		email.classList.add("error");
-		document.getElementById("p_email2").innerHTML ="Errore formato";
-		}
-	
 	let p1 = document.getElementsByName("password")[1];
 	let p2 = document.getElementsByName("cpassword")[0];
 	
 	if(p2.value!=p1.value)
 	{
 		valid = false;
-		email.classList.add("error");
-		document.getElementById("p_password").innerHTML ="Password diverse";
+		p1.focus();
+		document.getElementById("p_password").innerHTML ="  Password diverse";
 	}
-	else {email.classList.remove("error");}
+
+	let email=document.getElementsByName("email2")[0];
+	if(!validateEmail(email))
+		{
+		valid = false;
+		email.focus();
+		document.getElementById("p_email2").innerHTML ="  Errore formato";
+		
+		}
+	
+
 	
 	if(valid) obj.submit();
 	}
@@ -147,9 +147,7 @@
 						{
 						document.getElementById("p_email2").innerHTML ="Email già esistente";
 						}
-					else{
-					document.getElementById("p_email2").innerHTML ="";
-					}
+					
 				}
 			});
 		});
