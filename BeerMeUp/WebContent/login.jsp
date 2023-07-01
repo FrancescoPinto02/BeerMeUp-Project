@@ -91,7 +91,7 @@
 	function validate(obj)  //VALIDATION LOGIN
 	{
 	let valid = true;
-	alert(valid);
+	
 	let email=document.getElementsByName("email1")[0];
 	if(!validateEmail(email))
 		{
@@ -147,7 +147,9 @@
 						{
 						document.getElementById("p_email2").innerHTML ="Email già esistente";
 						}
-					
+					else {
+						document.getElementById("p_email2").innerHTML ="";
+					}
 				}
 			});
 		});

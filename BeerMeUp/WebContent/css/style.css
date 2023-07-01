@@ -104,7 +104,16 @@ main form textarea, select{
 	background-color:white;
 	
 }
-
+#login-page div,p
+{
+	display:inline;
+}
+	
+#login-page p
+{
+	color:red;
+	font-size:0.5 rem;
+}
 
 #login-page .login-page-form h2
 {
@@ -211,6 +220,7 @@ main form textarea, select{
 		margin-right: 6rem;
 		margin-left: 0.8rem;
 	}
+
 
 	
 	
