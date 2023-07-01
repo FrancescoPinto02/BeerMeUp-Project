@@ -26,6 +26,7 @@
 #catalog-manager .card-container .card{
     border: solid black 2px;
     margin: 2rem 2rem;
+    box-shadow: 0 .5rem 1rem black;
 }
 
 #catalog-manager .card-container .card .card-header{

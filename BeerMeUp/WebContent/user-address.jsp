@@ -25,7 +25,7 @@
 	<meta http-equiv="Content-Type" content="text/html">
 	<title>Beer Me Up</title>
 	<meta name="viewport" content="widht=device-width, initial-scale=1">
-	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/style.css?ts=<?=time()?>&quot">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">	
 </head>
 <body>
@@ -69,25 +69,26 @@
 					</tr>
 				<%}%>
 			</table><br><br>
-			
+			<div class="add-address-form">
 			<h2>Aggiungi Indirizzo</h2>
 			<form action="./address_control" method ="post">
 				<input type ="hidden" name="action" value="addAddress">
    				<label for="street">Via</label>
-   				<input id="street" type="text" name="street" required><br>
+   				<input id="street" type="text" name="street" placeholder="Via/Viale/Piazza" required><br>
    				<label for="num">Civico</label>
-  				<input id="num" type="text" name="num" required><br>
+  				<input id="num" type="text" name="num" placeholder="Numero Civico"required><br>
    				<label for="cap">CAP</label>
-   				<input id="cap" type="text" name="cap" required><br>
+   				<input id="cap" type="text" name="cap" placeholder="CAP" required><br>
    				<label for="city">Città</label>
-   				<input id="city" type="text" name="city" required><br>
+   				<input id="city" type="text" name="city" placeholder="Città" required><br>
   				<label for="nation">Nazione</label>
-   				<input id="nation" type="text" name="nation" required><br>
+   				<input id="nation" type="text" name="nation" placeholder="Nazione/Stato"required><br>
    				<label for="telephone">Telefono</label>
-   				<input id="telephone" type="text" name="telephone" required><br>
+   				<input id="telephone" type="text" name="telephone" placeholder="Numero Di Telefono" required><br>
    				<input type = "submit" value="Add"/>
    				<input type ="reset" value ="Reset"/>
    			</form>
+   			</div>
 		</div>				
 	</main>
 	<%@ include file="footer.jsp" %>

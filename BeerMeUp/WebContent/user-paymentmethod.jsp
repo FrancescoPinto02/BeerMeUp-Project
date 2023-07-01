@@ -64,21 +64,22 @@
 					</tr>
 				<%}%>
 			</table><br><br>
-			
+			<div class="add-paymentmethod-form">
 			<h2>Aggiungi Metodo di Pagamento</h2>
 			<form action="./paymentmethod_control" method ="post">
 				<input type ="hidden" name="action" value="addPaymentMethod">
    				<label for="card_owner">Proprietario</label>
-   				<input id="card_owner" type="text" name="card_owner" required><br>
+   				<input id="card_owner" type="text" name="card_owner" placeholder="Proprietario" required><br>
    				<label for="card_number">Numero Della Carta</label>
-  				<input id="card_number" type="text" name="card_number" required><br>
+  				<input id="card_number" type="text" name="card_number" placeholder="Card Number" required><br>
    				<label for="cvv">CVV</label>
-   				<input id="cvv" type="text" name="cvv" required><br>
+   				<input id="cvv" type="text" name="cvv" placeholder="CVV"required><br>
    				<label for="expiration">Data di Scadenza</label>
-   				<input id="expiration" type="date" name="expiration" required><br>
+   				<input id="expiration" type="date" name="expiration" placeholder="Expiration Date" required><br>
    				<input type = "submit" value="Add"/>
    				<input type ="reset" value ="Reset"/>
    			</form>
+   			</div>
 		</div>				
 	</main>
 	<%@ include file="footer.jsp" %>
