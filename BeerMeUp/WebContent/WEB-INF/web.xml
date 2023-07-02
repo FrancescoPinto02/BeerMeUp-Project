@@ -156,6 +156,15 @@
     <url-pattern>/check_email</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+    <servlet-name>RicercaDinamica</servlet-name>
+    <servlet-class>it.beermeup.control.RicercaDinamica</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RicercaDinamica</servlet-name>
+    <url-pattern>/ricerca_dinamica</url-pattern>
+  </servlet-mapping>
+  
   <error-page>
   	<location>/error.jsp</location>
   </error-page>

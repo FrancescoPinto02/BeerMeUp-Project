@@ -12,6 +12,7 @@
 	}
 	
 	
+	
 %>
 
 <!DOCTYPE html>
@@ -43,10 +44,16 @@
 					<h1>Catalogo</h1>
 					<h2><%=productsList.size() %> risultati</h2>	
 				</div>
+				<form name="vinform">
 				<div class="search-box">
-					<input type="text" class="search" placeholder="Cerca un prodotto...">
+					<input type="text" name="search" class="search" placeholder="Cerca un prodotto..." onkeyup="searchInfo()">
 					<button type="button" class="search-button"><i class="fa fa-search" aria-hidden="true"></i></button>
-				</div>
+					<div id="risultati"> </div>
+					</div>
+					</form>
+					<br>
+				 
+				
 				<div class="sort">
 					<h1>Ordina per: </h1>
 					<h2>
@@ -126,6 +133,33 @@ $(document).ready(function(){
 	});
 });
 
+
+//IMPLEMENTAZIONE RICERCA DINAMICA AJAX
+
+ 
+function searchInfo(){  
+let request=new XMLHttpRequest(); 
+let name = document.vinform.search.value;  
+let url="./ricerca_dinamica?val="+name;  
+
+try{
+	request.onreadystatechange=function(){
+		if(request.readyState==4 && request.status == 200){
+			
+			let val=request.responseText;  
+			document.getElementById("risultati").innerHTML=val;
+		}
+	}
+	request.open("GET",url,true);
+	request.send();
+}
+catch(e)
+{
+	alert("Impossibile connettersi al server");
+	}
+
+
+}
 </script>
 	
 </body>

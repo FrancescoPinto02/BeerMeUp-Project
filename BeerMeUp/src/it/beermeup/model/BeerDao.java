@@ -300,5 +300,30 @@ public class BeerDao{
 		return (result!=0);
 	}
 
-	
+	public synchronized  Collection<Beer> doRetrieveByNameDynamic(String name) throws SQLException {
+		Beer bean = new Beer();
+		Connection connection = null;
+		PreparedStatement ps = null;
+		Collection<Beer> collection = new ArrayList<>(); 
+		String sql = "SELECT * FROM " + BeerDao.TABLE_NAME + " WHERE beer_name LIKE CONCAT('%',?,'%')";
+		ResultSet rs = null;
+		
+		try {
+			connection = ds.getConnection(); 
+			
+			ps = connection.prepareStatement(sql);
+			ps.setString(1, name);
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {		
+				bean = getBeerFromRS(rs);
+				collection.add(bean);
+			}		
+		}
+		finally {
+			terminateQuery(ps, connection);
+		}
+		
+		return collection;
+	}
 }
