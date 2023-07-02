@@ -40,7 +40,7 @@
 	<meta http-equiv="Content-Type" content="text/html">
 	<title>Beer Me Up</title>
 	<meta name="viewport" content="widht=device-width, initial-scale=1">
-	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/style.css?ts=<?=time()?>&quot">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">	
 </head>
 <body>
@@ -48,8 +48,6 @@
 	<main>
 		<div id="checkout-page">
 			<h1>Checkout</h1>
-			<h2>Totale Senza Sconto: <%=cart.getTotalPrice(false)%></h2>
-			<h2>Totale: <%=cart.getTotalPrice(true)%></h2>
 			<br><br>
 			<form action="./checkout_control" method="post">
 				<input type="hidden" name="action" id="action" value="checkout">
@@ -68,6 +66,8 @@
 				} 
 				%>
 				</select>
+				<br><br>
+				<label for="paymentmethod">Metodo di Pagamento: </label><br>
 				<select name="paymentmethod" id="paymentmethod" required>
 				<%	
 			
@@ -82,7 +82,10 @@
 				} 
 				%>
 				</select>
-				
+				<br><br>
+				<h2>Totale Senza Sconto: <%=cart.getTotalPrice(false)%></h2>
+				<h2>Totale: <%=cart.getTotalPrice(true)%></h2>
+				<br><br>
 				<input type = "submit" value="Confirm"/>
    				<input type ="reset" value ="Reset"/>
 			</form>

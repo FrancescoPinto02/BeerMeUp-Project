@@ -17,7 +17,7 @@ if(cart==null){
 		<meta http-equiv="Content-Type" content="text/html">
 		<title>Beer Me Up</title>
 		<meta name="viewport" content="widht=device-width, initial-scale=1">
-		<link rel="stylesheet" href="css/style.css">
+		<link rel="stylesheet" href="css/style.css?ts=<?=time()?>&quot">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
@@ -25,9 +25,8 @@ if(cart==null){
 	<%@ include file="header.jsp"%>
 	
 	<main>
-	<div id=catalog> <!--È solo temporaneo, bisogna modificarlo-->
+	<div id="cart-page"> <!--È solo temporaneo, bisogna modificarlo-->
 		<h1>Carrello</h1>
-		<h2><a href="cart_control?action=deleteCart">Svuota Carrello</a></h2>
 		<div class="product-container"> <!--È solo temporaneo, bisogna modificarlo-->
 			<table class="product-table"> <!--È solo temporaneo, bisogna modificarlo-->
 				<caption></caption>
@@ -46,17 +45,18 @@ if(cart==null){
 					<td><%=beer.getId()%></td>
 					<td><%=beer.getName()%></td>
 					<td>
-						<a class="no" href="cart_control?action=increaseQta&id=<%=beer.getId()%>">+</a>
-						<%=x.getQta()%>
 						<a class ="no" href="cart_control?action=decreaseQta&id=<%=beer.getId()%>">-</a>
+						<%=x.getQta()%>
+						<a class="no" href="cart_control?action=increaseQta&id=<%=beer.getId()%>">+</a>
 					</td>
 					<td><%=x.getPrice(true)%>€</td>
-					<td><a href="cart_control?action=deleteFromCart&id=<%=beer.getId()%>">Delete from cart</a></td>
+					<td><a class="delete" href="cart_control?action=deleteFromCart&id=<%=beer.getId()%>">Delete from cart</a></td>
 				</tr>
 					<% } %>
 				<% } %>	
 			</table><br><br>
-			<h2><a href="checkout.jsp">Checkout</a></h2>		
+			<a class="buttons" href="cart_control?action=deleteCart">Svuota Carrello</a>
+			<a class="buttons" href="checkout.jsp">Checkout</a>	
 		</div>
 	</div>
 	</main>

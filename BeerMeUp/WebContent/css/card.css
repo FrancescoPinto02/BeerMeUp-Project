@@ -57,8 +57,8 @@
 .card-content  .title{
     padding: 2rem 0;
     background: #ffcf00;
-    border-bottom-right-radius: 20px;
-    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 18px;
+    border-bottom-left-radius: 18px;
     color:black;
     height: 7rem;
 }
