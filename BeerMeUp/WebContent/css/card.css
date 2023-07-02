@@ -19,11 +19,9 @@
 }
 
 .card {
-   	width:80%;
 	border:2px solid;
 	border-radius: 20px;
-	margin-left:auto;
-	margin-right:auto;
+	margin: 3rem;
 	text-align: center;
 	background-color:#ffffff;
 	box-shadow: 3px 5px 5px 0px #adaaaa;
