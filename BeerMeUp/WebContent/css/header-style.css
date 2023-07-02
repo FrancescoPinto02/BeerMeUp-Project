@@ -66,11 +66,11 @@ header .fa-bars{
 
 @media (max-width: 835px){
     header .fa-bars{
-        display: block;
+        display: contents;
     }
 
     header .logo{
-        margin-left: 4rem;
+        text-align: center;
     }
 
     header nav{

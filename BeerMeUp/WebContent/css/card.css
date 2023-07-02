@@ -15,14 +15,16 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    margin-bottom: 5rem;
 }
 
 .card {
-    background-color: #f2f2f2;
-    border-radius: 20px;
-    text-align: center;
-    margin: 2rem 5rem;
-    box-shadow: 0 .5rem 1rem black;
+	border:2px solid;
+	border-radius: 20px;
+	margin: 3rem;
+	text-align: center;
+	background-color:#ffffff;
+	box-shadow: 3px 5px 5px 0px #adaaaa;
 }
 
 

@@ -46,7 +46,7 @@
 					<label for="beerColor">Colore: </label><br>
 					<input type="text" name="beerColor" id="beerColor" value="<%=beer.getColor()%>" required><br>
 					<label for="beerGradation">Gradazione: </label><br>
-					<input type="number" name="beerGradation" id="beerGradation" min="0" max="99" value="<%=beer.getGradation()%>" required><br>
+					<input type="number" name="beerGradation" id="beerGradation" min="0.1" max="90.0" value="<%=beer.getGradation()%>" required><br>
 					<label for="beerPrice">Prezzo: </label><br>
 					<input type="number" name="beerPrice" id="beerPrice" min="0.00" step="0.01" value="<%=beer.getPrice()%>" required>€<br>
 					<label for="beerIva">IVA: </label><br>
@@ -69,7 +69,7 @@
 							Style style = (Style) styleIt.next();
 							if(style.getId()==beer.getStyleId()){
 							%>
-								<option selected="<%=style.getId()%>"><%=style.getName()%></option>
+								<option value="<%=style.getId()%>" selected><%=style.getName()%></option>
 							<%
 							}
 							else{
@@ -90,7 +90,7 @@
 							Brewery brewery = (Brewery) breweryIt.next();
 							if(brewery.getId()==beer.getBreweryId()){
 							%>
-								<option selected="<%=brewery.getId()%>"><%=brewery.getName()%></option>
+								<option value="<%=brewery.getId()%>" selected><%=brewery.getName()%></option>
 							<%
 							}
 							else{

@@ -19,6 +19,7 @@ html{
     overflow-x: hidden;
 }
 
+
 body{
 	min-height:100vh;
 	display: flex;
@@ -48,35 +49,110 @@ main .home h1{
 	text-align: center;
 }
 
-main form textarea, select{
+main form textarea{
 	border: 1px solid black;
 }
 
 
 
+label{
+	font-weight:bolder;
+}
 
+select{
+	box-shadow: 3px 5px 5px 0px #adaaaa;
+	font-size: 1rem;
+	border-radius: 2rem;
+	padding: 0.5rem;
+	margin: 0.5rem;
+	border:2px solid #ffcf00;
+}
+
+input{
+	box-shadow: 3px 5px 5px 0px #adaaaa;
+	font-size: 1rem;
+	height: 0.1rem;
+	border-radius: 2rem;
+	padding: 1rem;
+	margin: 0.5rem;
+	border:2px solid #ffcf00;
+	
+}
+
+input[type="submit"]{
+	box-shadow: 3px 5px 5px 0px #adaaaa;
+	background-color: #ffcf00;
+	height: 2.5rem;
+	border-radius: 2rem;
+	padding:0.6rem;
+	margin-top: 0.8rem;
+	margin-bottom: 1rem;
+	color: black;
+	font-weight:bolder;
+}
+
+input[type="reset"]{
+	box-shadow: 3px 5px 5px 0px #adaaaa;
+	background-color: #ffcf00;
+	height: 2.5rem;
+	border-radius: 2rem;
+	padding:0.6rem;
+	color: black;
+	font-weight:bolder;
+}
+
+input[type="submit"]:hover{
+	background-color: #0030ff;
+	border-color: #0030ff;
+	color: white;
+	cursor: pointer;
+}
+
+input[type="reset"]:hover{
+	background-color: #0030ff;
+	border-color: #0030ff;
+	color: white;
+	cursor: pointer;
+}
+
+table{
+	width:80%;
+	border:2px solid;
+	border-radius: 20px;
+	margin-left:auto;
+	margin-right:auto;
+	padding: 0.7rem;
+	text-align: center;
+	background-color:#ffffff;
+	box-shadow: 3px 5px 5px 0px #adaaaa;
+}
+
+table th, table td{
+	padding: 1rem 2rem;
+}
+
+
+table th{
+	height: 2rem;
+	font-size: 1.5rem;
+}
+
+table td{
+	border:2px solid;
+	height: 1.5rem;
+	font-size: 1rem;
+	border-radius: 20px;
+}
+
+button{
+	cursor: pointer;
+}
 
 
 /*------------------- DETTAGLI PRODOTTO --------------------------*/
 #product-page{
 	width:100%;
 	text-align:center;
-}
-
-#product-page .product-detail-table{
-	margin-left:auto;
-	margin-right:auto;
-	border-collapse: collapse;
-}
-
-#product-page .product-detail-table th, td{
-	border: 2px solid black;
-	padding: 1rem 2rem;
-}
-
-#product-page .product-detail-table th{
-	height: 2rem;
-	font-size: 1.5rem;
 }
 
 #product-page .product-description{
@@ -104,6 +180,7 @@ main form textarea, select{
 	background-color:white;
 	
 }
+
 #login-page div,p
 {
 	display:inline;
@@ -122,7 +199,6 @@ main form textarea, select{
 
 #login-page .login-page-form-container
 {
-	
  	display: grid;
 	grid-template-columns: auto auto ;
 	padding: 3%;
@@ -152,53 +228,6 @@ main form textarea, select{
 	margin-top:auto;
 	width: 50%;
 		}
-
-#login-page label{
-	font-weight:bolder;
-}
-
-#login-page input{
-	box-shadow: 3px 5px 5px 0px #adaaaa;
-	font-size: 1rem;
-	height: 0.1rem;
-	border-radius: 2rem;
-	padding: 1rem;
-	border:2px solid #ffcf00;
-}
-
-#login-page input[type="submit"]{
-	box-shadow: 3px 5px 5px 0px #adaaaa;
-	background-color: #ffcf00;
-	height: 2.5rem;
-	border-radius: 2rem;
-	padding:0.6rem;
-	margin-top: 0.8rem;
-	margin-bottom: 1rem;
-	color: black;
-}
-
-#login-page input[type="reset"]{
-	box-shadow: 3px 5px 5px 0px #adaaaa;
-	background-color: #ffcf00;
-	height: 2.5rem;
-	border-radius: 2rem;
-	padding:0.6rem;
-	color: black;
-}
-
-#login-page input[type="submit"]:hover{
-	background-color: #0030ff;
-	border-color: #0030ff;
-	color: white;
-	font-size: 1.3rem;
-}
-
-#login-page input[type="reset"]:hover{
-	background-color: #0030ff;
-	border-color: #0030ff;
-	color: white;
-	font-size: 1.3rem;
-}
 
 @media (max-width: 900px){
 	#login-page input{
@@ -238,31 +267,122 @@ main form textarea, select{
     	{
    			width: 0%;
 	}
+}
 /*------------------- LOGIN PAGE --------------------------*/
 
 
 /*------------------- ADMIN PAGE --------------------------*/
-#admin-page{
+#profile-admin{
 	width: 100%;
 	padding-left:1rem;
 }
 
-#admin-page .admin-page-form{
+#profile-admin .admin-page-form{
 	padding: 2rem 0;
 }
 
-#admin-page .admin-page-form form input{
+#profile-admin .admin-page-form form input{
 	text-transform: none;
 }
 
+
+
 /*------------------- ADMIN PAGE --------------------------*/
+
+/*------------------- ALL USERS PAGE --------------------------*/
+#admin-users-pages{
+	width:100%;
+	text-align:center;
+	margin-top: 3rem;
+}
+
+
+#admin-users-pages form{
+	text-align: center;
+}
+
+#admin-users-pages h1{
+	margin-bottom: 1rem;
+}
+
+#admin-users-pages a{
+	margin: 2rem;
+	text-transform: none;
+ 	color: black;
+ 	background-color:  #ffcf00;
+ 	padding: 1rem 2rem;
+ 	font-size: 1.2rem;
+ 	border-radius: 20px;
+ 	box-shadow: 0 .5rem 1rem black;
+	font-weight: bolder;
+}
+
+
+#admin-users-pages a:visited { color: #000000; }
+
+#admin-users-pages a:hover{
+	background-color: #0030ff;
+ 	color: white;
+ 	font-size: 1.5rem;
+}
+
+/*------------------- ALL USERS PAGE --------------------------*/
+
+/*------------------- ALL ORDERS PAGE --------------------------*/
+
+#admin-orders-pages{
+	width:100%;
+	text-align:center;
+	margin-top: 3rem;
+}
+#admin-orders-pages form{
+	width:80%;
+	border:2px solid;
+	border-radius: 20px;
+	margin-left:auto;
+	margin-right:auto;
+	text-align: center;
+	background-color:#ffffff;
+	box-shadow: 3px 5px 5px 0px #adaaaa;
+}
+
+#admin-orders-pages h3{
+	margin: 0.6rem;
+}
+
+
+/*------------------- ALL ORDERS PAGE --------------------------*/
+
 
 /*------------------- PROFILE PAGE --------------------------*/
 #profile-page{
 	width: 100%;
 	padding-left:1rem;
 	text-align: center;
+	padding-bottom: 3rem;
 }
+
+
+#profile-page a.logout{
+	margin: 2rem;
+	text-transform: none;
+ 	color: black;
+ 	background-color:  #ffcf00;
+ 	padding: 1rem 2rem;
+ 	font-size: 1.2rem;
+ 	border-radius: 20px;
+ 	box-shadow: 0 .5rem 1rem black;
+	font-weight: bolder;
+}
+
+#profile-page a.logout:visited { color: #000000; }
+
+#profile-page a.logout:hover{
+	background-color: #0030ff;
+ 	color: white;
+ 	font-size: 1.5rem;
+}
+
 
 /*------------------- PROFILE PAGE --------------------------*/
 
@@ -271,46 +391,125 @@ main form textarea, select{
 #user-address-page{
 	width:100%;
 	text-align:center;
-	margin-top: 5rem;
+	margin-top: 3rem;
 }
 
-#user-address-page table{
+#user-address-page h1{
+	margin-bottom: 1rem;
+}
+
+#user-address-page h2{
+	margin: 0.6rem;
+}
+
+#user-address-page .add-address-form{
+	width:80%;
+	border:2px solid;
+	border-radius: 20px;
 	margin-left:auto;
 	margin-right:auto;
-	border-collapse: collapse;
-}
-
-#user-address-page table th, #user-address-page table td{
-	border: 2px solid black;
-	padding: 1rem 2rem;
+	text-align: center;
+	background-color:#ffffff;
+	box-shadow: 3px 5px 5px 0px #adaaaa;
 }
 
 
-#user-address-page table th{
-	height: 2rem;
-	font-size: 1.5rem;
-}
-
-#user-address-page table td{
-	height: 1.5rem;
-	font-size: 1rem;
-}
 
 /*---------------------ADDRESS PAGE--------------------------*/
+
+/*---------------------PAYMENT CARD PAGE--------------------------*/
+#user-payment-page{
+	width:100%;
+	text-align:center;
+	margin-top: 3rem;
+}
+
+#user-payment-page h1{
+	margin-bottom: 1rem;
+}
+
+#user-payment-page h2{
+	margin: 0.6rem;
+}
+
+
+#user-payment-page .add-paymentmethod-form{
+	width:80%;
+	border:2px solid;
+	border-radius: 20px;
+	margin-left:auto;
+	margin-right:auto;
+	text-align: center;
+	background-color:#ffffff;
+	box-shadow: 3px 5px 5px 0px #adaaaa;
+}
+
+/*---------------------PAYMENT CARD PAGE--------------------------*/
+
+/*---------------------USER DATA PAGE--------------------------*/
+
+#user-data-change-page {
+	width:50%;
+	border:2px solid;
+	border-radius: 20px;
+	margin-top:3rem;
+	margin-left:auto;
+	margin-right:auto;
+	text-align: center;
+	background-color:#ffffff;
+	box-shadow: 3px 5px 5px 0px #adaaaa;
+}
+
+#user-data-change-page h1{
+	margin: 0.6rem;
+}
+
+/*---------------------USER DATA PAGE--------------------------*/
+
+/*---------------------USER ORDERS PAGE--------------------------*/
+
+#user-orders-page{
+	text-align: center;
+	margin-top: 3rem;
+}
+
+
+#user-orders-page h1{
+	margin: 0.6rem;
+	}
+
+
+/*---------------------USER ORDERS PAGE--------------------------*/
+
 @media (max-width: 990px){
     html{
         font-size: 90%;
     }
 }
 
-@media (max-width: 450px){
-    html{
-        font-size: 65%;
-    }
+@media (max-width: 600px){
+	input{
+		display: grid;
+		margin-left: 0.5rem;
+	}
+
+	input[type = "submit"]{
+		display: inline;
+	}
+	
+	input[type = "reset"]{
+		display: inline;
+		margin-bottom: 1rem;
+	}
+
+	label{
+		float: left;
+		margin-right: 9rem;
+		margin-left: 0.8rem;
+	}
 }
 
-/*Galaxy A51/71*/
-@media (max-width: 400px){
+@media (max-width: 450px){
     html{
         font-size: 60%;
     }

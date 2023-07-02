@@ -19,8 +19,8 @@
 			
 			<div class="hero-section">
 				<div class="hero-text">
-					<h1>La tua birra di fiducia</h1>
-					<p>ORDINA / APRI / GUSTA<br></p>
+					<h1>La tua birra di fiducia</h1><br>
+					<p>ORDINA / APRI / GUSTA<br></p><br><br>
 					<a href="catalogo.jsp"> Scopri i prodotti</a>
 				</div>
 			</div>

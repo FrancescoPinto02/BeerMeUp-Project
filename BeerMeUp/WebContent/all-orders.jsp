@@ -40,8 +40,9 @@
 				<input type="hidden" id="action" name="action" value="searchByDate">
 				<label for="fromDate">Da:</label>
 				<input type="date" id="fromDate" name="fromDate" required>
-				<label for="toDate">A:</label>
+				<label for="toDate"><br>A:</label>
 				<input type="date" id="toDate" name="toDate" required>
+				<br>
 				<input type="submit">
 		</form><br><br>
 		

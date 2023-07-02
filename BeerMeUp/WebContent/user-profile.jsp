@@ -32,7 +32,7 @@
 	<%@ include file="header.jsp" %>
 	<main>
 		<div id="profile-page">
-			<h1>Profilo Utente: <span><a href="./logout"> Logout</a></span></h1>
+			<h1>Profilo Utente:</h1>
 			<h2><%=user.getFirstName()%>  <%=user.getLastName()%></h2>
 			<br><br>
 			
@@ -86,6 +86,7 @@
             		</a>
         		</div>    
     		</div>
+    		<a class="logout" href="./logout"> Logout</a>
 		</div>				
 	</main>
 	<%@ include file="footer.jsp" %>

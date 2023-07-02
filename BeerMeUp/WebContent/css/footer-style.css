@@ -118,7 +118,7 @@ footer .footer-content .footer-bottom span{
 }
 
 
-@media (max-width:500px){
+@media (max-width:550px){
 	footer .footer-content .footer-menu ul{
 		display: inline;
 	}
@@ -126,4 +126,5 @@ footer .footer-content .footer-bottom span{
 	footer .footer-content .footer-menu ul li{
 		margin-bottom: 1.2rem;
 	}
+	
 }
