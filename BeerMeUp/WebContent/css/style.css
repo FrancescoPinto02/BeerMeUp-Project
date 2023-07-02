@@ -180,6 +180,19 @@ button{
 	background-color:white;
 	
 }
+<<<<<<< HEAD
+=======
+#login-page div,p
+{
+	display:inline;
+}
+	
+#login-page p
+{
+	color:red;
+	font-size:0.5 rem;
+}
+>>>>>>> branch 'master' of https://github.com/FrancescoPinto02/BeerMeUp-Project.git
 
 #login-page .login-page-form h2
 {
@@ -238,6 +251,7 @@ button{
 		margin-right: 6rem;
 		margin-left: 0.8rem;
 	}
+
 
 	
 	
