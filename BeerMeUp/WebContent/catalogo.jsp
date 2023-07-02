@@ -48,8 +48,10 @@
 				<div class="search-box">
 					<input type="text" name="search" class="search" placeholder="Cerca un prodotto..." onkeyup="searchInfo()">
 					<button type="button" class="search-button"><i class="fa fa-search" aria-hidden="true"></i></button>
-					<div id="risultati"> </div>
+					<br>
 					</div>
+					<div id="risultati"> </div>
+					
 					</form>
 					<br>
 				 

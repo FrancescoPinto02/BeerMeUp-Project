@@ -40,13 +40,17 @@
 }
 
 #catalog-page .catalog-container .search-box{
-	display: flex;
+  	display: flex; 
 	width:100%;
 	margin: auto;
 	grid-column: 4 / span 2;
 	align-items: center;
 	justify-content: flex-end;
+	
+	
 }
+
+
 
 
 #catalog-page .catalog-container .sort h1{
@@ -96,9 +100,40 @@
 	color: black;
 	
 }
+
 #catalog-page .catalog-container button.search-button:hover{
 	background-color: #0030ff;
 	color: white;
+}
+
+
+
+
+
+
+
+#risultati {
+  display: block;
+  background-color: #ffffff;
+  min-width: 230px;
+  overflow: auto;
+  z-index: 1;
+}
+#risultati:hover {
+border: 1px solid #ddd;
+}
+#risultati a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+#risultati a:hover {background-color: #ddd;
+ }
+
+.search-box {
+  position: relative;
+  display: inline-block;
 }
 
 @media (max-width: 1600px){
@@ -117,7 +152,7 @@
 	#catalog-page .catalog-container .search-box{
 		grid-column: 3 / span 2;
 	}
-}
+
 
 @media (max-width: 1350px){
     #catalog-page .catalog-container{
