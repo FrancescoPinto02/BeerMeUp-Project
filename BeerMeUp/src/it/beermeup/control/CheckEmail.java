@@ -2,7 +2,8 @@ package it.beermeup.control;
 
 import java.io.IOException;
 import java.sql.SQLException;
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -16,14 +17,15 @@ import it.beermeup.model.UserDao;
 public class CheckEmail extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	static UserDao userModel = new UserDao();
+	static Logger logger = Logger.getLogger(CheckEmail.class.getName());
  
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String Email = request.getParameter("email");
+		String email = request.getParameter("email");
 		
 		try {
-			if(existingEmail(Email))
+			if(existingEmail(email))
 			{
 				response.getWriter().write("true");
 				response.setContentType("text/plain");
@@ -33,7 +35,7 @@ public class CheckEmail extends HttpServlet {
 			}
 		} catch (SQLException e) {
 			
-			e.printStackTrace();
+			CheckEmail.logger.log(Level.WARNING, "Errore check email:");
 		}
 
 	

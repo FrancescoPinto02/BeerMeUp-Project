@@ -19,7 +19,7 @@
 	<meta name="viewport" content="widht=device-width, initial-scale=1">
 	<link rel="stylesheet" href="css/style.css?ts=<?=time()?>&quot">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">	
-	<script src="https://code.jquery.com/jquery-1.10.2.js" type="text/javascript"></script>
+	<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha384-r0tJvB87edk25TJle8mfwmdYBwaGtkX3r4CYHXS+2yZ7VPdI8xd2rHl6KTQ6oij4" crossorigin="anonymous" type="text/javascript"></script>
     <script src="js/app-ajax.js" type="text/javascript"></script>		
 </head>
 	
