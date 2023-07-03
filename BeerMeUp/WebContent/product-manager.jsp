@@ -45,7 +45,7 @@
 					<label for="beerColor">Colore: </label><br>
 					<input type="text" name="beerColor" id="beerColor" placeholder="Bionda/Scura/Rossa"required><br><br>
 					<label for="beerGradation">Gradazione: </label><br>
-					<input type="number" name="beerGradation" id="beerGradation" min="0" max="99" placeholder="0" required><br><br>
+					<input type="number" name="beerGradation" id="beerGradation" min="0.1" max="99.9" step="0.1" placeholder="0" required><br><br>
 					<label for="beerPrice">Prezzo: </label><br>
 					<input type="number" name="beerPrice" id="beerPrice" min="0.00" step="0.01" placeholder="Prezzo"required>€<br><br>
 					<label for="beerIva">IVA: </label><br>
