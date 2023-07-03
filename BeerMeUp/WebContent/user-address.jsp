@@ -58,7 +58,7 @@
 						<td><%=address.getCity()%></td>
 						<td><%=address.getNation()%></td>
 						<td><%=address.getTelephone()%></td>
-						<td><a href="address_control?action=deleteAddress&address-id=<%=address.getId()%>">Delete</a></td>
+						<td><a class="action" href="address_control?action=deleteAddress&address-id=<%=address.getId()%>">Delete</a></td>
 					</tr>
 				<%
 					}

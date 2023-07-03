@@ -27,7 +27,7 @@
 	<%@ include file="header.jsp" %>
 	<main>
 		<div id="profile-admin">
-			<h1>Profilo Amministratore:<span><a href="./logout"> Logout</a></span></h1>
+			<h1>Profilo Amministratore</h1>
 			<br><br>
 			<div class="card-container">
         		<div class="card">
@@ -67,6 +67,7 @@
             		</a>
         		</div>   
     		</div>
+    		<a class="logout" href="./logout"> Logout</a>
 		</div>				
 	</main>
 	<%@ include file="footer.jsp" %>

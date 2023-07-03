@@ -160,6 +160,23 @@ button{
 	cursor: pointer;
 }
 
+a.action{
+	box-shadow: 3px 5px 5px 0px #adaaaa;
+	display: flex;
+	background-color: #ffcf00;
+	border-radius: 2rem;
+	color: black;
+	padding: 0.5rem;
+	justify-content:space-evenly;
+}
+
+
+
+a.action:hover{
+	background-color: #0030ff;
+ 	color: white;
+}
+
 
 /*------------------- DETTAGLI PRODOTTO --------------------------*/
 #product-page{
@@ -294,6 +311,25 @@ button{
 	text-transform: none;
 }
 
+#profile-admin a.logout{
+	margin: 2rem;
+	text-transform: none;
+ 	color: black;
+ 	background-color:  #ffcf00;
+ 	padding: 1rem 2rem;
+ 	font-size: 1.2rem;
+ 	border-radius: 20px;
+ 	box-shadow: 0 .5rem 1rem black;
+	font-weight: bolder;
+}
+
+#profile-admin a.logout:visited { color: #000000; }
+
+#profile-admin a.logout:hover{
+	background-color: #0030ff;
+ 	color: white;
+ 	font-size: 1.5rem;
+}
 
 
 /*------------------- ADMIN PAGE --------------------------*/
@@ -511,6 +547,8 @@ button{
 #cart-page h1{
 	margin: 0.6rem;
 }
+
+
 
 #cart-page a.buttons{
 	margin: 2rem;

@@ -38,7 +38,7 @@ if(cart==null){
 					<th>Prezzo Totale</th>
 					<th>Action</th>
 				</tr>
-				<% if(cart != null ) { 
+				<% if(!cart.isEmpty() && cart != null) { 
 					List<CartProduct> prodcart = cart.getProducts(); 	
 		   			for(CartProduct x: prodcart) { 
 		   				Beer beer = x.getProduct();%>
@@ -51,10 +51,13 @@ if(cart==null){
 						<a class="no" href="cart_control?action=increaseQta&id=<%=beer.getId()%>">+</a>
 					</td>
 					<td><%=x.getPrice(true)%>€</td>
-					<td><a class="delete" href="cart_control?action=deleteFromCart&id=<%=beer.getId()%>">Delete from cart</a></td>
+					<td><a class="action" href="cart_control?action=deleteFromCart&id=<%=beer.getId()%>">Delete from cart</a></td>
 				</tr>
 					<% } %>
-				<% } %>	
+				<% } 
+				else { %>
+					<td colspan="5">CARRELLO VUOTO</td>
+				<% } %>
 			</table><br><br>
 			</div>
 			<a class="buttons" href="cart_control?action=deleteCart">Svuota Carrello</a>

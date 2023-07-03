@@ -54,7 +54,7 @@
 						<td><%=paymentmethod.getNumber()%></td>
 						<td><%=paymentmethod.getCvv()%></td>
 						<td><%=paymentmethod.getExpirationDate()%></td>
-						<td><a href="paymentmethod_control?action=deletePaymentMethod&paymentmethod-id=<%=paymentmethod.getId()%>">Delete</a></td>
+						<td><a class="action" href="paymentmethod_control?action=deletePaymentMethod&paymentmethod-id=<%=paymentmethod.getId()%>">Delete</a></td>
 					</tr>
 				<%
 					}
