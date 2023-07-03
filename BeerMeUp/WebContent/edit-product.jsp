@@ -46,7 +46,7 @@
 					<label for="beerColor">Colore: </label><br>
 					<input type="text" name="beerColor" id="beerColor" value="<%=beer.getColor()%>" required><br>
 					<label for="beerGradation">Gradazione: </label><br>
-					<input type="number" name="beerGradation" id="beerGradation" min="0.1" max="90.0" value="<%=beer.getGradation()%>" required><br>
+					<input type="number" name="beerGradation" id="beerGradation" min="0.1" max="90.0" step="0.1" value="<%=beer.getGradation()%>" required><br>
 					<label for="beerPrice">Prezzo: </label><br>
 					<input type="number" name="beerPrice" id="beerPrice" min="0.00" step="0.01" value="<%=beer.getPrice()%>" required>€<br>
 					<label for="beerIva">IVA: </label><br>
