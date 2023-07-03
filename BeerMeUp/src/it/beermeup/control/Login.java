@@ -50,7 +50,6 @@ public class Login extends HttpServlet {
 				
 		}
 		catch (Exception e){
-			e.printStackTrace();
 			Login.logger.log(Level.WARNING, "Errore Servlet Login");
 		}
 

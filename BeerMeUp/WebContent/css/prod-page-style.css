@@ -94,6 +94,7 @@
     font-size: 1.1rem;
     font-weight: lighter;
     text-align: center;
+    margin: 0 10rem 2rem 10rem;
 }
 
 
@@ -102,12 +103,20 @@
     	grid-template-columns: 35rem 15rem;
 	}
 	
+	#prod-page .prod-page-container .bonus-info h3{
+    	margin: 0 8rem 2rem 8rem;
+	}
+	
 	
 }
 
 @media (max-width: 900px){
     #prod-page .prod-page-container .prod-info{
     	grid-template-columns: 25rem 10rem;
+	}
+	
+	#prod-page .prod-page-container .bonus-info h3{
+    	margin: 0 6rem 2rem 6rem;
 	}
 }
 
@@ -121,5 +130,9 @@
    	 	grid-template-rows: 4rem 4rem 4rem;
     	font-size: 1rem;
     	justify-items: center;
+	}
+	
+	#prod-page .prod-page-container .bonus-info h3{
+    	margin: 0 3rem 2rem 3rem;
 	}
 }

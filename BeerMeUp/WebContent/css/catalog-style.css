@@ -217,6 +217,7 @@ border: 1px solid #ddd;
     	gap: 4rem;
 	}
 	
+
 	#catalog-page .catalog-container .title{
 		grid-column: 1 / span 1;
 	}
