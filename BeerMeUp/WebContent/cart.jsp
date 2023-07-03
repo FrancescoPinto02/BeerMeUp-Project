@@ -27,8 +27,9 @@ if(cart==null){
 	<main>
 	<div id="cart-page"> <!--È solo temporaneo, bisogna modificarlo-->
 		<h1>Carrello</h1>
-		<div class="product-container"> <!--È solo temporaneo, bisogna modificarlo-->
-			<table class="product-table"> <!--È solo temporaneo, bisogna modificarlo-->
+		<div class="product-container">
+		<div class="scroll-table">
+			<table class="product-table"> 
 				<caption></caption>
 				<tr>
 					<th>Codice</th>
@@ -55,6 +56,7 @@ if(cart==null){
 					<% } %>
 				<% } %>	
 			</table><br><br>
+			</div>
 			<a class="buttons" href="cart_control?action=deleteCart">Svuota Carrello</a>
 			<a class="buttons" href="checkout.jsp">Checkout</a>	
 		</div>

@@ -39,6 +39,10 @@ main{
 }
 
 
+.scroll-table{
+	overflow-x:auto;
+}
+
 
 main .home{
 	width:100%;
