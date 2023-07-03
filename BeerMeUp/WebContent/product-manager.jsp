@@ -34,6 +34,7 @@
 <body>
 	<%@ include file="header.jsp" %>
 	
+	
 	<main>
 		<div id="admin-page">
 			<div class="admin-page-form">
