@@ -46,11 +46,13 @@
 				</div>
 				<form name="vinform">
 				<div class="search-box">
+					<div class="search-bar">
 					<input type="text" name="search" class="search" placeholder="Cerca un prodotto..." onkeyup="searchInfo()">
 					<button type="button" class="search-button"><i class="fa fa-search" aria-hidden="true"></i></button>
 					<br>
 					</div>
 					<div id="risultati"> </div>
+				</div>
 					
 					</form>
 					<br>

@@ -32,6 +32,7 @@
 	<main>
 	<div id="admin-users-pages">		
 		<h1>Tutti Gli Utenti</h1>
+		<div class="scroll-table">
 		<table>
 		<caption></caption>
 				<tr>
@@ -50,6 +51,7 @@
 						<td><%=users.getLastName()%></td>
 		
 			</table><br><br>
+		</div>
 		<a href="all-users.jsp">Tutti gli utenti</a>
 </div>
 </main>

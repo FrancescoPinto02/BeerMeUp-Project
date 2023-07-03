@@ -25,7 +25,7 @@
 	<meta http-equiv="Content-Type" content="text/html">
 	<title>Beer Me Up</title>
 	<meta name="viewport" content="widht=device-width, initial-scale=1">
-	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/style.css?ts=<?=time()?>&quot">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">	
 	
 </head>
@@ -34,6 +34,7 @@
 	<main>
 		<div id="user-payment-page">
 			<h1>Metodi Di Pagamento</h1>
+			<div class="scroll-table">
 			<table>
 				<caption></caption>
 				<tr>
@@ -65,6 +66,7 @@
 					</tr>
 				<%}%>
 			</table><br><br>
+			</div>
 			<div class="add-paymentmethod-form">
 			<h2>Aggiungi Metodo di Pagamento</h2>
 			<form action="./paymentmethod_control" method ="post" onsubmit="event.preventDefault();validate(this)">

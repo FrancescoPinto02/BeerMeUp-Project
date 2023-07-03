@@ -40,6 +40,7 @@ main{
 
 
 .scroll-table{
+	margin-bottom: 2rem;
 	overflow-x:auto;
 }
 
@@ -84,7 +85,9 @@ input{
 	border-radius: 2rem;
 	padding: 1rem;
 	margin: 0.5rem;
+	margin-right: 1.5rem;
 	border:2px solid #ffcf00;
+	
 	
 }
 
@@ -125,7 +128,6 @@ input[type="reset"]:hover{
 }
 
 table{
-	overflow-x: auto;
 	width:80%;
 	border:2px solid;
 	border-radius: 20px;
@@ -415,6 +417,7 @@ button{
 	border-radius: 20px;
 	margin-left:auto;
 	margin-right:auto;
+	margin-bottom: 2rem;
 	text-align: center;
 	background-color:#ffffff;
 	box-shadow: 3px 5px 5px 0px #adaaaa;
@@ -438,27 +441,26 @@ button{
 #user-payment-page h2{
 	margin: 0.6rem;
 }
-#user-payment-page div,p
-{
-	display:inline;
-}
 	
 #user-payment-page p
-{
+{	
+	display:inline;
 	color:red;
 	font-size:0.5 rem;
 }
 
 #user-payment-page .add-paymentmethod-form{
-	width:80%;
+	width:60%;
 	border:2px solid;
 	border-radius: 20px;
 	margin-left:auto;
 	margin-right:auto;
+	margin-bottom: 2rem;
 	text-align: center;
 	background-color:#ffffff;
 	box-shadow: 3px 5px 5px 0px #adaaaa;
 }
+
 
 /*---------------------PAYMENT CARD PAGE--------------------------*/
 
@@ -471,6 +473,7 @@ button{
 	margin-top:3rem;
 	margin-left:auto;
 	margin-right:auto;
+	margin-bottom: 2rem;
 	text-align: center;
 	background-color:#ffffff;
 	box-shadow: 3px 5px 5px 0px #adaaaa;
@@ -627,7 +630,9 @@ button{
 
 
 @media (max-width: 600px){
-	input, textarea, select{
+	
+	
+	form, textarea, select{
 		display: grid;
 		margin-left: 0.5rem;
 	}
@@ -643,7 +648,7 @@ button{
 
 	label{
 		float: left;
-		margin-right: 9rem;
+		margin-right: auto;
 		margin-left: 0.8rem;
 	}
 	

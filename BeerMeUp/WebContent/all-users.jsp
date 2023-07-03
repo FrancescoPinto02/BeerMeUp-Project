@@ -32,6 +32,7 @@
 	<main>
 	<div id="admin-users-pages">		
 		<h1>Tutti Gli Utenti</h1>
+		<div class="scroll-table">
 		<table>
 		<caption></caption>
 				<tr>
@@ -62,6 +63,7 @@
 					</tr>
 				<%}%>
 			</table><br><br>
+		</div>
 		<form action="./user_orders_control" method="post">
 		<input type ="hidden" name="action" value="retrieveUser">
 		<select name="users" id="users" required>

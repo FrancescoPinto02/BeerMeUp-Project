@@ -43,6 +43,7 @@
       			</div>
     		</div>
     		<div class="invoice-body">
+    			<div class="scroll-table">
       			<table class="invoice-table">
       			<caption></caption>
         			<thead>
@@ -88,6 +89,7 @@
           				</tr>
         			</tfoot>
       			</table>
+    		</div>
     		</div>
     		<div class="invoice-footer">
       			<h4>Indirizzo di Spedizione</h4>

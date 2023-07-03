@@ -30,6 +30,7 @@
 	<main>
 	<div id="user-orders-page">
 			<h1>Ordini</h1>		
+			<div class="scroll-table">
 			<table>
 				<caption></caption>
 				<tr>
@@ -61,6 +62,7 @@
 					</tr>
 				<%}%>
 			</table><br><br>
+			</div>
 	</div>
 </main>
 <%@ include file="footer.jsp" %>

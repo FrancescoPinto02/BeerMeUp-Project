@@ -47,7 +47,7 @@
 	align-items: center;
 	justify-content: flex-end;
 	margin-left: 20rem;
-	
+	flex-direction: column;
 }
 
 
@@ -75,18 +75,25 @@
 }
 
 
+#catalog-page .catalog-container .search-box .search-bar{
+	display:inline-flex;
+	align-items: center;
+	margin-left:4.3rem;
+}
+
 #catalog-page .catalog-container .search-box input.search{
 	box-shadow: 3px 5px 5px 0px #adaaaa;
 	font-size: 1rem;
 	height: 2.5rem;
 	border-radius: 2rem;
 	padding: 1rem;
-	float: left;
+	margin-right: 0.5rem;
 }
 
 #catalog-page .catalog-container button{
 	font-size: 1.3rem;
 	padding-right: 2rem;
+	margin-right: 1rem;
 }
 
 

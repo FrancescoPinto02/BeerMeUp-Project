@@ -33,6 +33,7 @@
 	<main>
 		<div id="user-address-page">
 			<h1>Indirizzi</h1>
+			<div class="scroll-table">
 			<table>
 				<caption></caption>
 				<tr>
@@ -69,6 +70,7 @@
 					</tr>
 				<%}%>
 			</table><br><br>
+			</div>
 			<div class="add-address-form">
 			<h2>Aggiungi Indirizzo</h2>
 			<form action="./address_control" method ="post">

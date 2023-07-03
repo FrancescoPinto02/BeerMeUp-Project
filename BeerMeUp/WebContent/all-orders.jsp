@@ -65,7 +65,7 @@
 				</select>
 				<input type="submit">
 		</form><br><br>
-			
+		<div class="scroll-table">	
 		<table>
 				<caption></caption>
 				<tr>
@@ -98,7 +98,7 @@
 					</tr>
 				<%}%>
 			</table><br><br>
-			
+		</div>
 			
 </div>
 </main>
