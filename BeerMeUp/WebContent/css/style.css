@@ -434,7 +434,16 @@ button{
 #user-payment-page h2{
 	margin: 0.6rem;
 }
-
+#user-payment-page div,p
+{
+	display:inline;
+}
+	
+#user-payment-page p
+{
+	color:red;
+	font-size:0.5 rem;
+}
 
 #user-payment-page .add-paymentmethod-form{
 	width:80%;
