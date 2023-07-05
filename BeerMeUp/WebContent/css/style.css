@@ -618,6 +618,20 @@ a.action:hover{
 	margin: 0.6rem;
 }
 
+#checkout-page a.no{
+	box-shadow: 3px 5px 5px 0px #adaaaa;
+	background-color: #ffcf00;
+	height: 1.3rem;
+	border-radius: 2rem;
+	padding:0.4rem;
+	color: black;
+	margin: 0rem 0.4rem;
+}
+
+#checkout-page a.no:hover{
+	background-color: #0030ff;
+ 	color: white;
+}
 
 
 /*---------------------CHECKOUT PAGE--------------------------*/

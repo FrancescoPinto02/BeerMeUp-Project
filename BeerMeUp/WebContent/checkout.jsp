@@ -51,7 +51,7 @@
 			<br><br>
 			<form action="./checkout_control" method="post">
 				<input type="hidden" name="action" id="action" value="checkout">
-				<label for="address">Indirizzo:<a href="user-address.jsp">+</a></label><br>
+				<label for="address">Indirizzo:<a  class="no" href="user-address.jsp">+</a></label><br><br>
 				<select name="address" id="address" required>
 				<%
 				if (addressList != null && addressList.size() != 0) {
@@ -66,8 +66,8 @@
 				} 
 				%>
 				</select>
-				<br><br>
-				<label for="paymentmethod">Metodo di Pagamento:<a href="user-paymentmethod.jsp">+</a></label><br>
+				<br><br><br>
+				<label for="paymentmethod">Metodo di Pagamento:<a class="no" href="user-paymentmethod.jsp">+</a></label><br><br>
 				<select name="paymentmethod" id="paymentmethod" required>
 				<%	
 			
@@ -82,7 +82,7 @@
 				} 
 				%>
 				</select>
-				<br><br>
+				<br><br><br>
 				<h2>Totale Senza Sconto: <%=cart.getTotalPrice(false)%>€</h2>
 				<h2>Totale: <%=cart.getTotalPrice(true)%>€</h2>
 				<br><br>

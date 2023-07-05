@@ -61,7 +61,6 @@
 				<div class="sort">
 					<h1>Ordina per: </h1>
 					<h2>
-						<span><a href="catalogo_control?action=catalogo&sort=id">Ultimi Arrivi</a> |</span> 
 						<span><a href="catalogo_control?action=catalogo&sort=beer_name">Nome</a> |</span>
 						<span><a href="catalogo_control?action=catalogo&sort=price">Prezzo</a></span>
 					</h2>
